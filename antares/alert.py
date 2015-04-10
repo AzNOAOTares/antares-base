@@ -26,20 +26,33 @@ class CameraAlert( Alert ):
     CA = None
     """
     CA (Camera Alert) context object. CA attributes are always available.
+
     :type: :py:class:`antares.context.CAContext`
     """
 
     IM = None
-    """IM (Image) context object."""
+    """IM (Image) context object.
+
+    :type: :py:class:`antares.context.IMContext`
+    """
 
     IR = None
-    """IR (Image RAFT) context object."""
+    """IR (Image RAFT) context object.
+
+    :type: :py:class:`antares.context.IRContext`
+    """
 
     IS = None
-    """IS (Image Section) context object."""
+    """IS (Image Section) context object.
+    
+    :type: :py:class:`antares.context.ISContext`
+    """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object. LA attributes are always available."""
+    """LA (Locus-aggregated Alert) context object. LA attributes are always available.
+
+    :type: :py:class:`antares.context.LAContext`
+    """
 
     def __init__( self, CA, IM, IR, IS, LA ):
         pass
@@ -79,15 +92,24 @@ class AlertReplica( CameraAlert ):
 
     AO = None
     """AO (Astro Object) context object. AO attributes are available if
-    AR.HasAstroObject = True."""
+    AR.HasAstroObject = :py:const:`True`.
+
+    :type: :py:class:`antares.context.AOContext`
+    """
 
     ES = None
     """ES (Extended Source) context object. ES attributes are available only
-    if AO.kind = "extended source"."""
+    if AO.kind = "extended source".
+
+    :type: :py:class:`antares.context.ESContext`
+    """
 
     PS = None
     """PS (Point Source) context object. PS attributes are available only
-    if AO.kind = "point source"."""
+    if AO.kind = "point source".
+
+    :type: :py:class:`antares.context.PSContext`
+    """
 
     def __init__( self, astroobj=None ):
         """Replica is initialized with its associated astro object (optional)."""
@@ -101,11 +123,16 @@ class AlertCombo( CameraAlert ):
     Beyond contexts available for CameraAlert,
     an alert combo is also associated with CB context objects.
     Combo is initialized with a set of alert replicas.
+
+    :param: :py:class:`list` alert_replicas: a list of :py:class:`AlertReplica`
     """
     
     CB = None
     """CB (Combo) context object. CB attributes are only visible during
-    per-combo processing."""
+    per-combo processing.
+
+    :type: :py:class:`antares.context.CBContext`
+    """
 
     def __init__( self, alert_replicas ):
         """Combo is initialized with a set of alert replicas."""
