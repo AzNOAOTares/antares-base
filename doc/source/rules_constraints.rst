@@ -37,3 +37,31 @@ Rules & Constraints
 
 7. The value of an attribute may be NA (not applicable), but NK (not known)
    is not allowed as a value.
+
+8. The value for a Base Attribute is provided by the Camera in a
+   camera alert or from the Aggregated AstroObject Catalogue for the
+   relevant alert replica, and is always present when appropriate.
+
+9. The value for a Derived Attribute will be present for a derivation
+   function for a given context if its arguments are present and if
+   the algorithm for that derivation function completes.
+
+10. CA and LA attributes are always available.
+
+11. AR attributes are only accessible during per-replica processing;
+    AO attributes are available if ``AR-HasAstroObject`` is
+    :py:data:`True`; ES only if ``AO-kind = "extended source"``; PS only if
+    ``AR-HasAstroObject`` is :py:data:`True` and ``AO-kind = "point
+    source"``. 
+
+12. CB attributes are only visible during per-combo processing.
+
+13. CA processing can iterate through the alerts of its
+    locus-aggregated alert to access AR, PS, and ES attributes.
+
+14. CB processing can iterate through its replicas to access AR, AO,
+    PS, and ES attributes.
+
+15. A derived attribute cannot have a circular definition (and so
+    definitions form a directed acyclic graph).
+
