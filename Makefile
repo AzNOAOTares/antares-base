@@ -62,6 +62,7 @@ gh-pages:
 	rm -rf build _sources _static
 	git checkout master $(GH_PAGE_SRCS)
 	git reset HEAD
+	mv ./doc/source source
 	make html
 	mv -fv build/html/* ./
 	rm -rf $(GH_PAGE_SRCS) build
