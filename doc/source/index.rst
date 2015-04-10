@@ -28,6 +28,7 @@ Alert related
    alert/camera_alert
    alert/alert_replica
    alert/alert_combo
+   alert/astroobj
 
 Context related
 ^^^^^^^^^^^^^^^

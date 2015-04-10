@@ -79,7 +79,7 @@ class AlertReplica( CameraAlert ):
     associated with AO, AR, ES, LA, and PS context objects.
     Replica is initialized with its associated astro object (optional).
 
-    :param: :py:class:`antares.alert.AstroObject` astrobj: associated astro object (optional). 
+    :param :py:class:`antares.alert.AstroObject` astrobj: associated astro object (optional). 
     """
     
     AR = None
