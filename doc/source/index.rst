@@ -33,11 +33,24 @@ API
 .. toctree::
    :maxdepth: 2
 
+   context/context
+   context/ca_context
+   context/ar_context
+   context/ao_context
+   context/la_context
+   context/cb_context
+
 **Attribute related**
 
 .. toctree::
    :maxdepth: 2
 
+   attribute/attribute
+   attribute/uncertain_float
+   attribute/int_pair
+   attribute/float_pair
+   attribute/prob_curve
+   attribute/time_period
 
 *************************
 Class inheritance diagram
