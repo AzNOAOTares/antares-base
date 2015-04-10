@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
-GH_PAGE_SRCS  = doc/source Makefile
+GH_PAGE_SRCS  = doc/source antares Makefile
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -59,13 +59,13 @@ html:
 
 gh-pages:
 	git checkout gh-pages
-	rm -rf build _sources _static
+	rm -rf build _sources _static 
 	git checkout master $(GH_PAGE_SRCS)
 	git reset HEAD
 	mv ./doc/source source
 	make html
 	mv -fv build/html/* ./
-	rm -rf $(GH_PAGE_SRCS) build
+	rm -rf $(GH_PAGE_SRCS) build source
 	git add -A
 	git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
 
