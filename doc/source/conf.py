@@ -38,7 +38,8 @@ extensions = [
 ]
 
 # To add links to modules and objects in the Python standard library documentation.
-intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None),
+                       'pandas': ('http://pandas.pydata.org/pandas-docs/version/0.15.2/index.html', None),}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
