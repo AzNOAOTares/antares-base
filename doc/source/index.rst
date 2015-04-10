@@ -17,7 +17,8 @@ Welcome to Antares documentation.
 API reference
 *************
 
-**Alert related**
+Alert related
+^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
@@ -28,7 +29,8 @@ API reference
    alert/alert_replica
    alert/alert_combo
 
-**Context related**
+Context related
+^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
@@ -40,7 +42,8 @@ API reference
    context/la_context
    context/cb_context
 
-**Attribute related**
+Attribute related
+^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
@@ -98,9 +101,9 @@ Rules & Constraints
 Examples
 *********************
 
-
+******************
 Indices and tables
-==================
+******************
 
 * :ref:`genindex`
 * :ref:`modindex`
