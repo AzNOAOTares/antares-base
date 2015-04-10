@@ -46,10 +46,10 @@ class CAContext( Context ):
     def createReplica( self, astroobj=None ):
         """
         Create an alert replica which is associated with an
-        optional astro object 'astroobj'.
+        optional astro object ``astroobj``.
 
-        :param :py:class:`antares.alert.AstroObject` astroobj: the astro object
-               to be associated with the created replica.
+        :param: :py:class:`antares.alert.AstroObject` astroobj: the astro object
+                to be associated with the created replica.
         """
         replica = AlertReplica( self.alert, astroobj, kind )
         replica.AR.HasAstroObj = True
@@ -59,20 +59,32 @@ class CAContext( Context ):
         self.NumberInAlert += 1
 
     def createCombo( self, replicas ):
-        """Create an alert combo object which contains a set of
-        alert replicas 'replicas'."""
+        """
+        Create an alert combo object which contains a set of
+        alert replicas.
+
+        :param list replicas: a set of alert replicas
+        """
         pass
 
     def hasReplicas( self ):
-        """Check whether alert has replicas. Return true if alert
-        has replicas, otherwise false."""
+        """
+        Check whether alert has replicas.
+
+        :return: :py:data:`True` if alert has replicas, otherwise :py:data:`False`.
+        """
         pass
 
-    def assembleVector( self, context, attr ):
+    def assembleVector( self, context, attrname ):
         """
-        The function assembles a vector of all the values of an attribute
-        of the alert replicas of the camera alert.
-        'attr' is the target attribute and 'context' is where 'attr' belongs.
+        The function assembles a vector of all the values of an attribute inside
+        a context of the alert replicas of the camera alert.
+
+        :param string context: the name of the context
+        :param string attrname: the name of the attribute
+
+        :return: a list of values
+        :rtype: list
         """
         pass
 
@@ -96,11 +108,16 @@ class CBContext( Context ):
     replicas = None
     """A set of the alert replicas associated with the combo."""
 
-    def assembleVector_replicas( self, context, attr ):
+    def assembleVector_replicas( self, context, attrname ):
         """
         The function assembles a vector of all the values of an attribute
-        of the alert replicas associated with the alert combo.
-        'attr' is the target attribute and 'context' is where 'attr' belongs.
+        inside a context of the alert replicas associated with the alert combo.
+
+        :param string context: the name of the context
+        :param string attrname: the name of the attribute
+
+        :return: a list of values
+        :rtype: list
         """
         pass
 
@@ -122,20 +139,30 @@ class LAContext( Context ):
     name = 'LA'
     """Name of LA context."""
 
-    def assembleTimeSeries_replicas( self, context, attr ):
+    def assembleTimeSeries_replicas( self, context, attrname ):
         """
         The function assembles a time series of all the past values
-        of an attribute of the alert replicas associated with a locus aggregated alert.
-        'attr' is the target attribute and 'context' is where 'attr' belongs.
-        It returns a Pandas TimeSeries.
+        of an attribute inside a context of the alert replicas associated
+        with a locus aggregated alert.
+
+        :param string context: the name of the context
+        :param string attrname: the name of the attribute
+
+        :return: a time series of values
+        :rtype: Pandas TimeSeries
         """
         pass
 
-    def assembleTimeSeries_cameraAlerts( self, context, attr ):
+    def assembleTimeSeries_cameraAlerts( self, context, attrname ):
         """
         The function assembles a time series of all the past values
-        of an attribute of the camera alerts associated with a locus aggregated alert.
-        'attr' is the target attribute and 'context' is where 'attr' belongs.
-        It returns a Pandas TimeSeries.
+        of an attribute inside a context of the camera alerts associated
+        with a locus aggregated alert.
+
+        :param string context: the name of the context
+        :param string attrname: the name of the attribute
+
+        :return: a time series of values
+        :rtype: Pandas TimeSeries
         """
         pass
