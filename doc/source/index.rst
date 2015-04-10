@@ -72,7 +72,7 @@ Class inheritance relationship
 :py:class:`antares.alert.AlertCombo`.
 
 :py:class:`antares.context.Context` is the superclass for the other 11
-    context classes.
+context classes.
 
 Class composition relationship
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -83,7 +83,7 @@ An :py:class:`antares.alert.ExternalAlert` has exactly one
 A :py:class:`antares.alert.CameraAlert` has one to many
 :py:class:`antares.context.Context`.
 
-A :py:class:`antares.context.Context` has one to many :py:class:`antares.attribute.Attirbute`.
+A :py:class:`antares.context.Context` has one to many :py:class:`antares.attribute.Attribute`.
 
 *********************
 Rules & Constraints
