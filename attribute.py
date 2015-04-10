@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+    
+class Attribute:
+    """
+    Represents an attribute object. An attribute is initialized with its name,
+    the context it belongs to, the datatype of its value, a description and the scale of its value.
+    """
+
+    vector = None
+    """The vector of all the past values computed for the attribute.
+    It is a Numpy array."""
+
+    time_series = None
+    """The time series of all the past values computed for the attribute.
+    It is a Pandas Time Series."""
+
+    description = ""
+    """A short description of the attribute."""
+
+    name = ""
+    """The name of the attribute."""
+
+    context = ""
+    """The context that the attribute belongs to."""
+
+    datatype = ""
+    """The data type of the attribute. The valid data type could be either
+    a Python's built-in type (boolean, int, float, string, timestamp) or a composite
+    object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod)."""
+
+    timestamp = None
+    """Time stamp for the most-recently computed value."""
+
+    annotation = ""
+    """Annotation for the most-recently computed value."""
+
+    confidence = 1.0
+    """Confidence for the most-recently computed value."""
+
+    enum_ints = None
+    """A finite list of possible int values for the attribute. It is
+    available only when datatype = "enumerated int". In that case the
+    attribute value can be only picked from this list."""
+
+    enum_strs = None
+    """A finite list of possible string values for the attribute. It is
+    available only when datatype = "enumerated string". In that case the
+    attribute value can be only picked from this list."""
+
+    def __init__( self, name, context, datatype, scale, description="" ):
+        pass
+
+    def timeDelimitedSeries( self, start_time, end_time ):
+        """
+        A time-delimited series of all the past values of the attribute.
+
+        :param timestamp start_time: the start of time series
+        :param timestamp end_time: the end of time series
+
+        :return: time series of the attribute values from `start_time` to
+                  `end_time`.
+        :rtype: Pandas Time Series
+        """
+        pass
+
+class UncertainFloat:
+    """Represents a triple floats which is one of the data type of
+    :py:class:`antares.attribute.Attribute`. It consists of three float values, one being the expected
+    value, a second being the lower std dev (one std dev below) and the
+    third being the upper std dev (one std dev above)."""
+    expected_value = None
+    """The first float: expected value."""
+    
+    lower_stddev = None
+    """The second float: lower std dev (one std dev below)."""
+
+    upper_stddev = None
+    """The third float: upper std dev (one std dev above)."""
+
+class ProbabilityCurve:
+    """Represents a probability curve which is one of the data type of
+    :py:class:`antares.attribute.Attribute`. It is used for variability."""
+    probabilities = None
+    """A list of probability values."""
+    
+class IntPair:
+    """Represents a pair of int (providing lower and upper bounds)
+    which is one of the data type of :py:class:`antares.attribute.Attribute`."""
+    lower_bound = None
+    """The value of lower bound."""
+    
+    upper_bound = None
+    """The value of upper bound."""
+
+class FloatPair:
+    """Represents a pair of float (providing lower and upper bounds)
+    which is one of the data type of :py:class:`antares.attribute.Attribute`."""
+    lower_bound = None
+    """The value of lower bound."""
+
+    upper_bound = None
+    """The value of upper bound."""
+
+class TimePeriod:
+    """A derived attribute of the existence time for the
+    locus-aggregated alert. It is a data type of :py:class:`antares.attribute.Attribute`."""
+    start = None
+    """The start of the time period."""
+    
+    end = None
+    """The end of the time period."""
