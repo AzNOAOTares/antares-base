@@ -80,7 +80,7 @@ class AlertReplica( CameraAlert ):
 
     ES = None
     """ES (Extended Source) context object. ES attributes are available only
-    if AO.kind = "extened source"."""
+    if AO.kind = "extended source"."""
 
     PS = None
     """PS (Point Source) context object. PS attributes are available only
