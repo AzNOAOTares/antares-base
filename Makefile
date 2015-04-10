@@ -64,8 +64,9 @@ gh-pages:
 	git reset HEAD
 	mv ./doc/source source
 	make html
+	rm -rf source
 	mv -fv build/html/* ./
-	rm -rf $(GH_PAGE_SRCS) build source
+	rm -rf $(GH_PAGE_SRCS) build
 	git add -A
 	git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
 
