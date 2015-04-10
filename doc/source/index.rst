@@ -56,6 +56,8 @@ API reference
 Class inheritance diagram
 *************************
 
+.. image:: ./_static/classes.png
+
 *********************
 Rules & Constraints
 *********************
