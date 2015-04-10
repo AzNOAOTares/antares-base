@@ -149,7 +149,7 @@ class LAContext( Context ):
         :param string attrname: the name of the attribute
 
         :return: a time series of values
-        :rtype: :py:class:pandas.Series
+        :rtype: :py:class:`pandas.Series`
         """
         pass
 
