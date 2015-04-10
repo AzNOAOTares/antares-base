@@ -17,14 +17,18 @@ class Context:
         """
         Check if the context is currently present.
 
-        :return: :py:const:`True` if the context is currently present
-        otherwise :py:const:`False`.
+        :return: :py:data:`True` if the context is currently present,
+                 otherwise :py:data:`False`.
         """
         pass
 
     def isValidAttribute( self, attrname ):
-        """Check whether the given attribute 'attrname' is valid.
-        Return true if valid, otherwise false."""
+        """
+        Check whether the given attribute 'attrname' is valid.
+
+        :param string attrname: the name of attribute to be checked
+
+        :return: :py:data:`True` if valid, otherwise :py:data:`False`."""
         pass
 
 
@@ -40,8 +44,13 @@ class CAContext( Context ):
     """A set of the alert replicas created by camera alert."""
 
     def createReplica( self, astroobj=None ):
-        """Create an alert replica which is associated with an
-        optional astro object 'astroobj'."""
+        """
+        Create an alert replica which is associated with an
+        optional astro object 'astroobj'.
+
+        :param :py:class:`antares.alert.AstroObject` astroobj: the astro object
+               to be associated with the created replica.
+        """
         replica = AlertReplica( self.alert, astroobj, kind )
         replica.AR.HasAstroObj = True
         replica.AR.ID = self.replicaID
