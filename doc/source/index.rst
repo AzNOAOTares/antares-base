@@ -13,9 +13,9 @@ Antares Documentation
 
 Welcome to Antares documentation.
 
-**********
-API
-**********
+*************
+API reference
+*************
 
 **Alert related**
 
