@@ -7,15 +7,19 @@ Antares context module.
 class Context:
     """
     Represents a context object in general. 
-    It is the super class for all concrete context objects.    
+    It is the super class for all 11 concrete context objects.    
     """
 
     def __init__( self ):
         pass
 
     def isPresent( self ):
-        """Return true is the context is currently present,
-        otherwise return false."""
+        """
+        Check if the context is currently present.
+
+        :return: :py:const:`True` if the context is currently present
+        otherwise :py:const:`False`.
+        """
         pass
 
     def isValidAttribute( self, attrname ):
