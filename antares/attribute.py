@@ -4,6 +4,12 @@ class Attribute:
     """
     Represents an attribute object. An attribute is initialized with its name,
     the context it belongs to, the datatype of its value, a description and the scale of its value.
+
+    :param: name(string): name of the attribute
+    :param: context(:py:class:`antares.context.Context`): context the attribute belongs to
+    :param: datatype(string): data type of the attribute value
+    :param: scale(:py:class:`IntPair`): the range to which the attribute value scales
+    :param: description(string): description of the attribute
     """
 
     vector = None
@@ -79,13 +85,13 @@ class UncertainFloat:
 
 class ProbabilityCurve:
     """Represents a probability curve which is one of the data type of
-    :py:class:`antares.attribute.Attribute`. It is used for variability."""
+    :py:class:`Attribute`. It is used for variability."""
     probabilities = None
     """A list of probability values."""
     
 class IntPair:
     """Represents a pair of int (providing lower and upper bounds)
-    which is one of the data type of :py:class:`antares.attribute.Attribute`."""
+    which is one of the data type of :py:class:`Attribute`."""
     lower_bound = None
     """The value of lower bound."""
     
@@ -94,7 +100,7 @@ class IntPair:
 
 class FloatPair:
     """Represents a pair of float (providing lower and upper bounds)
-    which is one of the data type of :py:class:`antares.attribute.Attribute`."""
+    which is one of the data type of :py:class:`Attribute`."""
     lower_bound = None
     """The value of lower bound."""
 
@@ -103,7 +109,7 @@ class FloatPair:
 
 class TimePeriod:
     """A derived attribute of the existence time for the
-    locus-aggregated alert. It is a data type of :py:class:`antares.attribute.Attribute`."""
+    locus-aggregated alert. It is a data type of :py:class:`Attribute`."""
     start = None
     """The start of the time period."""
     
