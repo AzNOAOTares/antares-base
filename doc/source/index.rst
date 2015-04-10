@@ -1,22 +1,44 @@
-.. Antares documentation master file, created by
-   sphinx-quickstart on Thu Apr  9 19:56:06 2015.
+.. Antares API documentation master file, created by
+   sphinx-quickstart on Tue Mar 10 20:02:16 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Antares's documentation!
-===================================
+******************************************************
+Camera Alert ( :py:class:`antares.alert.CameraAlert` )
+******************************************************
 
-Contents:
+.. automodule:: antares.alert
 
-.. toctree::
-   :maxdepth: 2
+.. autoclass:: CameraAlert
+   :show-inheritance:
 
+   .. rubric:: Attributes Summary
 
+   .. autosummary::
 
-Indices and tables
-==================
+      ~CameraAlert.CA
+      ~CameraAlert.LA
+      ~CameraAlert.IM
+      ~CameraAlert.IR
+      ~CameraAlert.IS
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~CameraAlert.throttle
+      ~CameraAlert.divert
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: CA
+   .. autoattribute:: LA
+   .. autoattribute:: IM
+   .. autoattribute:: IR
+   .. autoattribute:: IS
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: throttle
+   .. automethod:: divert
 
