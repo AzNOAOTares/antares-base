@@ -50,7 +50,7 @@ Rules & Constraints
 .. toctree::
    :maxdepth: 2
 
-   rules_constraints/index
+   rules_constraints.rst
 
 *********************
 Examples
