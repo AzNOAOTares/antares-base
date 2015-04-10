@@ -124,7 +124,7 @@ class AlertCombo( CameraAlert ):
     an alert combo is also associated with CB context objects.
     Combo is initialized with a set of alert replicas.
 
-    :param: :py:class:`list` alert_replicas: a list of :py:class:`AlertReplica`
+    :param: alert_replicas (:py:class:`list`): a list of :py:class:`AlertReplica`
     """
     
     CB = None

@@ -42,6 +42,12 @@ Context related
    context/ao_context
    context/la_context
    context/cb_context
+   context/ea_context
+   context/im_context
+   context/is_context
+   context/ir_context
+   context/ps_context
+   context/es_context
 
 Attribute related
 ^^^^^^^^^^^^^^^^^

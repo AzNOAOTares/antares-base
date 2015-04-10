@@ -34,7 +34,7 @@ class Context:
 
 class CAContext( Context ):
     """
-    Represents a CA (Camera Alert) context object which is a sub-class of Context.
+    Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CA context.
     """
     name = 'CA'
@@ -90,7 +90,7 @@ class CAContext( Context ):
 
 class ARContext( Context ):
     """
-    Represents a AR (Alert Replica) context object which is a sub-class of Context.
+    Represents a AR (Alert Replica) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AR context.
     """
     name = 'AR'
@@ -99,7 +99,7 @@ class ARContext( Context ):
 
 class CBContext( Context ):
     """
-    Represents a CB (Alert Combo) context object which is a sub-class of Context.
+    Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CB context.
     """
     name = 'CB'
@@ -123,7 +123,7 @@ class CBContext( Context ):
 
 class AOContext( Context ):
     """
-    Represents a AO (Astro Object) context object which is a sub-class of Context.
+    Represents a AO (Astro Object) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AO context.
     """
     name = 'AO'
@@ -133,7 +133,7 @@ class AOContext( Context ):
 
 class LAContext( Context ):
     """
-    Represents a LA (Locus-aggregated Alert) context object which is a sub-class of Context.
+    Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under LA context.
     """
     name = 'LA'
@@ -166,3 +166,59 @@ class LAContext( Context ):
         :rtype: Pandas TimeSeries
         """
         pass
+
+class EAContext( Context ):
+    """
+    Represents a EA (External Alert) context object which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under EA context.
+    """
+    name = 'EA'
+    """Name of EA context."""
+    pass
+
+class IMContext( Context ):
+    """
+    Represents a IM (Image) context object which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under IM context.
+    """
+    name = 'IM'
+    """Name of IM context."""
+    pass
+
+class ISContext( Context ):
+    """
+    Represents a IS (Image Section) context object which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under IS context.
+    """
+    name = 'IS'
+    """Name of IS context."""
+    pass
+
+class IRContext( Context ):
+    """
+    Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under IR context.
+    """
+    name = 'IR'
+    """Name of IR context."""
+    pass
+
+class PSContext( Context ):
+    """
+    Represents a PS (Point-source AstroObject) context object
+    which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under PS context.
+    """
+    name = 'PS'
+    """Name of PS context."""
+    pass
+
+class ESContext( Context ):
+    """
+    Represents a ES (Extended-source AstroObject) context object
+    which is a sub-class of :py:class:`Context`.
+    It contains all the attributes defined under ES context.
+    """
+    name = 'ES'
+    """Name of ES context."""
+    pass
