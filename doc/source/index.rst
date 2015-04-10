@@ -60,11 +60,30 @@ Class inheritance diagram
    :width: 500px
    :height: 480px
 
-* Class inheritance relationship
+Class inheritance relationship
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :py:class:`antares.alert.Alert` is the superclass for
 :py:class:`antares.alert.CameraAlert` and 
 :py:class:`antares.alert.ExternalAlert`.
+
+:py:class:`antares.alert.CameraAlert` is the superclass for
+:py:class:`antares.alert.AlertReplica` and
+:py:class:`antares.alert.AlertCombo`.
+
+:py:class:`antares.context.Context` is the superclass for the other 11
+    context classes.
+
+Class composition relationship
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An :py:class:`antares.alert.ExternalAlert` has exactly one
+:py:class:`antares.context.Context`, which is :py:class:`antares.context.EAContext`.
+
+A :py:class:`antares.alert.CameraAlert` has one to many
+:py:class:`antares.context.Context`.
+
+A :py:class:`antares.context.Context` has one to many :py:class:`antares.attribute.Attirbute`.
 
 *********************
 Rules & Constraints
