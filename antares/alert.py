@@ -92,21 +92,21 @@ class AlertReplica( CameraAlert ):
 
     AO = None
     """AO (Astro Object) context object. AO attributes are available if
-    AR.HasAstroObject = :py:data:`True`.
+    ``AR.HasAstroObject`` = :py:data:`True`.
 
     :type: :py:class:`antares.context.AOContext`
     """
 
     ES = None
     """ES (Extended Source) context object. ES attributes are available only
-    if AO.kind = "extended source".
+    if ``AO.kind = "extended source"``.
 
     :type: :py:class:`antares.context.ESContext`
     """
 
     PS = None
     """PS (Point Source) context object. PS attributes are available only
-    if AO.kind = "point source".
+    if ``AO.kind = "point source"``.
 
     :type: :py:class:`antares.context.PSContext`
     """
