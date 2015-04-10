@@ -57,6 +57,8 @@ Class inheritance diagram
 *************************
 
 .. image:: ./_static/classes.png
+   :width: 500px
+   :height: 480px
 
 *********************
 Rules & Constraints
