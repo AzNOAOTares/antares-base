@@ -24,7 +24,10 @@ class CameraAlert( Alert ):
     """
     
     CA = None
-    """CA (Camera Alert) context object. CA attributes are always available."""
+    """
+    CA (Camera Alert) context object. CA attributes are always available.
+    :type: :py:class:`antares.context.CAContext`
+    """
 
     IM = None
     """IM (Image) context object."""
