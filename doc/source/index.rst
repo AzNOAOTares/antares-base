@@ -3,42 +3,64 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-******************************************************
-Camera Alert ( :py:class:`antares.alert.CameraAlert` )
-******************************************************
+#################################
+Antares Documentation
+#################################
 
-.. automodule:: antares.alert
+.. image:: ./_static/antares.png
+   :width: 100px
+   :height: 100px
 
-.. autoclass:: CameraAlert
-   :show-inheritance:
+Welcome to Antares documentation.
 
-   .. rubric:: Attributes Summary
+**********
+API
+**********
 
-   .. autosummary::
+**Alert related**
 
-      ~CameraAlert.CA
-      ~CameraAlert.LA
-      ~CameraAlert.IM
-      ~CameraAlert.IR
-      ~CameraAlert.IS
+.. toctree::
+   :maxdepth: 2
 
-   .. rubric:: Methods Summary
+   alert/general_alert
+   alert/external_alert
+   alert/camera_alert
+   alert/alert_replica
+   alert/alert_combo
 
-   .. autosummary::
+**Context related**
 
-      ~CameraAlert.throttle
-      ~CameraAlert.divert
+.. toctree::
+   :maxdepth: 2
 
-   .. rubric:: Attributes Documentation
+**Attribute related**
 
-   .. autoattribute:: CA
-   .. autoattribute:: LA
-   .. autoattribute:: IM
-   .. autoattribute:: IR
-   .. autoattribute:: IS
+.. toctree::
+   :maxdepth: 2
 
-   .. rubric:: Methods Documentation
 
-   .. automethod:: throttle
-   .. automethod:: divert
+*************************
+Class inheritance diagram
+*************************
+
+*********************
+Rules & Constraints
+*********************
+
+.. toctree::
+   :maxdepth: 2
+
+   rules_constraints/index
+
+*********************
+Examples
+*********************
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
