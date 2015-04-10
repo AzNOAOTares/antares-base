@@ -60,11 +60,11 @@ Class inheritance diagram
    :width: 500px
    :height: 480px
 
-Class inheritance relationship
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Class inheritance relationship
 
-:py:class:`alert` is the superclass for :py:class:`CameraAlert` and
-:py:class:`ExternalAlert`.
+:py:class:`antares.alert.Alert` is the superclass for
+:py:class:`antares.alert.CameraAlert` and 
+:py:class:`antares.alert.ExternalAlert`.
 
 *********************
 Rules & Constraints
