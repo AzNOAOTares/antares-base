@@ -148,7 +148,8 @@ class LAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a time series of values
+        :return: a time series of values. Here the value is a dict that maps
+                 replica ID to the real value of ``attrname``.
         :rtype: :py:class:`pandas.Series`
         """
         pass

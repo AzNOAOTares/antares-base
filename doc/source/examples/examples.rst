@@ -75,8 +75,8 @@ of attribute ``RedShift`` which belongs to ``AR`` context::
 Different ways of iterating attribute values
 ============================================
 
-Iterating values of alert replicas of a camera alert
-----------------------------------------------------
+Iterating attribute values of alert replicas of a camera alert
+--------------------------------------------------------------
 
 >>> import numpy as np
 >>> values = alert.CA.assembleVector( 'AR', 'Redshift' )
@@ -86,3 +86,25 @@ Iterating values of alert replicas of a camera alert
 Here, ``alert`` is a camera alert. The second line of code returns a
 numpy array of all the values of attribute ``Redshift`` under ``AR``
 context of replicas of ``alert``.
+
+Iterating attribute values of alert replicas of an alert combo
+--------------------------------------------------------------
+
+>>> import numpy as np
+>>> values = combo.CB.assembleVector( 'AR', 'Redshift' )
+>>> for val in np.nditer( values ):
+>>>     print( val )
+
+Here, ``combo`` is an alert combo. The second line of code returns a
+numpy array of all the values of attribute ``Redshift`` under ``AR``
+context of replicas that belongs to ``combo``.
+
+Iterating a time series of all past values an attribute
+-------------------------------------------------------
+
+>>> for item in alert.CA.GMinusR.time_series.iteritems():
+>>>     print( item.index, item.value )
+
+Here, ``alert`` is a camera alert. ``alert.CA.GMinusR.time_series`` is
+a Pandas time series, so ``item.index`` is a timestamp and
+``item.value`` is the actual value of ``GMinusR``.
