@@ -83,8 +83,8 @@ class CAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a list of values
-        :rtype: list
+        :return: an array of values
+        :rtype: numpy array
         """
         pass
 

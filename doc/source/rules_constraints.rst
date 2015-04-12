@@ -57,10 +57,25 @@ Rules & Constraints
 12. CB attributes are only visible during per-combo processing.
 
 13. CA processing can iterate through the alerts of its
-    locus-aggregated alert to access AR, PS, and ES attributes.
+    locus-aggregated alert to access AR, PS, and ES attributes. For
+    example: 
+
+    >>> alert.LA.assembleTimeSeries_replics( 'AR', 'Redshift' )
+
+    Here, ``alert`` is a camera alert and the above call returns a
+    time series of all the values of the attribute ``Redshift`` under
+    ``AR`` context of the alert replicas associated with a locus
+    aggregated alert.
 
 14. CB processing can iterate through its replicas to access AR, AO,
     PS, and ES attributes.
+
+    >>> combo.CB.assembleVector( 'AR', 'Redshift' )
+
+    Here, ``combo`` is an alert combo and the above call returns a
+    numpy array of all the values of the attribute ``Redshift`` under
+    ``AR`` context of the alert replicas associated with the alert
+    combo.
 
 15. A derived attribute cannot have a circular definition (and so
     definitions form a directed acyclic graph).
