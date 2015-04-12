@@ -72,3 +72,17 @@ of attribute ``RedShift`` which belongs to ``AR`` context::
     if len(replica_set2) > 0:
         alert.CA.createCombo( replica_set2 )
 
+Different ways of iterating attribute values
+============================================
+
+Iterating values of alert replicas of a camera alert
+----------------------------------------------------
+
+>>> import numpy as np
+>>> values = alert.CA.assembleVector( 'AR', 'Redshift' )
+>>> for val in np.nditer( values ):
+>>>     print( val )
+
+Here, ``alert`` is a camera alert. The second line of code returns a
+numpy array of all the values of attribute ``Redshift`` under ``AR``
+context of replicas of ``alert``.
