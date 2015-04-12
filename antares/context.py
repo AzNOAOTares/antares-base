@@ -38,10 +38,18 @@ class CAContext( Context ):
     It contains all the attributes defined under CA context.
     """
     name = 'CA'
-    """Name of CA context."""
+    """
+    Name of CA context.
+
+    :type: string
+    """
     
     replicas = None
-    """A set of the alert replicas created by camera alert."""
+    """
+    A set of the alert replicas created by camera alert.
+
+    :type: list
+    """
 
     def createReplica( self, astroobj=None ):
         """
@@ -103,10 +111,18 @@ class CBContext( Context ):
     It contains all the attributes defined under CB context.
     """
     name = 'CB'
-    """Name of CB context."""
+    """
+    Name of CB context.
+
+    :type: string
+    """
     
     replicas = None
-    """A set of the alert replicas associated with the combo."""
+    """
+    A set of the alert replicas associated with the combo.
+
+    :type: list
+    """
 
     def assembleVector_replicas( self, context, attrname ):
         """
@@ -127,7 +143,11 @@ class AOContext( Context ):
     It contains all the attributes defined under AO context.
     """
     name = 'AO'
-    """Name of AO context."""
+    """
+    Name of AO context.
+
+    :type: string
+    """
 
     pass
 
@@ -137,7 +157,11 @@ class LAContext( Context ):
     It contains all the attributes defined under LA context.
     """
     name = 'LA'
-    """Name of LA context."""
+    """
+    Name of LA context.
+
+    :type: string
+    """
 
     def assembleTimeSeries_replicas( self, context, attrname ):
         """
@@ -174,7 +198,11 @@ class EAContext( Context ):
     It contains all the attributes defined under EA context.
     """
     name = 'EA'
-    """Name of EA context."""
+    """
+    Name of EA context.
+
+    :type: string
+    """
     pass
 
 class IMContext( Context ):
@@ -183,7 +211,11 @@ class IMContext( Context ):
     It contains all the attributes defined under IM context.
     """
     name = 'IM'
-    """Name of IM context."""
+    """
+    Name of IM context.
+
+    :type: string
+    """
     pass
 
 class ISContext( Context ):
@@ -192,7 +224,11 @@ class ISContext( Context ):
     It contains all the attributes defined under IS context.
     """
     name = 'IS'
-    """Name of IS context."""
+    """
+    Name of IS context.
+
+    :type: string
+    """
     pass
 
 class IRContext( Context ):
@@ -201,7 +237,11 @@ class IRContext( Context ):
     It contains all the attributes defined under IR context.
     """
     name = 'IR'
-    """Name of IR context."""
+    """
+    Name of IR context.
+
+    :type: string
+    """
     pass
 
 class PSContext( Context ):
@@ -211,7 +251,11 @@ class PSContext( Context ):
     It contains all the attributes defined under PS context.
     """
     name = 'PS'
-    """Name of PS context."""
+    """
+    Name of PS context.
+
+    :type: string
+    """
     pass
 
 class ESContext( Context ):
@@ -221,5 +265,9 @@ class ESContext( Context ):
     It contains all the attributes defined under ES context.
     """
     name = 'ES'
-    """Name of ES context."""
+    """
+    Name of ES context.
+
+    :type: string
+    """
     pass

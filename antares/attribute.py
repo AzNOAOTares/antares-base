@@ -13,45 +13,89 @@ class Attribute:
     """
 
     vector = None
-    """The vector of all the past values computed for the attribute.
-    It is a Numpy array."""
+    """
+    The vector of all the past values computed for the attribute.
+    It is a Numpy array.
+
+    :type: numpy array
+    """
 
     time_series = None
-    """The time series of all the past values computed for the attribute.
-    It is a Pandas Time Series."""
+    """
+    The time series of all the past values computed for the attribute.
+    It is a Pandas Time Series.
+
+    :type: pandas series
+    """
 
     description = ""
-    """A short description of the attribute."""
+    """
+    A short description of the attribute.
+
+    :type: string
+    """
 
     name = ""
-    """The name of the attribute."""
+    """
+    The name of the attribute.
+
+    :type: string
+    """
 
     context = ""
-    """The context that the attribute belongs to."""
+    """
+    The context that the attribute belongs to.
+
+    :type: string
+    """
 
     datatype = ""
-    """The data type of the attribute. The valid data type could be either
+    """
+    The data type of the attribute. The valid data type could be either
     a Python's built-in type (boolean, int, float, string, timestamp) or a composite
-    object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod)."""
+    object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod).
+
+    :type: string
+    """
 
     timestamp = None
-    """Time stamp for the most-recently computed value."""
+    """
+    Time stamp for the most-recently computed value.
+
+    :type: timestamp
+    """
 
     annotation = ""
-    """Annotation for the most-recently computed value."""
+    """
+    Annotation for the most-recently computed value.
+
+    :type: string
+    """
 
     confidence = 1.0
-    """Confidence for the most-recently computed value."""
+    """
+    Confidence for the most-recently computed value.
+
+    :type: float
+    """
 
     enum_ints = None
-    """A finite list of possible int values for the attribute. It is
+    """
+    A finite list of possible int values for the attribute. It is
     available only when datatype = "enumerated int". In that case the
-    attribute value can be only picked from this list."""
+    attribute value can be only picked from this list.
+
+    :type: list of ints
+    """
 
     enum_strs = None
-    """A finite list of possible string values for the attribute. It is
+    """
+    A finite list of possible string values for the attribute. It is
     available only when datatype = "enumerated string". In that case the
-    attribute value can be only picked from this list."""
+    attribute value can be only picked from this list.
+
+    :type: list of strings
+    """
 
     def __init__( self, name, context, datatype, scale, description="" ):
         pass
@@ -75,43 +119,83 @@ class UncertainFloat:
     value, a second being the lower std dev (one std dev below) and the
     third being the upper std dev (one std dev above)."""
     expected_value = None
-    """The first float: expected value."""
+    """
+    The first float: expected value.
+
+    :type: float
+    """
     
     lower_stddev = None
-    """The second float: lower std dev (one std dev below)."""
+    """
+    The second float: lower std dev (one std dev below).
+
+    :type: float
+    """
 
     upper_stddev = None
-    """The third float: upper std dev (one std dev above)."""
+    """
+    The third float: upper std dev (one std dev above).
+
+    :type: float
+    """
 
 class ProbabilityCurve:
     """Represents a probability curve which is one of the data type of
     :py:class:`Attribute`. It is used for variability."""
     probabilities = None
-    """A list of probability values."""
+    """
+    A list of probability values.
+
+    :type: numpy array
+    """
     
 class IntPair:
     """Represents a pair of int (providing lower and upper bounds)
     which is one of the data type of :py:class:`Attribute`."""
     lower_bound = None
-    """The value of lower bound."""
+    """
+    The value of lower bound.
+
+    :type: int
+    """
     
     upper_bound = None
-    """The value of upper bound."""
+    """
+    The value of upper bound.
+
+    :type: int
+    """
 
 class FloatPair:
     """Represents a pair of float (providing lower and upper bounds)
     which is one of the data type of :py:class:`Attribute`."""
     lower_bound = None
-    """The value of lower bound."""
+    """
+    The value of lower bound.
+
+    :type: float
+    """
 
     upper_bound = None
-    """The value of upper bound."""
+    """
+    The value of upper bound.
+
+    :type: float
+    """
 
 class TimePeriod:
     """A derived attribute of the existence time for the
     locus-aggregated alert. It is a data type of :py:class:`Attribute`."""
     start = None
-    """The start of the time period."""
+    """
+    The start of the time period.
+
+    :type: timestamp
+    """
     
     end = None
-    """The end of the time period."""
+    """
+    The end of the time period.
+
+    :type: timestamp
+    """
