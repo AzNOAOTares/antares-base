@@ -59,7 +59,7 @@ html:
 
 gh-pages:
 	git checkout gh-pages
-	rm -rf build _sources _static alert context attribute _images
+	rm -rf build _sources _static alert context attribute examples _images
 	git checkout master $(GH_PAGE_SRCS)
 	git reset HEAD
 	mv ./doc/source ./
