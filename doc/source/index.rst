@@ -108,6 +108,11 @@ Rules & Constraints
 Examples
 *********************
 
+.. toctree::
+   :maxdepth: 2
+
+   examples/attr_val.rst
+
 ******************
 Indices and tables
 ******************
