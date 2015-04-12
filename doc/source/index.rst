@@ -111,7 +111,7 @@ Examples
 .. toctree::
    :maxdepth: 2
 
-   examples/attr_val.rst
+   examples/examples.rst
 
 ******************
 Indices and tables
