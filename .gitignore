@@ -37,3 +37,6 @@ __pycache__
 *.ilg
 
 .DS_Store
+
+# ignore data for demo, it is too big
+demo-data
