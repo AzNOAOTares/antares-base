@@ -3,6 +3,9 @@ Antares context module.
 """
 
 #!/usr/bin/env python3
+from antares.config import *
+from antares.attribute import *
+from io import StringIO
 
 class Context:
     """
@@ -50,6 +53,23 @@ class CAContext( Context ):
 
     :type: list
     """
+
+    def __init__( self ):
+        ## Initialize predefined attributes for CA context.
+        for attrname in CA_attributes.keys():
+            attr = Attribute( attrname, 'CA', CA_attributes[attrname][0],
+                              1, description=CA_attributes[attrname][1] )
+            setattr( self, attrname, attr )
+
+    ## string representation of the CA context object.
+    def __str__( self ):
+        buf = StringIO()
+        buf.write( '{0} Context:\n'.format(self.name) )
+        for attrname in CA_attributes.keys():
+            attr = getattr( self, attrname )
+            buf.write( 'Attribute: {0}, datatype: {1}, value: {2}\n'
+                       .format(attr.name, attr.datatype, attr.value) )
+        return buf.getvalue()
 
     def createReplica( self, astroobj=None ):
         """

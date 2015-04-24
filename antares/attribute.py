@@ -98,7 +98,21 @@ class Attribute:
     """
 
     def __init__( self, name, context, datatype, scale, description="" ):
-        pass
+        self.name = name
+        self.context = context
+        self.datatype = datatype
+        self.scale = scale
+        self.description = description
+
+    def get_value( self ):
+        return self._value
+
+    def set_value( self, val ):
+        ## Check if 'val' is of the desired type.
+        if not isinstance( val, self.datatype ):
+            raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
+        
+        self._value = val
 
     def timeDelimitedSeries( self, start_time, end_time ):
         """
@@ -112,6 +126,9 @@ class Attribute:
         :rtype: Pandas Time Series
         """
         pass
+
+    ## Attach getters & setters
+    value = property( get_value, set_value )
 
 class UncertainFloat:
     """Represents a triple floats which is one of the data type of
