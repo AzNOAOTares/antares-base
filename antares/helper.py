@@ -30,8 +30,8 @@ def GenerateCameraAlertStream( alert_num=10, night=1 ):
                                  delimiter=r'\s+' )
     plv_linear_data[ 'RA' ] = plv_sdss_data[ 'RA' ]
     plv_linear_data[ 'Decl' ] = plv_sdss_data[ 'Decl' ]
-    plv_linear_data[ 'g' ] = plv_sdss_data[ 'g' ]
-    plv_linear_data[ 'r' ] = plv_sdss_data[ 'r' ]
+    plv_linear_data[ 'G' ] = plv_sdss_data[ 'G' ]
+    plv_linear_data[ 'R' ] = plv_sdss_data[ 'R' ]
 
     alerts = [] # list of camera alerts to be returned to caller.
     for index in range( alert_num*(night-1), alert_num*night ):
