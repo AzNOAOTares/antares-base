@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from datetime import datetime
+from antares.config import *
     
 class Attribute:
     """
@@ -58,7 +60,7 @@ class Attribute:
     :type: string
     """
 
-    timestamp = None
+    computedAt = None
     """
     Time stamp for the most-recently computed value.
 
@@ -97,12 +99,14 @@ class Attribute:
     :type: list of strings
     """
 
-    def __init__( self, name, context, datatype, scale, description="" ):
+    def __init__( self, name, atype, context, datatype, scale, description="" ):
         self.name = name
+        self.atype = atype
         self.context = context
         self.datatype = datatype
         self.scale = scale
         self.description = description
+        self.valueAssigned = False
 
     def get_value( self ):
         return self._value
@@ -113,6 +117,10 @@ class Attribute:
             raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
         
         self._value = val
+        self.valueAssigned = True # indicate its value has been assigned
+        if self.atype == DERIVED_ATTR:
+            # Set timestamp of computation.
+            self.computedAt = datetime.now().timestamp()
 
     def timeDelimitedSeries( self, start_time, end_time ):
         """

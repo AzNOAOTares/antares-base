@@ -55,10 +55,18 @@ class CAContext( Context ):
     """
 
     def __init__( self ):
-        ## Initialize predefined attributes for CA context.
+        ## Initialize predefined base attributes for CA context.
         for attrname in CA_base_attributes.keys():
-            attr = Attribute( attrname, 'CA', CA_base_attributes[attrname][0],
-                              1, description=CA_base_attributes[attrname][1] )
+            attr = Attribute( attrname, BASE_ATTR, 'CA',
+                              CA_base_attributes[attrname][0], 1,
+                              description=CA_base_attributes[attrname][1] )
+            setattr( self, attrname, attr )
+
+        ## Initialize predefined derived attributes for CA context.
+        for attrname in CA_derived_attributes.keys():
+            attr = Attribute( attrname, DERIVED_ATTR, 'CA',
+                              CA_derived_attributes[attrname][0], 1,
+                              description=CA_derived_attributes[attrname][1] )
             setattr( self, attrname, attr )
 
     ## string representation of the CA context object.
@@ -69,6 +77,13 @@ class CAContext( Context ):
             attr = getattr( self, attrname )
             buf.write( 'Attribute: {0}, datatype: {1}, value: {2}\n'
                        .format(attr.name, attr.datatype, attr.value) )
+
+        for attrname in CA_derived_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned:
+                buf.write( 'Attribute: {0}, datatype: {1}, value: {2}\n'
+                           .format(attr.name, attr.datatype, attr.value) )
+
         return buf.getvalue()
 
     def createReplica( self, astroobj=None ):
