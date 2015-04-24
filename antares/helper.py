@@ -36,7 +36,7 @@ def GenerateCameraAlertStream( alert_num=10, night=1 ):
     alerts = [] # list of camera alerts to be returned to caller.
     for index in range( alert_num*(night-1), alert_num*night ):
         ca_context = CAContext()
-        for attrname in CA_attributes.keys():
+        for attrname in CA_base_attributes.keys():
             attr = getattr( ca_context, attrname )
             attr.value = plv_linear_data.loc[index, attrname].astype(attr.datatype)
 

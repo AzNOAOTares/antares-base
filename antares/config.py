@@ -11,7 +11,7 @@ import numpy
 demo_data_path = '../demo-data'
 
 ## Base attributes under CA context.
-CA_attributes = { 'RA' : (numpy.float64, 'Right ascension'),
+CA_base_attributes = { 'RA' : (numpy.float64, 'Right ascension'),
                   'Decl' : (numpy.float64, 'Declination'),
                   'LCtype' : (numpy.int64, 'Type of light curve'),
                   'P' : (numpy.float64, 'Best fit period'),
