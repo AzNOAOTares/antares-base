@@ -10,8 +10,9 @@ import sys, os
 def main():
     alerts = GenerateCameraAlertStream()
     for alert in alerts:
-        print( alert )
         alert.CA.GMinusR.value = alert.CA.G.value - alert.CA.R.value
+        alert.CA.GMinusR.confidence = 1.0
+        alert.CA.GMinusR.annotation = 'Computed with high confidence'
         print( alert )
 
 if __name__ == '__main__':
