@@ -75,14 +75,14 @@ class CAContext( Context ):
         buf.write( '{0} Context:\n'.format(self.name) )
         for attrname in CA_base_attributes.keys():
             attr = getattr( self, attrname )
-            buf.write( 'Attribute: {0}, datatype: {1}, value: {2}\n'
+            buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
                        .format(attr.name, attr.datatype, attr.value) )
 
         for attrname in CA_derived_attributes.keys():
             attr = getattr( self, attrname )
             if attr.valueAssigned:
-                buf.write( 'Attribute: {0}, datatype: {1}, value: {2}\n'
-                           .format(attr.name, attr.datatype, attr.value) )
+                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}, confidence: {3}, annotation: {4}\n'
+                           .format(attr.name, attr.datatype, attr.value, attr.confidence, attr.annotation) )
 
         return buf.getvalue()
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from datetime import datetime
 from antares.config import *
+import numpy as np
     
 class Attribute:
     """
@@ -109,18 +110,50 @@ class Attribute:
         self.valueAssigned = False
 
     def get_value( self ):
-        return self._value
+        if hasattr( self, '_value' ):
+            return self._value
+        else:
+            raise AttributeError( 'Value for {0} has not been set!'.format(self.name) )
 
     def set_value( self, val ):
         ## Check if 'val' is of the desired type.
         if not isinstance( val, self.datatype ):
-            raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
+            if isinstance( val, float ) or isinstance( val, int ):
+                val = np.float64( val )
+            else:
+                raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
         
         self._value = val
         self.valueAssigned = True # indicate its value has been assigned
         if self.atype == DERIVED_ATTR:
             # Set timestamp of computation.
             self.computedAt = datetime.now().timestamp()
+
+    def get_confidence( self ):
+        if hasattr( self, '_confidence' ):
+            return self._confidence
+        else:
+            return None
+
+    def set_confidence( self, confid ):
+        ## Check if 'val' is of the desired type.
+        if isinstance( confid, float ) or isinstance( confid, int ):
+            self._confidence = confid
+        else:
+            raise TypeError( '{0} should be a {1}!'.format(confid, float) )
+    
+    def get_annotation( self ):
+        if hasattr( self, '_annotation' ):
+            return self._annotation
+        else:
+            return ''
+
+    def set_annotation( self, annotation ):
+        ## Check if 'val' is of the desired type.
+        if not isinstance( annotation, str ):
+            raise TypeError( '{0} should be a {1}!'.format(confid, str) )
+        
+        self._annotation = annotation
 
     def timeDelimitedSeries( self, start_time, end_time ):
         """
@@ -137,6 +170,8 @@ class Attribute:
 
     ## Attach getters & setters
     value = property( get_value, set_value )
+    confidence = property( get_confidence, set_confidence )
+    annotation = property( get_annotation, set_annotation )
 
 class UncertainFloat:
     """Represents a triple floats which is one of the data type of
