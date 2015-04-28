@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'db_model.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'antares_db',
+        'NAME': 'antares_demo',
         'USER': 'root',
         'HOST': '127.0.0.1',
         'PASSWORD': '',

@@ -33,6 +33,10 @@ class Alert( models.Model ):
                                  choices=decisions,
                                  default='NA' )
 
+    # Explicitly specify the column name for the forign key field,
+    # otherwise Django will automatically append a _id as postfix.
+    LocusID.db_column = 'LocusID'
+
     class Meta:
         db_table = 'Alert'
 
@@ -45,6 +49,10 @@ class AstroObject( models.Model ):
     Catalog = models.CharField( max_length=500 )
     IDinCatalog = models.IntegerField()
     IsPointSource = models.BooleanField( default=False )
+
+    # Explicitly specify the column name for the forign key field,
+    # otherwise Django will automatically append a _id as postfix.
+    LocusID.db_column = 'LocusID'
 
     class Meta:
         db_table = 'AstroObject'
@@ -61,6 +69,12 @@ class AlertReplica( models.Model ):
     LocusID = models.ForeignKey( Locus )
     ChannelID = models.IntegerField()
     ChannelProbability = models.FloatField()
+
+    # Explicitly specify the column name for the forign key field,
+    # otherwise Django will automatically append a _id as postfix.
+    LocusID.db_column = 'LocusID'
+    AlertID.db_column = 'AlertID'
+    AstroObjectID.db_column = 'AstroObjectID'
 
     class Meta:
         db_table = 'AlertReplica'
@@ -101,6 +115,10 @@ class AttributeValue( models.Model ):
     Value = models.FloatField()
     Annotation = models.CharField( max_length=500 )
     Confidence = models.FloatField()
+
+    # Explicitly specify the column name for the forign key field,
+    # otherwise Django will automatically append a _id as postfix.
+    AttrName.db_column = 'AttrName'
 
     class Meta:
         unique_together = ( 'AttrName', 'ContainerID',
