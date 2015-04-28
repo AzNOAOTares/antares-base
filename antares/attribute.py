@@ -108,6 +108,7 @@ class Attribute:
         self.scale = scale
         self.description = description
         self.valueAssigned = False
+        self.history = [] # List of (computeAt, value) tuples
 
     def get_value( self ):
         if hasattr( self, '_value' ):
@@ -118,17 +119,21 @@ class Attribute:
     def set_value( self, val ):
         ## Check if 'val' is of the desired type.
         if not isinstance( val, self.datatype ):
-            if isinstance( val, float ) or isinstance( val, int ):
-                val = np.float64( val )
-            else:
+            try:
+                val = self.datatype( val )
+            except ValueError:
                 raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
         
         self._value = val
-        self.valueAssigned = True # indicate its value has been assigned
+        self.valueAssigned = True
         if self.atype == DERIVED_ATTR:
             # Set timestamp of computation.
             self.computedAt = datetime.now().timestamp()
-
+            self.history.append( (self.computedAt, self._value ) )
+            # Indicate the value of derived attribute has not been written
+            # to DB yet. When alert.commit() is called, this flag will become True.
+            self.flushed2DB = False
+        
     def get_confidence( self ):
         if hasattr( self, '_confidence' ):
             return self._confidence
