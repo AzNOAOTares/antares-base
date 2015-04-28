@@ -30,6 +30,16 @@ class Alert( models.Model ):
                                  choices=decisions,
                                  default='NA' )
 
+class AstroObject( models.Model ):
+    """
+    The class corresponds to the 'AstroObject' table.
+    """
+    AstroObjectID = models.IntegerField( primary_key=True )
+    LocusID = models.ForeignKey( Locus )
+    Catalog = models.CharField( max_length=500 )
+    IDinCatalog = models.IntegerField()
+    IsPointSource = models.BooleanField( default=False )
+
 class AlertReplica( models.Model ):
     """
     The class corresponds to the 'AlertReplica' table.
@@ -42,16 +52,6 @@ class AlertReplica( models.Model ):
     LocusID = models.ForeignKey( Locus )
     ChannelID = models.IntegerField()
     ChannelProbability = models.FloatField()
-
-class AstroObject( models.Model ):
-    """
-    The class corresponds to the 'AlertReplica' table.
-    """
-    AstroObjectID = models.IntegerField( primary_key=True )
-    LocusID = models.ForeignKey( Locus )
-    Catalog = models.CharField( max_length=500 )
-    IDinCatalog = models.IntegerField()
-    IsPointSource = models.BooleanField( default=False )
 
 class Attribute( models.Model ):
     """
