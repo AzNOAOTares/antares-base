@@ -9,41 +9,57 @@ from antares.context import *
 from antares.config import *
 import os
 import pandas as pd
+import pymysql
 
-def GenerateCameraAlertStream( alert_num=10, night=1 ):
+def GenerateCameraAlertStream( alert_num=10 ):
     """
-    Randomly generate a stream of camera alerts from
-    the demo data.
+    Randomly generate a stream of camera alerts from the demo database.
     """
-    if night < 1:
-        print( "The value of 'night' must be greater than 0!" )
-        exit( -1 )
-
-    if night*alert_num > total_num_alerts:
-        print( 'We have reached the limit of camera alert we can generate!' )
-        exit( -1 )
+    ## Connect to mysql database.
+    conn = pymysql.connect( host='127.0.0.1',
+                            user='root',
+                            passwd='',
+                            db='antares_demo' )
+    cur = conn.cursor()
     
-    ## load demo data: PLV LINEAR variable data as a pandas data frame.
-    plv_linear_data = pd.read_csv( os.path.join(demo_data_path, 'PLV_LINEAR.dat'),
-                                   delimiter=r'\s+' )
-    plv_sdss_data = pd.read_csv( os.path.join(demo_data_path, 'PLV_SDSS.dat'),
-                                 delimiter=r'\s+' )
-    plv_linear_data[ 'RA' ] = plv_sdss_data[ 'RA' ]
-    plv_linear_data[ 'Decl' ] = plv_sdss_data[ 'Decl' ]
-    plv_linear_data[ 'G' ] = plv_sdss_data[ 'G' ]
-    plv_linear_data[ 'R' ] = plv_sdss_data[ 'R' ]
-
     alerts = [] # list of camera alerts to be returned to caller.
-    for index in range( alert_num*(night-1), alert_num*night ):
+    for index in range( 0, alert_num ):
         ca_context = CAContext()
-        for attrname in CA_base_attributes.keys():
-            attr = getattr( ca_context, attrname )
-            attr.value = plv_linear_data.loc[index, attrname].astype(attr.datatype)
 
-        alert_id = plv_linear_data.loc[index, 'LINEARobjectID'].astype(int)
-        ra = plv_linear_data.loc[index, 'RA']
-        decl = plv_linear_data.loc[index, 'Decl']
-        alert = CameraAlert( alert_id, ra, decl, ca_context, None, None, None, None )
+        query = """select * from Alert where LocusID={0}""".format(index)
+        cur.execute( query )
+        alert_row = cur.fetchall()[ 0 ]
+        query = """select * from Locus where LocusID={0}""".format(index)
+        cur.execute( query )
+        locus_row = cur.fetchall()[ 0 ]
+
+        alert_id = alert_row[ 0 ]
+        ra = locus_row[ 1 ]
+        decl = locus_row[ 2 ]
+
+        ca_context.RA.value = ra
+        ca_context.Decl.value = decl
+
+        query = """select Value from AttributeValue where ContainerID={0} and
+        ContainerType="E" and AttrName="Magnitude" """.format( alert_id )
+        cur.execute( query )
+        mag_rows = cur.fetchall()
+        # The most-recenctly computed magnitude value.
+        magnitude = mag_rows[len(mag_rows)-1][0]
+
+        query = """select Value from AttributeValue where ContainerID={0} and
+        ContainerType="E" and AttrName="MagnitudeErr" """.format( alert_id )
+        cur.execute( query )
+        magerr_rows = cur.fetchall()
+        # The most-recenctly computed magnitude value.
+        magnitude_err = magerr_rows[len(magerr_rows)-1][0]
+
+        ca_context.Magnitude.value = magnitude
+        ca_context.MagnitudeErr.value = magnitude_err
+        #print( alert_id, ra, decl, magnitude, magnitude_err )
+        #print( type(magnitude) )
+
+        alert = CameraAlert( alert_id, ra, decl, ca_context )
         alerts.append( alert )
 
     return alerts # return the generated camera alert stream
