@@ -11,6 +11,9 @@ class Locus( models.Model ):
     RA = models.FloatField()
     Decl = models.FloatField()
 
+    class Meta:
+        db_table = 'Locus'
+
 class Alert( models.Model ):
     """
     The class corresponds to the 'Alert' table.
@@ -30,6 +33,9 @@ class Alert( models.Model ):
                                  choices=decisions,
                                  default='NA' )
 
+    class Meta:
+        db_table = 'Alert'
+
 class AstroObject( models.Model ):
     """
     The class corresponds to the 'AstroObject' table.
@@ -39,6 +45,9 @@ class AstroObject( models.Model ):
     Catalog = models.CharField( max_length=500 )
     IDinCatalog = models.IntegerField()
     IsPointSource = models.BooleanField( default=False )
+
+    class Meta:
+        db_table = 'AstroObject'
 
 class AlertReplica( models.Model ):
     """
@@ -53,6 +62,9 @@ class AlertReplica( models.Model ):
     ChannelID = models.IntegerField()
     ChannelProbability = models.FloatField()
 
+    class Meta:
+        db_table = 'AlertReplica'
+
 class Attribute( models.Model ):
     """
     The class corresponds to the 'Attribute' table.
@@ -60,6 +72,9 @@ class Attribute( models.Model ):
     AttrName = models.CharField( max_length=100, primary_key=True )
     IsScaled = models.BooleanField( default=False )
     DataType = models.CharField( max_length=500 )
+
+    class Meta:
+        db_table = 'Attribute'    
 
 class AttributeValue( models.Model ):
     """
@@ -91,3 +106,4 @@ class AttributeValue( models.Model ):
         unique_together = ( 'AttrName', 'ContainerID',
                             'ContainerType', 'ComputedAt' )
 
+        db_table = 'AttributeValue'    
