@@ -15,6 +15,11 @@ def ComputeP():
 def main():
     alerts = GenerateCameraAlertStream()
     for alert in alerts:
+        try:
+            alert.CA.P.value = '5.7'
+        except TypeError:
+            print( 'TypeError caught because we are assigning an incompatible type of value!' )
+        
         alert.CA.P.value = ComputeP()
         alert.CA.P.confidence = 1.0
         alert.CA.P.annotation = 'Computed with high confidence'
