@@ -1,5 +1,5 @@
 BEGIN;
-CREATE TABLE `Alert` (`AlertID` integer NOT NULL PRIMARY KEY, `Decision` varchar(50) NOT NULL);
+CREATE TABLE `Alert` (`AlertID` integer NOT NULL PRIMARY KEY, `Decision` varchar(50) NOT NULL, `Annotation` varchar(500));
 CREATE TABLE `AlertReplica` (`ReplicaID` integer NOT NULL PRIMARY KEY, `ReplicaNumber` integer NOT NULL, `ChannelID` integer NOT NULL, `ChannelProbability` double precision NOT NULL, `AlertID` integer NOT NULL);
 CREATE TABLE `AstroObject` (`AstroObjectID` integer NOT NULL PRIMARY KEY, `Catalog` varchar(500) NOT NULL, `IDinCatalog` integer NOT NULL, `IsPointSource` bool NOT NULL);
 CREATE TABLE `Attribute` (`AttrName` varchar(100) NOT NULL PRIMARY KEY, `IsScaled` bool NOT NULL, `DataType` varchar(500) NOT NULL);
