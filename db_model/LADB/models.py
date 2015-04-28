@@ -110,7 +110,7 @@ class AttributeValue( models.Model ):
     AttrName = models.ForeignKey( Attribute )
     ContainerID = models.IntegerField()
     ContainerType = models.CharField( max_length=1, choices=container_types )
-    ComputedAt = models.DateTimeField( 'Time the value was computed' )
+    ComputedAt = models.CharField( max_length=50 ) # timestamp
     # Seems that attributes used in the demo are all floats.
     Value = models.FloatField()
     Annotation = models.CharField( max_length=500 )

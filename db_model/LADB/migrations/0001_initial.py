@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Alert',
             fields=[
-                ('AlertID', models.IntegerField(serialize=False, primary_key=True)),
+                ('AlertID', models.IntegerField(primary_key=True, serialize=False)),
                 ('Decision', models.CharField(choices=[('NA', 'Not Applicable'), ('T', 'Throttled Alert'), ('D', 'Diverted'), ('L1', 'Level-I Alert'), ('L2', 'Level-II Alert'), ('R', 'Rarest of the rare Alert')], max_length=50, default='NA')),
             ],
             options={
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AlertReplica',
             fields=[
-                ('ReplicaID', models.IntegerField(serialize=False, primary_key=True)),
+                ('ReplicaID', models.IntegerField(primary_key=True, serialize=False)),
                 ('ReplicaNumber', models.IntegerField(validators=[django.core.validators.MinValueValidator(1)])),
                 ('ChannelID', models.IntegerField()),
                 ('ChannelProbability', models.FloatField()),
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AstroObject',
             fields=[
-                ('AstroObjectID', models.IntegerField(serialize=False, primary_key=True)),
+                ('AstroObjectID', models.IntegerField(primary_key=True, serialize=False)),
                 ('Catalog', models.CharField(max_length=500)),
                 ('IDinCatalog', models.IntegerField()),
                 ('IsPointSource', models.BooleanField(default=False)),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Attribute',
             fields=[
-                ('AttrName', models.CharField(serialize=False, max_length=100, primary_key=True)),
+                ('AttrName', models.CharField(max_length=100, primary_key=True, serialize=False)),
                 ('IsScaled', models.BooleanField(default=False)),
                 ('DataType', models.CharField(max_length=500)),
             ],
@@ -64,10 +64,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AttributeValue',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('ContainerID', models.IntegerField()),
                 ('ContainerType', models.CharField(choices=[('A', 'AstroObject Table'), ('C', 'Combo Table'), ('I', 'Image Table'), ('E', 'Alert Table'), ('L', 'LocusAggregatedAlert Table'), ('M', 'ImageSection Table'), ('R', 'AlertReplica Table'), ('S', 'Source Table')], max_length=1)),
-                ('ComputedAt', models.DateTimeField(verbose_name='Time the value was computed')),
+                ('ComputedAt', models.CharField(max_length=50)),
                 ('Value', models.FloatField()),
                 ('Annotation', models.CharField(max_length=500)),
                 ('Confidence', models.FloatField()),
@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Locus',
             fields=[
-                ('LocusID', models.IntegerField(serialize=False, primary_key=True)),
+                ('LocusID', models.IntegerField(primary_key=True, serialize=False)),
                 ('RA', models.FloatField()),
                 ('Decl', models.FloatField()),
             ],
