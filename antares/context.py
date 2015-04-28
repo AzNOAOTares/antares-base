@@ -6,6 +6,9 @@ Antares context module.
 from antares.config import *
 from antares.attribute import *
 from io import StringIO
+import pymysql
+import pandas as pd
+from pandas.lib import Timestamp
 
 class Context:
     """
@@ -198,6 +201,9 @@ class LAContext( Context ):
     :type: string
     """
 
+    def __init__( self, container_id ):
+        self.container_id = container_id
+
     def assembleTimeSeries_replicas( self, context, attrname ):
         """
         The function assembles a time series of all the past values
@@ -225,8 +231,26 @@ class LAContext( Context ):
         :return: a time series of values
         :rtype: Pandas TimeSeries
         """
-        pass
+        ## Connect to mysql database.
+        conn = pymysql.connect( host='127.0.0.1',
+                                user='root',
+                                passwd='',
+                                db='antares_demo' )
+        cur = conn.cursor()
 
+        query = """select ComputedAt, Value from AttributeValue where ContainerID={0} and
+        ContainerType="E" and AttrName="{1}" """.format( self.container_id, attrname )
+        cur.execute( query )
+        rows = cur.fetchall()
+        timestamps = []
+        values = []
+        for row in rows:
+            timestamps.append( Timestamp(row[0]) )
+            values.append( row[1] )
+
+        # Return a Pandas TimeSeries
+        return pd.Series( values, index=timestamps )
+    
 class EAContext( Context ):
     """
     Represents a EA (External Alert) context object which is a sub-class of :py:class:`Context`.

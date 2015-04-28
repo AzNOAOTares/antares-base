@@ -64,7 +64,7 @@ class CameraAlert( Alert ):
     def __init__( self, alert_id, ra, decl, CA, IM=None, IR=None, IS=None ):
         super().__init__( alert_id, ra, decl )
         self.CA = CA
-        self.LA = LAContext() # LA context is implicit
+        self.LA = LAContext( alert_id ) # LA context is implicit
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2})\n{3}'.format(
