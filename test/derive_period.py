@@ -13,10 +13,10 @@ def ComputeP():
 
 ## The main function.
 def main():
-    alerts = GenerateCameraAlertStream()
+    alerts = GenerateCameraAlertStream( alert_num=1 )
     for alert in alerts:
         try:
-            alert.CA.P.value = '5.7'
+            alert.CA.P.value = 'abc'
         except TypeError:
             print( 'TypeError caught because we are assigning an incompatible type of value!' )
         
