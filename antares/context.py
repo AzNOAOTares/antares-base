@@ -60,6 +60,7 @@ class CAContext( Context ):
     def __init__( self, container_id ):
         """'container_id' is the ID of the object that owns the context."""
         self.container_id = container_id
+
         ## Initialize predefined base attributes for CA context.
         for attrname in CA_base_attributes.keys():
             attr = Attribute( attrname, BASE_ATTR, 'CA',
@@ -90,21 +91,6 @@ class CAContext( Context ):
                            .format(attr.name, attr.datatype, attr.value, attr.confidence, attr.annotation) )
 
         return buf.getvalue()
-
-    def createReplica( self, astroobj_id=None ):
-        """
-        Create an alert replica which is associated with an
-        optional astro object id ``astroobj_id``.
-
-        :param: :py:class:`antares.alert.AstroObject` astroobj: the astro object
-                to be associated with the created replica.
-        """
-        replica = AlertReplica( self.alert, astroobj, kind )
-        replica.AR.HasAstroObj = True
-        replica.AR.ID = self.replicaID
-        self.replicaID += 1
-        replica.AR.NumberInAlert = self.NumberInAlert
-        self.NumberInAlert += 1
 
     def createCombo( self, replicas ):
         """
@@ -158,7 +144,26 @@ class ARContext( Context ):
     """
     name = 'AR'
     """Name of AR context."""
-    pass
+
+    def __init__( self, container_id ):
+        self.container_id = container_id
+        ## Initialize predefined base attributes for CA context.
+        for attrname in AR_base_attributes.keys():
+            attr = Attribute( attrname, BASE_ATTR, 'AR',
+                              AR_base_attributes[attrname][0], 1,
+                              description=AR_base_attributes[attrname][1] )
+            setattr( self, attrname, attr )
+
+    def __str__( self ):
+        buf = StringIO()
+        buf.write( '{0} Context:\n'.format(self.name) )
+        for attrname in AR_base_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned == True:
+                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
+                           .format(attr.name, attr.datatype, attr.value) )
+
+        return buf.getvalue()
 
 class CBContext( Context ):
     """
@@ -203,8 +208,42 @@ class AOContext( Context ):
 
     :type: string
     """
+    def __init__( self, astro_id ):
+        """'continer_id' is the ID of the object that owns the context."""
+        self.container_id = astro_id
 
-    pass
+        ## Initialize predefined base attributes for AO context.
+        for attrname in AO_base_attributes.keys():
+            attr = Attribute( attrname, BASE_ATTR, 'CA',
+                              AO_base_attributes[attrname][0], 1,
+                              description=AO_base_attributes[attrname][1] )
+            setattr( self, attrname, attr )
+
+        ## Connect to mysql database.
+        conn = pymysql.connect( host='127.0.0.1',
+                                user='root',
+                                passwd='',
+                                db='antares_demo' )
+        cur = conn.cursor()
+        query = """select * from PLV_SDSS where object_id={0}""".format(astro_id)
+        cur.execute( query )
+        row = cur.fetchall()[0]
+        for attrname in AO_base_attributes.keys():
+            attr = getattr( self, attrname )
+            attr.value = row[ AO_base_attributes[attrname][2] ]
+
+        conn.close()
+
+    def __str__( self ):
+        buf = StringIO()
+        buf.write( '{0} Context:\n'.format(self.name) )
+        for attrname in AO_base_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned == True:
+                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
+                           .format(attr.name, attr.datatype, attr.value) )
+
+        return buf.getvalue()
 
 class LAContext( Context ):
     """

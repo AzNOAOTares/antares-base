@@ -67,10 +67,24 @@ class CameraAlert( Alert ):
         self.LA = LAContext( alert_id ) # LA context is implicit
         # When a camera alert is constructed, its decision is always not applicable.
         self.decision = 'NA' 
+        self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
+        self.replicas = []
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
             self.decision, self.ID, self.ra, self.decl, self.CA)
+
+    def createReplica( self, astro_id=None ):
+        """
+        Create an alert replica which is associated with an
+        optional astro object id ``astro_id``.
+
+        :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
+                to be associated with the created replica. It is optional.
+        """
+        replica = AlertReplica( self, astro_id=astro_id )
+        self.replicas.append( replica )
+        return replica
 
     def throttle( self, annotation ):
         """
@@ -153,10 +167,37 @@ class AlertReplica( CameraAlert ):
     :type: :py:class:`antares.context.PSContext`
     """
 
-    def __init__( self, astroobj_id=None ):
-        """Replica is initialized with its associated astro object (optional)."""
-        pass
+    def __init__( self, parent, astro_id=None ):
+        """Replica is initialized with its 'parent' (a camera alert) and
+        associated astro object (optional)."""
+        self.CA = parent.CA
+        self.LA = parent.LA
+        self.num = parent.replica_num
+        self.parent = parent
+        self.parent.replica_num += 1
 
+        ## Assign Replica ID.
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        query = """select ReplicaID from AlertReplica"""
+        cursor.execute( query )
+        rows = cursor.fetchall()
+        self.ID = len( rows )
+        conn.close()
+
+        ## Populate AR context.
+        self.AR = ARContext( self.ID )
+
+        if astro_id != None:
+            self.astro_id = astro_id
+            self.AR.HasAstroObject.value = 1
+            ## Populate AR context.
+            self.AO = AOContext( astro_id )
+
+    def __str__( self ):
+        return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
+            self.ID, self.parent.ID, self.AR, self.AO )
 
 class AlertCombo( CameraAlert ):
     """
