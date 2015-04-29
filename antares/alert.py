@@ -61,18 +61,19 @@ class CameraAlert( Alert ):
     :type: :py:class:`antares.context.LAContext`
     """
 
-    def __init__( self, alert_id, ra, decl, CA, IM=None, IR=None, IS=None ):
+    def __init__( self, alert_id, ra, decl, CA, decision, locus_id, IM=None, IR=None, IS=None ):
         super().__init__( alert_id, ra, decl )
         self.CA = CA
         self.LA = LAContext( alert_id ) # LA context is implicit
         # When a camera alert is constructed, its decision is always not applicable.
-        self.decision = 'NA' 
+        self.decision = decision
+        self.locus_id = locus_id
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
-            self.decision, self.ID, self.ra, self.decl, self.CA)
+            self.ID, self.ra, self.decl, self.decision, self.CA)
 
     def createReplica( self, astro_id=None ):
         """
@@ -93,8 +94,9 @@ class CameraAlert( Alert ):
         conn.commit()
         conn.close()
 
+        replica.commit()
         self.replicas.append( replica )
-        return replica
+        return replica.ID
 
     def throttle( self, annotation ):
         """
