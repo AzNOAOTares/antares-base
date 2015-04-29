@@ -83,6 +83,16 @@ class CameraAlert( Alert ):
                 to be associated with the created replica. It is optional.
         """
         replica = AlertReplica( self, astro_id=astro_id )
+        ## Update status for the newly created replica.
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        query = "INSERT INTO AlertStatus VALUES \
+        ({}, 'a', 'w', 0, {}, {})".format(replica.ID, self.ID, self.ID)
+        cursor.execute(query)
+        conn.commit()
+        conn.close()
+
         self.replicas.append( replica )
         return replica
 
