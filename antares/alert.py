@@ -125,6 +125,9 @@ class CameraAlert( Alert ):
             sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
                 self.decision, self.ID )
 
+        for replica in self.replcas:
+            replica.commit()
+
         conn.commit()
         conn.close()
 
@@ -175,6 +178,8 @@ class AlertReplica( CameraAlert ):
         self.num = parent.replica_num
         self.parent = parent
         self.parent.replica_num += 1
+        self.flushed2DB = False
+        self.astro_id = astro_id
 
         ## Assign Replica ID.
         conn = pymysql.connect(host='localhost', user='root',
@@ -189,8 +194,7 @@ class AlertReplica( CameraAlert ):
         ## Populate AR context.
         self.AR = ARContext( self.ID )
 
-        if astro_id != None:
-            self.astro_id = astro_id
+        if self.astro_id != None:
             self.AR.HasAstroObject.value = 1
             ## Populate AR context.
             self.AO = AOContext( astro_id )
@@ -198,6 +202,29 @@ class AlertReplica( CameraAlert ):
     def __str__( self ):
         return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
             self.ID, self.parent.ID, self.AR, self.AO )
+
+    def commit( self ):
+        conn = pymysql.connect( host='127.0.0.1', user='root',
+                                passwd='', db='antares_demo' )
+        cur = conn.cursor()
+        if self.flushed2DB == False:
+            if self.astro_id != None:
+                sql_insert = """insert into AstroObject values({0}, "{1}", {2}, {3}, {4})""".format( self.astro_id,
+                                                                                                     "SDSS", self.astro_id,
+                                                                                                     1, self.parent.locus_id )
+                cur.execute( sql_insert )
+                
+                sql_insert = """insert into AlertReplica(ReplicaID,ReplicaNumber,AlertID,AstroObjectID,LocusID) \
+                values({0}, {1}, {2}, {3}, {4})""".format( self.ID, self.num, self.parent.ID,
+                                                           self.astro_id, self.parent.locus_id )
+            else:
+                sql_insert = """insert into AlertReplica(ReplicaID,ReplicaNumber,AlertID,LocusID) \
+                values({0}, {1}, {2}, {3})""".format( self.ID, self.num, self.parent.ID, self.parent.locus_id )
+
+            cur.execute( sql_insert )
+            conn.commit()
+            self.flushed2DB = True
+            print( "Flush 2 DB" )
 
 class AlertCombo( CameraAlert ):
     """

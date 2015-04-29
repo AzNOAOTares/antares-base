@@ -59,6 +59,7 @@ def GenerateCameraAlertStream( alert_num=10 ):
         #print( type(magnitude) )
 
         alert = CameraAlert( alert_id, ra, decl, ca_context )
+        alert.locus_id = index
         alerts.append( alert )
 
     conn.close()
