@@ -61,4 +61,5 @@ def GenerateCameraAlertStream( alert_num=10 ):
         alert = CameraAlert( alert_id, ra, decl, ca_context )
         alerts.append( alert )
 
+    conn.close()
     return alerts # return the generated camera alert stream

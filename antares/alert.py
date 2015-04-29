@@ -65,10 +65,12 @@ class CameraAlert( Alert ):
         super().__init__( alert_id, ra, decl )
         self.CA = CA
         self.LA = LAContext( alert_id ) # LA context is implicit
+        # When a camera alert is constructed, its decision is always not applicable.
+        self.decision = 'NA' 
 
     def __str__( self ):
-        return 'Alert {0} at (ra={1}, dec={2})\n{3}'.format(
-            self.ID, self.ra, self.decl, self.CA)
+        return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
+            self.decision, self.ID, self.ra, self.decl, self.CA)
 
     def throttle( self, annotation ):
         """
@@ -90,7 +92,18 @@ class CameraAlert( Alert ):
         """
         Commit the changed data to Locus-aggregated Alerts DB.
         """
-        self.CA.commit()
+        conn = pymysql.connect( host='127.0.0.1', user='root',
+                                passwd='', db='antares_demo' )
+        cur = conn.cursor()
+
+        self.CA.commit( cur )
+        if self.decision != 'NA':
+            ## Update corresponding Alert table to reflect decision change.
+            ## Connect to mysql database.            
+            sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
+                self.decision, self.ID )
+
+        conn.commit()
 
 
 class AlertReplica( CameraAlert ):

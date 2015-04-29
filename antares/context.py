@@ -137,14 +137,7 @@ class CAContext( Context ):
         pass
 
     ## Flush attriubtes under CA to DB if their values is not synced.
-    def commit( self ):
-        ## Connect to mysql database.
-        conn = pymysql.connect( host='127.0.0.1',
-                                user='root',
-                                passwd='',
-                                db='antares_demo' )
-        cur = conn.cursor()
-
+    def commit( self, cur ):
         for attrname in CA_derived_attributes.keys():
             attr = getattr( self, attrname )
             if attr.valueAssigned and attr.flushed2DB == False:
@@ -156,8 +149,7 @@ class CAContext( Context ):
                                                                         attr.annotation, attr.confidence,
                                                                         attr.name )
                 cur.execute( sql_insert )
-                conn.commit()
-                print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
 
 class ARContext( Context ):
     """
