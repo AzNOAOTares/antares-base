@@ -57,7 +57,9 @@ class CAContext( Context ):
     :type: list
     """
 
-    def __init__( self ):
+    def __init__( self, container_id ):
+        """'container_id' is the ID of the object that owns the context."""
+        self.container_id = container_id
         ## Initialize predefined base attributes for CA context.
         for attrname in CA_base_attributes.keys():
             attr = Attribute( attrname, BASE_ATTR, 'CA',
@@ -89,10 +91,10 @@ class CAContext( Context ):
 
         return buf.getvalue()
 
-    def createReplica( self, astroobj=None ):
+    def createReplica( self, astroobj_id=None ):
         """
         Create an alert replica which is associated with an
-        optional astro object ``astroobj``.
+        optional astro object id ``astroobj_id``.
 
         :param: :py:class:`antares.alert.AstroObject` astroobj: the astro object
                 to be associated with the created replica.
@@ -133,6 +135,29 @@ class CAContext( Context ):
         :rtype: numpy array
         """
         pass
+
+    ## Flush attriubtes under CA to DB if their values is not synced.
+    def commit( self ):
+        ## Connect to mysql database.
+        conn = pymysql.connect( host='127.0.0.1',
+                                user='root',
+                                passwd='',
+                                db='antares_demo' )
+        cur = conn.cursor()
+
+        for attrname in CA_derived_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned and attr.flushed2DB == False:
+                attr.flushed2DB = True
+                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,
+                ComputedAt,Value, Annotation,Confidence,AttrName)
+                values({0},"{1}","{2}", {3},"{4}",{5},"{6}")""".format( self.container_id,
+                                                                        'E', attr.computedAt, attr.value,
+                                                                        attr.annotation, attr.confidence,
+                                                                        attr.name )
+                cur.execute( sql_insert )
+                conn.commit()
+                print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
 
 class ARContext( Context ):
     """
@@ -202,6 +227,7 @@ class LAContext( Context ):
     """
 
     def __init__( self, container_id ):
+        """'continer_id' is the ID of the object that owns the context."""
         self.container_id = container_id
 
     def assembleTimeSeries_replicas( self, context, attrname ):

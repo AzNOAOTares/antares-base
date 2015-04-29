@@ -86,6 +86,12 @@ class CameraAlert( Alert ):
         """
         pass
 
+    def commit( self ):
+        """
+        Commit the changed data to Locus-aggregated Alerts DB.
+        """
+        self.CA.commit()
+
 
 class AlertReplica( CameraAlert ):
     """

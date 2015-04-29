@@ -13,7 +13,7 @@ import pymysql
 
 def GenerateCameraAlertStream( alert_num=10 ):
     """
-    Randomly generate a stream of camera alerts from the demo database.
+    Generate a stream of camera alerts from the demo database.
     """
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
@@ -24,8 +24,6 @@ def GenerateCameraAlertStream( alert_num=10 ):
     
     alerts = [] # list of camera alerts to be returned to caller.
     for index in range( 0, alert_num ):
-        ca_context = CAContext()
-
         query = """select * from Alert where LocusID={0}""".format(index)
         cur.execute( query )
         alert_row = cur.fetchall()[ 0 ]
@@ -37,6 +35,7 @@ def GenerateCameraAlertStream( alert_num=10 ):
         ra = locus_row[ 1 ]
         decl = locus_row[ 2 ]
 
+        ca_context = CAContext( alert_id )
         ca_context.RA.value = ra
         ca_context.Decl.value = decl
 
