@@ -165,6 +165,17 @@ class ARContext( Context ):
 
         return buf.getvalue()
 
+    ## Flush attriubtes under AR to DB if their values is not synced.
+    def commit( self, cur ):
+        for attrname in AR_base_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned and attr.flushed2DB == False:
+                attr.flushed2DB = True
+                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,Value, AttrName) \
+                values({0},"{1}",{2},"{3}")""".format( self.container_id,'R' , attr.value, attr.name )
+                cur.execute( sql_insert )
+                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+
 class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
@@ -244,6 +255,18 @@ class AOContext( Context ):
                            .format(attr.name, attr.datatype, attr.value) )
 
         return buf.getvalue()
+
+    ## Flush attriubtes under AR to DB if their values is not synced.
+    def commit( self, cur ):
+        for attrname in AO_base_attributes.keys():
+            attr = getattr( self, attrname )
+            if attr.valueAssigned and attr.flushed2DB == False:
+                attr.flushed2DB = True
+                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,Value, AttrName) \
+                values({0},"{1}",{2},"{3}")""".format( self.container_id,'O' , attr.value, attr.name )
+                cur.execute( sql_insert )
+                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+
 
 class LAContext( Context ):
     """

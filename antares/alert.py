@@ -209,10 +209,13 @@ class AlertReplica( CameraAlert ):
         cur = conn.cursor()
         if self.flushed2DB == False:
             if self.astro_id != None:
-                sql_insert = """insert into AstroObject values({0}, "{1}", {2}, {3}, {4})""".format( self.astro_id,
-                                                                                                     "SDSS", self.astro_id,
-                                                                                                     1, self.parent.locus_id )
-                cur.execute( sql_insert )
+                query = """select * from AstroObject where AstroObjectID={0}""".format(self.astro_id)
+                cur.execute( query )
+                if len(cur.fetchall()) == 0:
+                    sql_insert = """insert into AstroObject values({0}, "{1}", {2}, {3}, {4})""".format( self.astro_id,
+                                                                                                         "SDSS", self.astro_id,
+                                                                                                         1, self.parent.locus_id )
+                    cur.execute( sql_insert )
                 
                 sql_insert = """insert into AlertReplica(ReplicaID,ReplicaNumber,AlertID,AstroObjectID,LocusID) \
                 values({0}, {1}, {2}, {3}, {4})""".format( self.ID, self.num, self.parent.ID,
@@ -222,9 +225,14 @@ class AlertReplica( CameraAlert ):
                 values({0}, {1}, {2}, {3})""".format( self.ID, self.num, self.parent.ID, self.parent.locus_id )
 
             cur.execute( sql_insert )
-            conn.commit()
+
             self.flushed2DB = True
-            print( "Flush 2 DB" )
+
+        self.AR.commit( cur )
+        if self.astro_id != None:
+            self.AO.commit( cur )
+
+        conn.commit()
 
 class AlertCombo( CameraAlert ):
     """

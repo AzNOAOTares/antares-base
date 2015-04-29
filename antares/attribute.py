@@ -109,6 +109,7 @@ class Attribute:
         self.description = description
         self.valueAssigned = False
         self.history = [] # List of (computeAt, value) tuples
+        self.flushed2DB = False
 
     def get_value( self ):
         if hasattr( self, '_value' ):
