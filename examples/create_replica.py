@@ -32,6 +32,7 @@ def main():
 
     ## Construct replica object given ID
     replica2 = ConstructAlertFromID( replica_id2, 'R' )
+    replica2.commit()
     print( replica2 )
 
 if __name__ == '__main__':
