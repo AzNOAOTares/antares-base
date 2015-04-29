@@ -83,18 +83,22 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        replica = AlertReplica( self, astro_id=astro_id )
+        replica = AlertReplica( self, astro_id=astro_id, init_from_db=False )
+        
         ## Update status for the newly created replica.
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
-        cursor = conn.cursor()
-        query = "INSERT INTO AlertStatus VALUES \
-        ({}, 'a', 'w', 0, {}, {})".format(replica.ID, self.ID, self.ID)
-        cursor.execute(query)
-        conn.commit()
-        conn.close()
+        ## TODO: call Zhe's system API.
+
+        # conn = pymysql.connect(host='localhost', user='root',
+        #                        passwd='', db='antares_demo')
+        # cursor = conn.cursor()
+        # query = "INSERT INTO AlertStatus VALUES \
+        # ({}, 'a', 'w', 0, {}, {})".format(replica.ID, self.ID, self.ID)
+        # cursor.execute(query)
+        # conn.commit()
+        # conn.close()
 
         replica.commit()
+        replica.flushed2DB = True
         self.replicas.append( replica )
         return replica.ID
 
@@ -113,14 +117,19 @@ class CameraAlert( Alert ):
         :param string annotation: a short description of why the alert is diverted.
         """
         self.decision = 'D'
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
-        cursor = conn.cursor()
-        query = "INSERT INTO AlertStatus VALUES \
-        ({}, 'a', 'f', 0, {}, {})".format(self.ID, self.ID, self.ID)
-        cursor.execute(query)
-        conn.commit()
-        conn.close()
+
+        ## TODO: reflect the change of decision immediately to DB.
+        
+        ## TODO: call Zhe's system API.
+        
+        #conn = pymysql.connect(host='localhost', user='root',
+        #                       passwd='', db='antares_demo')
+        # cursor = conn.cursor()
+        # query = "INSERT INTO AlertStatus VALUES \
+        # ({}, 'a', 'f', 0, {}, {})".format(self.ID, self.ID, self.ID)
+        # cursor.execute(query)
+        # conn.commit()
+        # conn.close()
 
     def commit( self ):
         """
@@ -182,7 +191,7 @@ class AlertReplica( CameraAlert ):
     :type: :py:class:`antares.context.PSContext`
     """
 
-    def __init__( self, parent, astro_id=None ):
+    def __init__( self, parent, astro_id=None, init_from_db=False, replica_id=None ):
         """Replica is initialized with its 'parent' (a camera alert) and
         associated astro object (optional)."""
         self.CA = parent.CA
@@ -190,18 +199,22 @@ class AlertReplica( CameraAlert ):
         self.num = parent.replica_num
         self.parent = parent
         self.parent.replica_num += 1
-        self.flushed2DB = False
         self.astro_id = astro_id
 
-        ## Assign Replica ID.
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
-        cursor = conn.cursor()
-        query = """select ReplicaID from AlertReplica"""
-        cursor.execute( query )
-        rows = cursor.fetchall()
-        self.ID = len( rows )
-        conn.close()
+        if init_from_db == False:
+            ## Assign Replica ID.
+            conn = pymysql.connect(host='localhost', user='root',
+                                   passwd='', db='antares_demo')
+            cursor = conn.cursor()
+            query = """select ReplicaID from AlertReplica"""
+            cursor.execute( query )
+            rows = cursor.fetchall()
+            self.ID = len( rows )
+            conn.close()
+            self.flushed2DB = False
+        else:
+            self.ID = replica_id
+            self.flushed2DB = True
 
         ## Populate AR context.
         self.AR = ARContext( self.ID )
