@@ -3,7 +3,7 @@ CREATE TABLE `Alert` (`AlertID` integer NOT NULL PRIMARY KEY, `Decision` varchar
 CREATE TABLE `AlertReplica` (`ReplicaID` integer NOT NULL PRIMARY KEY, `ReplicaNumber` integer NOT NULL, `ChannelID` integer, `ChannelProbability` double precision, `AlertID` integer NOT NULL);
 CREATE TABLE `AstroObject` (`AstroObjectID` integer NOT NULL PRIMARY KEY, `Catalog` varchar(500) NOT NULL, `IDinCatalog` integer NOT NULL, `IsPointSource` bool NOT NULL);
 CREATE TABLE `Attribute` (`AttrName` varchar(100) NOT NULL PRIMARY KEY, `IsScaled` bool NOT NULL, `DataType` varchar(500) NOT NULL);
-CREATE TABLE `AttributeValue` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `ContainerID` integer NOT NULL, `ContainerType` varchar(1) NOT NULL, `ComputedAt` varchar(50) NOT NULL, `Value` double precision NOT NULL, `Annotation` varchar(500) NOT NULL, `Confidence` double precision NOT NULL, `AttrName` varchar(100) NOT NULL);
+CREATE TABLE `AttributeValue` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `ContainerID` integer NOT NULL, `ContainerType` varchar(1) NOT NULL, `ComputedAt` varchar(50), `Value` double precision NOT NULL, `Annotation` varchar(500), `Confidence` double precision, `AttrName` varchar(100) NOT NULL);
 CREATE TABLE `Locus` (`LocusID` integer NOT NULL PRIMARY KEY, `RA` double precision NOT NULL, `Decl` double precision NOT NULL);
 ALTER TABLE `AttributeValue` ADD CONSTRAINT `AttributeValue_AttrName_4f3bf495baf3d8bb_uniq` UNIQUE (`AttrName`, `ContainerID`, `ContainerType`, `ComputedAt`);
 ALTER TABLE `AstroObject` ADD COLUMN `LocusID` integer NOT NULL;
