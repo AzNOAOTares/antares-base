@@ -8,7 +8,7 @@ import sys, os
 
 ## The main function.
 def main():
-    alerts = GenerateCameraAlertStream()
+    alerts = GenerateCameraAlertStream( alert_num=5 )
     for alert in alerts:
         print( alert )
 
