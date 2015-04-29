@@ -86,7 +86,15 @@ class CameraAlert( Alert ):
 
         :param string annotation: a short description of why the alert is diverted.
         """
-        pass
+        self.decision = 'D'
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        query = "INSERT INTO AlertStatus VALUES \
+        ({}, 'a', 'f', 0, {}, {})".format(self.ID, self.ID, self.ID)
+        cursor.execute(query)
+        conn.commit()
+        conn.close()
 
     def commit( self ):
         """
@@ -104,7 +112,7 @@ class CameraAlert( Alert ):
                 self.decision, self.ID )
 
         conn.commit()
-
+        conn.close()
 
 class AlertReplica( CameraAlert ):
     """
@@ -145,7 +153,7 @@ class AlertReplica( CameraAlert ):
     :type: :py:class:`antares.context.PSContext`
     """
 
-    def __init__( self, astroobj=None ):
+    def __init__( self, astroobj_id=None ):
         """Replica is initialized with its associated astro object (optional)."""
         pass
 
