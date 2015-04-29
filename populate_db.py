@@ -9,8 +9,9 @@ Email: imsure95@gmail.com
 
 import pymysql
 import pandas as pd
-import os
+import os, sys
 from datetime import datetime
+from antares.config import *
 
 path2demo_data = './demo-data'
 #debug = True
@@ -29,20 +30,35 @@ def populate_db( conn, cur ):
     plv_linear_data[ 'Decl' ] = plv_sdss_data[ 'Decl' ]
 
     ## Populate Attribute table.
-    sql_insert = """insert into Attribute values("Magnitude", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("MagnitudeErr", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("P", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("A", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("mmed", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("stdev", 0, "float")"""
-    cur.execute( sql_insert )
-    sql_insert = """insert into Attribute values("kurt", 0, "float")"""
-    cur.execute( sql_insert )
+    for attrname in CA_base_attributes.keys():
+        if CA_base_attributes[attrname][0] == float:
+            datatype = 'float'
+        else:
+            datatype = 'int'
+            
+        sql_insert = """insert into Attribute values("{0}", 0, "{1}")""".format(
+            attrname, datatype )
+        cur.execute( sql_insert )
+
+    for attrname in AR_base_attributes.keys():
+        if AR_base_attributes[attrname][0] == float:
+            datatype = 'float'
+        else:
+            datatype = 'int'
+            
+        sql_insert = """insert into Attribute values("{0}", 0, "{1}")""".format(
+            attrname, datatype )
+        cur.execute( sql_insert )
+
+    for attrname in AO_base_attributes.keys():
+        if AO_base_attributes[attrname][0] == float:
+            datatype = 'float'
+        else:
+            datatype = 'int'
+            
+        sql_insert = """insert into Attribute values("{0}", 0, "{1}")""".format(
+            attrname, datatype )
+        cur.execute( sql_insert )
 
     conn.commit()
     
@@ -96,6 +112,8 @@ def populate_db( conn, cur ):
 
 ## The main function.
 def main():
+    #sys.path.append( './' )
+
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
                             user='root',
