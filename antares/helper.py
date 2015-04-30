@@ -74,8 +74,16 @@ def ConstructCameraAlertFromID( alert_id ):
     # The most-recenctly computed magnitude value.
     magnitude_err = magerr_rows[len(magerr_rows)-1][0]
 
+    query = """select Value from AttributeValue where ContainerID={0} and
+    ContainerType="E" and AttrName="DeltaMagnitude" """.format( alert_id )
+    cur.execute( query )
+    delta_mag_rows = cur.fetchall()
+    # The most-recenctly computed magnitude value.
+    delta_magnitude = delta_mag_rows[len(delta_mag_rows)-1][0]
+
     ca_context.Magnitude.value = magnitude
     ca_context.MagnitudeErr.value = magnitude_err
+    ca_context.DeltaMagnitude.value = delta_magnitude
     #print( alert_id, ra, decl, magnitude, magnitude_err )
     #print( type(magnitude) )
 
