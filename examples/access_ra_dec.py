@@ -2,8 +2,6 @@
 Examples of how to access RA and Decl for a camera alert.
 """
 
-#!/usr/bin/env python3
-
 import sys, os
 
 ## The main function.
