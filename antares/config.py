@@ -2,8 +2,6 @@
 Configurations for Antares project.
 """
 
-#!/usr/bin/env python3
-
 import numpy
 
 ## Path to the astro catalog data used for demo

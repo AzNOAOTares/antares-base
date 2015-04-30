@@ -2,7 +2,6 @@
 Antares context module.
 """
 
-#!/usr/bin/env python3
 from antares.config import *
 from antares.attribute import *
 from io import StringIO

@@ -2,8 +2,6 @@
 Global helper functions.
 """
 
-#!/usr/bin/env python3
-
 from antares.alert import *
 from antares.context import *
 from antares.config import *
