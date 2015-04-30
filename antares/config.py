@@ -15,6 +15,7 @@ CA_base_attributes = {
     'Decl' : (float, 'Declination'),
     'Magnitude' : (float, 'Logarithmic measure of the brightness of an alert'),
     'MagnitudeErr' : (float, 'Error of magnitude of an alert'),
+    'DeltaMagnitude' : (float, 'Absolute value of change of magnitude between two most observations'),
 }
 
 ## Derived attributes under CA context.
