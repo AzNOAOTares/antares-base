@@ -146,7 +146,7 @@ class CameraAlert( Alert ):
             sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
                 self.decision, self.ID )
 
-        for replica in self.replcas:
+        for replica in self.replicas:
             replica.commit()
 
         conn.commit()
