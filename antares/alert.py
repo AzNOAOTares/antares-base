@@ -138,15 +138,19 @@ class CameraAlert( Alert ):
                                 passwd='', db='antares_demo' )
         cur = conn.cursor()
 
-        self.CA.commit( cur )
+        # Nothing to commit for CA context now since all attributes are pre-loaded to DB.
+        # self.CA.commit( cur )
+        
         if self.decision != 'NA':
             ## Update corresponding Alert table to reflect decision change.
             ## Connect to mysql database.            
             sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
                 self.decision, self.ID )
+            cur.execute( sql_update )
 
-        for replica in self.replicas:
-            replica.commit()
+        # Replicas will be written to DB when they are created.
+        # for replica in self.replicas:
+        #    replica.commit()
 
         conn.commit()
         conn.close()
@@ -195,22 +199,25 @@ class AlertReplica( CameraAlert ):
         associated astro object (optional)."""
         self.CA = parent.CA
         self.LA = parent.LA
-        self.num = parent.replica_num
         self.parent = parent
-        self.parent.replica_num += 1
         self.astro_id = astro_id
 
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        query = """select ReplicaNumber from AlertReplica where AlertID={0}""".format(parent.ID)
+        cursor.execute( query )
+        replica_num = len(cursor.fetchall()) + 1
+                
         if init_from_db == False:
             ## Assign Replica ID.
-            conn = pymysql.connect(host='localhost', user='root',
-                                   passwd='', db='antares_demo')
-            cursor = conn.cursor()
             query = """select ReplicaID from AlertReplica"""
             cursor.execute( query )
             rows = cursor.fetchall()
             self.ID = len( rows )
             conn.close()
             self.flushed2DB = False
+            self.num = replica_num
         else:
             self.ID = replica_id
             self.flushed2DB = True
