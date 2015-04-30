@@ -8,8 +8,10 @@ import sys, os
 
 ## The main function.
 def main():
-    alerts = GenerateCameraAlertStream( alert_num=5 )
-    for alert in alerts:
+    alert_ids = GenerateCameraAlertStream( alert_num=5 )
+    for alert_id in alert_ids:
+        alert = ConstructAlertFromID( alert_id, 'E' )
+        
         ## This is the recommended way of getting ra/dec for an alert:
         ## directly from alert.
         ra = alert.ra
@@ -24,4 +26,5 @@ def main():
 if __name__ == '__main__':
     sys.path.append( '../' )
     from antares.helper import GenerateCameraAlertStream
+    from antares.helper import ConstructAlertFromID
     main()

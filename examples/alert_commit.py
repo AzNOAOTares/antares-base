@@ -13,8 +13,10 @@ def ComputeP():
 
 ## The main function.
 def main():
-    alerts = GenerateCameraAlertStream( alert_num=1 )
-    alert = alerts[ 0 ]
+    alert_ids = GenerateCameraAlertStream( alert_num=1 )
+    alert_id = alert_ids[ 0 ]
+
+    alert = ConstructAlertFromID( alert_id, 'E' )
 
     ## Compute P value with lower confidence.
     alert.CA.P.value = ComputeP()
@@ -30,4 +32,5 @@ def main():
 if __name__ == '__main__':
     sys.path.append( '../' )
     from antares.helper import GenerateCameraAlertStream
+    from antares.helper import ConstructAlertFromID
     main()

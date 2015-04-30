@@ -16,6 +16,6 @@ def main():
 
 if __name__ == '__main__':
     sys.path.append( '../' )
-    from antares import GenerateCameraAlertStream
-    from antares import ConstructAlertFromID
+    from antares.helper import GenerateCameraAlertStream
+    from antares.helper import ConstructAlertFromID
     main()
