@@ -23,13 +23,22 @@ def GenerateCameraAlertStream( alert_num=10 ):
     cur = conn.cursor()
     
     alert_ids = [] # list of camera alert ids to be returned to caller.
-    for index in range( 0, alert_num ):
-        query = """select AlertID from Alert where LocusID={0}""".format(index)
-        cur.execute( query )
-        alert_row = cur.fetchall()[ 0 ]
 
-        alert_id = alert_row[ 0 ]
-        alert_ids.append( alert_id )
+    query = """select AlertID from Alert"""
+    cur.execute( query )
+    alert_rows = cur.fetchall()
+    for row in alert_rows:
+        if alert_num == 0:
+            break
+        
+        alert_id = row[ 0 ]
+        query = """select Value from AttributeValue where ContainerID={0} \
+        and ContainerType='E' and attrname='DeltaMagnitude'""".format(alert_id)
+        cur.execute( query )
+        delta_mag = cur.fetchall()[0][0]
+        if delta_mag > 0.1:
+            alert_ids.append( alert_id )
+            alert_num -= 1
 
     conn.close()
     return alert_ids # return the generated camera alert stream
