@@ -256,7 +256,7 @@ class AlertReplica( CameraAlert ):
         self.decl = self.parent.decl
         self.astro_id = astro_id
         self.ID = replica_id
-        self.replica_num = replica_num
+        self.num = replica_num
 
         # conn = pymysql.connect(host='localhost', user='root',
         #                        passwd='', db='antares_demo')
