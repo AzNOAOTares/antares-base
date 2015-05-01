@@ -139,6 +139,26 @@ class CameraAlert( Alert ):
         # conn.commit()
         # conn.close()
 
+    def mark_as_rare( self, annotation ):
+        """
+        Mark the alert as a rare alert.
+
+        :param string annotation: a short description of why the alert is rare.
+        """
+        self.decision = 'R'
+
+        ## TODO: reflect the change of decision immediately to DB.
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        sql_update = """update Alert set Decision="{0}", Annotation="{1}" where AlertID={2}""".format(
+            self.decision, annotation, self.ID )
+        cursor.execute( sql_update )
+        conn.commit()
+        conn.close()
+        
+        ## TODO: call Zhe's system API.
+
     def commit( self ):
         """
         Commit the changed data to Locus-aggregated Alerts DB.
@@ -248,6 +268,9 @@ class AlertReplica( CameraAlert ):
     def divert( self, annotation ):
         ## Just call parent's divert
         self.parent.divert( annotation )
+
+    def mark_as_rare( self, annotation ):
+        self.parent.mark_as_rare( annotation )
 
     def commit( self ):
         conn = pymysql.connect( host='127.0.0.1', user='root',
