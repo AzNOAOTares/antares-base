@@ -145,19 +145,36 @@ class CameraAlert( Alert ):
 
         :param string annotation: a short description of why the alert is rare.
         """
-        self.decision = 'R'
-
-        ## TODO: reflect the change of decision immediately to DB.
         conn = pymysql.connect(host='localhost', user='root',
                                passwd='', db='antares_demo')
         cursor = conn.cursor()
+
+        if self.decision == 'R':
+            sql_query = """select Annotation from Alert where AlertID={0}""".format(self.ID)
+            cursor.execute( sql_query )
+            self.annotation = cursor.fetchall()[0][0]
+            self.annotation += '; ' + annotation
+        else:
+            self.annotation = annotation
+            self.decision = 'R'
+
+        ## TODO: reflect the change of decision immediately to DB.
         sql_update = """update Alert set Decision="{0}", Annotation="{1}" where AlertID={2}""".format(
-            self.decision, annotation, self.ID )
+            self.decision, self.annotation, self.ID )
         cursor.execute( sql_update )
         conn.commit()
         conn.close()
         
         ## TODO: call Zhe's system API.
+
+    def get_annotation( self ):
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+
+        sql_query = """select Annotation from Alert where AlertID={0}""".format(self.ID)
+        cursor.execute( sql_query )
+        return cursor.fetchall()[0][0]
 
     def commit( self ):
         """
