@@ -56,20 +56,22 @@ class CAContext( Context ):
     :type: list
     """
 
+    container_type = 'E'
+
     def __init__( self, container_id ):
         """'container_id' is the ID of the object that owns the context."""
         self.container_id = container_id
 
         ## Initialize predefined base attributes for CA context.
         for attrname in CA_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, 'CA',
+            attr = Attribute( attrname, BASE_ATTR, self,
                               CA_base_attributes[attrname][0], 1,
                               description=CA_base_attributes[attrname][1] )
             setattr( self, attrname, attr )
 
         ## Initialize predefined derived attributes for CA context.
         for attrname in CA_derived_attributes.keys():
-            attr = Attribute( attrname, DERIVED_ATTR, 'CA',
+            attr = Attribute( attrname, DERIVED_ATTR, self,
                               CA_derived_attributes[attrname][0], 1,
                               description=CA_derived_attributes[attrname][1] )
             setattr( self, attrname, attr )

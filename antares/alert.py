@@ -208,7 +208,7 @@ class AlertReplica( CameraAlert ):
         query = """select ReplicaNumber from AlertReplica where AlertID={0}""".format(parent.ID)
         cursor.execute( query )
         replica_num = len(cursor.fetchall()) + 1
-                
+        
         if init_from_db == False:
             ## Assign Replica ID.
             query = """select ReplicaID from AlertReplica"""

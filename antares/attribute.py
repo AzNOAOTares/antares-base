@@ -1,6 +1,7 @@
 from datetime import datetime
 from antares.config import *
 import numpy as np
+import pymysql
     
 class Attribute:
     """
@@ -109,12 +110,31 @@ class Attribute:
         self.valueAssigned = False
         self.history = [] # List of (computeAt, value) tuples
         self.flushed2DB = False
+        self.loaded = False
 
     def get_value( self ):
+        if self.loaded == False:
+            ## Query the DB to see if the value for the attribute has already been computed.
+            conn = pymysql.connect(host='localhost', user='root',
+                                   passwd='', db='antares_demo')
+            cursor = conn.cursor()
+            query = """select Value from AttributeValue where ContainerID={0} \
+            and ContainerType="{1}" and AttrName="{2}" """.format( self.context.container_id,
+                                                                   self.context.container_type,
+                                                                   self.name )
+            cursor.execute( query )
+            rows = cursor.fetchall()
+            if len(rows) == 1:
+                self._value = self.datatype( rows[0][0] )
+                #print( 'Value for {0} of alert {1} has been computed as {2}!'.
+                #       format( self.name, self.context.container_id, self._value ) )
+                self.loaded = True
+
         if hasattr( self, '_value' ):
             return self._value
         else:
-            raise AttributeError( 'Value for {0} has not been set!'.format(self.name) )
+            return None
+            #raise AttributeError( 'Value for {0} has not been set!'.format(self.name) )
 
     def set_value( self, val ):
         ## Check if 'val' is of the desired type.
