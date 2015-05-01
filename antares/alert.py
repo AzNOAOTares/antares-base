@@ -86,6 +86,7 @@ class CameraAlert( Alert ):
         """
         replica_id = int( str(self.ID) + str(self.replica_count) )
         self.replica_count += 1
+        print( 'replica count = ', self.replica_count )
         replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
                                 replica_id=replica_id, replica_num=self.replica_count )
         
@@ -292,6 +293,7 @@ class AlertReplica( CameraAlert ):
             self.ID, self.parent.ID, self.AR, self.AO )
 
     def createReplica( self ):
+        self.parent.replica_count += 1
         return self.parent.createReplica( astro_id=self.astro_id )
 
     def divert( self, annotation ):
