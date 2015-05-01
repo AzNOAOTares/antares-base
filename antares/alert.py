@@ -85,6 +85,7 @@ class CameraAlert( Alert ):
         replica = AlertReplica( self, astro_id=astro_id, init_from_db=False )
         
         ## Update status for the newly created replica.
+
         ## TODO: call Zhe's system API.
 
         # conn = pymysql.connect(host='localhost', user='root',
@@ -118,6 +119,14 @@ class CameraAlert( Alert ):
         self.decision = 'D'
 
         ## TODO: reflect the change of decision immediately to DB.
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        sql_update = """update Alert set Decision="{0}", Annotation="{1}" where AlertID={2}""".format(
+            self.decision, annotation, self.ID )
+        cursor.execute( sql_update )
+        conn.commit()
+        conn.close()
         
         ## TODO: call Zhe's system API.
         
@@ -235,6 +244,10 @@ class AlertReplica( CameraAlert ):
     def __str__( self ):
         return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
             self.ID, self.parent.ID, self.AR, self.AO )
+
+    def divert( self, annotation ):
+        ## Just call parent's divert
+        self.parent.divert( annotation )
 
     def commit( self ):
         conn = pymysql.connect( host='127.0.0.1', user='root',
