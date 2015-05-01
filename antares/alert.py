@@ -1,4 +1,5 @@
 from antares.context import *
+import threading
 
 class Alert:
     """Represents a general alert. It is the super class of :py:class:`CameraAlert`
@@ -69,6 +70,8 @@ class CameraAlert( Alert ):
         self.locus_id = locus_id
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
+        self._lock_ = threading.Lock()
+        self.replica_count = 0
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
@@ -82,7 +85,10 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        replica = AlertReplica( self, astro_id=astro_id, init_from_db=False )
+        replica_id = int( str(self.ID) + str(self.replica_count) )
+        self.replica_count += 1
+        replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
+                                replica_id=replica_id, replica_num=self.replica_count )
         
         ## Update status for the newly created replica.
 
@@ -240,7 +246,8 @@ class AlertReplica( CameraAlert ):
     :type: :py:class:`antares.context.PSContext`
     """
 
-    def __init__( self, parent, astro_id=None, init_from_db=False, replica_id=None ):
+    def __init__( self, parent, astro_id=None, init_from_db=False,
+                  replica_id=None, replica_num=None ):
         """Replica is initialized with its 'parent' (a camera alert) and
         associated astro object (optional)."""
         self.CA = parent.CA
@@ -249,27 +256,30 @@ class AlertReplica( CameraAlert ):
         self.ra = self.parent.ra
         self.decl = self.parent.decl
         self.astro_id = astro_id
+        self.ID = replica_id
+        self.replica_num = replica_num
 
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
-        cursor = conn.cursor()
-        query = """select ReplicaNumber from AlertReplica where AlertID={0}""".format(parent.ID)
-        cursor.execute( query )
-        replica_num = len(cursor.fetchall()) + 1
+        # conn = pymysql.connect(host='localhost', user='root',
+        #                        passwd='', db='antares_demo')
+        # cursor = conn.cursor()
+        # query = """select ReplicaNumber from AlertReplica where AlertID={0}""".format(parent.ID)
+        # cursor.execute( query )
+        # replica_num = len(cursor.fetchall()) + 1
         
         if init_from_db == False:
             ## Assign Replica ID.
-            query = """select ReplicaID from AlertReplica"""
-            cursor.execute( query )
-            rows = cursor.fetchall()
-            self.ID = len( rows )
-            conn.close()
+            # query = """select ReplicaID from AlertReplica"""
+            # cursor.execute( query )
+            # rows = cursor.fetchall()
+            # self.ID = len( rows )
+            # conn.close()
             self.flushed2DB = False
             self.num = replica_num
         else:
-            self.ID = replica_id
+            #self.ID = replica_id
             self.flushed2DB = True
 
+        #conn.close()
         ## Populate AR context.
         self.AR = ARContext( self.ID )
 
