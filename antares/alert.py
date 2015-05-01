@@ -70,7 +70,7 @@ class CameraAlert( Alert ):
         self.locus_id = locus_id
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
-        self.replica_count = 0
+        self.replica_counter = 0
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
@@ -84,11 +84,11 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        replica_id = int( str(self.ID) + str(self.replica_count) )
-        self.replica_count += 1
-        print( 'replica count = ', self.replica_count )
+        replica_id = int( str(self.ID) + str(self.replica_counter) )
+
+        #print( 'replica count = ', self.replica_count )
         replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
-                                replica_id=replica_id, replica_num=self.replica_count )
+                                replica_id=replica_id, replica_num=self.replica_counter )
         
         ## Update status for the newly created replica.
 
@@ -253,6 +253,7 @@ class AlertReplica( CameraAlert ):
         self.CA = parent.CA
         self.LA = parent.LA
         self.parent = parent
+        self.parent.replica_counter += 1
         self.ra = self.parent.ra
         self.decl = self.parent.decl
         self.astro_id = astro_id
@@ -278,6 +279,7 @@ class AlertReplica( CameraAlert ):
         else:
             #self.ID = replica_id
             self.flushed2DB = True
+            self.num = replica_num
 
         #conn.close()
         ## Populate AR context.
@@ -293,7 +295,7 @@ class AlertReplica( CameraAlert ):
             self.ID, self.parent.ID, self.AR, self.AO )
 
     def createReplica( self ):
-        self.parent.replica_count += 1
+        self.parent.replica_counter = self.num + 1
         return self.parent.createReplica( astro_id=self.astro_id )
 
     def divert( self, annotation ):

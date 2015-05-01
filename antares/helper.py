@@ -112,10 +112,12 @@ def ConstructAlertReplicaFromID( replica_id ):
     replica_row = cur.fetchall()[ 0 ]
     parent_id = replica_row[ 4 ]
     astro_id = replica_row[ 5 ]
+    replica_num = replica_row[ 1 ]
     #print( "Parent: {0}, Astro: {1}".format(parent_id, astro_id) )
     parent = ConstructCameraAlertFromID( parent_id )
     return AlertReplica( parent, astro_id=astro_id,
-                         init_from_db=True, replica_id=replica_id )
+                         init_from_db=True, replica_id=replica_id,
+                         replica_num=replica_num)
 
 def ConstructAlertFromID( target_id, target_type ):
     """
