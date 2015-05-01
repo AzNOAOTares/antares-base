@@ -71,6 +71,7 @@ class CameraAlert( Alert ):
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
         self.replica_counter = 0
+        self.lock = threading.Lock()
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
@@ -84,11 +85,12 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        replica_id = int( str(self.ID) + str(self.replica_counter) )
+        with self.lock:
+            replica_id = int( str(self.ID) + str(self.replica_counter) )
 
-        #print( 'replica count = ', self.replica_count )
-        replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
-                                replica_id=replica_id, replica_num=self.replica_counter )
+            #print( 'replica count = ', self.replica_count )
+            replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
+                                    replica_id=replica_id, replica_num=self.replica_counter )
         
         ## Update status for the newly created replica.
 
