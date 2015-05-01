@@ -7,58 +7,75 @@ import scipy.signal as scisig
 import scipy.stats as scistats
 
 def derivePeriod( alert ):
-    lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
-    times = []
-    for time in lightcurve.index.values: # ndarray
-        times.append( float(time) )
-
-    timestamps = np.ndarray( lightcurve.index.values.shape,
-                             buffer=np.array(times), dtype=float )
-
-    vals       = lightcurve.values # ndarray
-    freqs      = np.linspace( 0.01, 10., num=len(vals) )
-    period_ind = scisig.lombscargle( timestamps, vals, freqs ).argmax()
-    period     = 1./( 2*freqs[period_ind] )
-
+    # If the value of P is already in DB,
+    # alert.CA.P.value will return a non-None value.
+    period = alert.CA.P.value
+    
+    if period == None:
+        lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+        times = []
+        for time in lightcurve.index.values: # ndarray
+            times.append( float(time) )
+            
+        timestamps = np.ndarray( lightcurve.index.values.shape,
+                                 buffer=np.array(times), dtype=float )
+        vals       = lightcurve.values # ndarray
+        freqs      = np.linspace( 0.01, 10., num=len(vals) )
+        period_ind = scisig.lombscargle( timestamps, vals, freqs ).argmax()
+        period     = 1./( 2*freqs[period_ind] )
+            
     return period
 
 
 def deriveAmplitude( alert ):
-    lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
-    vals       = lightcurve.values # ndarray
-    amp        = np.ptp( vals )
+    # If the value of A is already in DB,
+    # alert.CA.A.value will return a non-None value.
+    amp = alert.CA.A.value
+    
+    if amp == None:
+        lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+        vals       = lightcurve.values # ndarray
+        amp        = np.ptp( vals )
+
     return amp
 
 
 def deriveMmed( alert ):
-    lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
-    vals       = lightcurve.values # ndarray
-    mmed       = np.median(vals)
+    # If the value of mmed is already in DB,
+    # alert.CA.mmed.value will return a non-None value.
+    mmed = alert.CA.mmed.value
+    
+    if mmed == None:
+        lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+        vals       = lightcurve.values # ndarray
+        mmed       = np.median(vals)
+
     return mmed
 
 
 def deriveKurt( alert ):
-    lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
-    vals       = lightcurve.values # ndarray
-    kurt       = scistats.kurtosis( vals )
-    print( kurt )
+    # If the value of kurt is already in DB,
+    # alert.CA.kurt.value will return a non-None value.
+    kurt = alert.CA.kurt.value
+
+    if kurt == None:
+        lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+        vals       = lightcurve.values # ndarray
+        kurt       = scistats.kurtosis( vals )
+
     return kurt
     
 
-def deriveStdev(LocusAlert):
-    locusid  = LocusAlert.LocusID
-    con = mdb.connect('localhost', 'antares', 'br0ker', 'antares_demo');
-    with con:
-        command = 'SELECT Value from AttributeValue WHERE ContainerID=%i AND AttrName="skew"' %locusid 
-        cur = con.cursor()
-        cur.execute(command)
-        results = cur.fetchall()
-        if len(results) == 0:
-            timeseries = LocusAlert.assembleTimeSeries_cameraAlerts("CA", "Magnitude")
-            vals       = get_vals(timeseries)
-            stdev = np.std(vals)
-        elif len(results) >= 1:
-            stdev =  results[0]
+def deriveStdev( alert ):
+    # If the value of stdev is already in DB,
+    # alert.CA.stdev.value will return a non-None value.
+    stdev = alert.CA.stdev.value
+
+    if stdev == None:
+        lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+        vals       = lightcurve.values # ndarray
+        stdev      = np.std( vals )
+
     return stdev
 
 
@@ -78,7 +95,11 @@ if __name__ == '__main__':
     ## Construct replica object given ID
     replica = ConstructAlertFromID( replica_id, 'R' )
 
-    derivePeriod( replica )
-    deriveAmplitude( replica )
-    deriveMmed( replica )
-    deriveKurt( replica )
+    replica.CA.P.value = derivePeriod( replica )
+    replica.CA.A.value = deriveAmplitude( replica )
+    replica.CA.mmed.value = deriveMmed( replica )
+    replica.CA.kurt.value = deriveKurt( replica )
+    replica.CA.stdev.value = deriveStdev( replica )
+
+    print( 'Replica {0} of camera alert {1}'.format(replica.ID, replica.parent.ID) )
+    print( replica.CA.P.value, replica.CA.A.value, replica.CA.mmed.value, replica.CA.stdev.value, replica.CA.kurt.value )
