@@ -200,6 +200,8 @@ class AlertReplica( CameraAlert ):
         self.CA = parent.CA
         self.LA = parent.LA
         self.parent = parent
+        self.ra = self.parent.ra
+        self.decl = self.parent.decl
         self.astro_id = astro_id
 
         conn = pymysql.connect(host='localhost', user='root',
