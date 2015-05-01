@@ -6,10 +6,6 @@ import sys
 import os
 import argparse
 import numpy as np
-import astropy.coordinates as coords
-
-
-
 
 def readKeplerVarTextData():
     midsfile = 'l96b-60.dat.hist.mids'
@@ -18,8 +14,6 @@ def readKeplerVarTextData():
     ctsdata  = np.loadtxt(ctsfile, comments='#')
     histdata =  np.rec.fromarrays([middata,ctsdata], names='mids,cts')
     return histdata
-
-
 
 
 def readKeplerVarData():
@@ -36,18 +30,16 @@ def readKeplerVarData():
         try:
             with open(npzfile, 'w') as f:
                 np.savez(f, histdata=histdata)
-        except (OSError, IOError), e:
+        except (OSError, IOError) as e:
             # we have histdata at this point anyway
             pass
     else:
         npzdata = np.load(npzfile)
         try:
             histdata = npzdata['histdata']
-        except KeyError, e:
+        except KeyError as e:
             histdata = readKeplerVarTextData()
     return histdata
-
-
 
 
 def scaleKeplerData(ra, dec, histdata):
@@ -57,7 +49,6 @@ def scaleKeplerData(ra, dec, histdata):
     by the stellar distribution from the bezancson model
     """
     return histdata
-
 
 
 def findRarity(ra, dec, dmag):
@@ -76,14 +67,12 @@ def findRarity(ra, dec, dmag):
     return rarity
 
 
-
-
 def main():
     # TODO: Make this script usable from commandline
     # inputs should be ra, dec, dmag using argparse
     # read in Kepler data
     # scale it for the current position and assess rarity based on dmag
-    return 
+    return
 
 
 if __name__=='__main__':
