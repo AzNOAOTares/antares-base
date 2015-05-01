@@ -70,7 +70,6 @@ class CameraAlert( Alert ):
         self.locus_id = locus_id
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
-        self._lock_ = threading.Lock()
         self.replica_count = 0
 
     def __str__( self ):
