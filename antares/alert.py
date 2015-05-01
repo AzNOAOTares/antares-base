@@ -265,6 +265,9 @@ class AlertReplica( CameraAlert ):
         return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
             self.ID, self.parent.ID, self.AR, self.AO )
 
+    def createReplica( self ):
+        return self.parent.createReplica( astro_id=self.astro_id )
+
     def divert( self, annotation ):
         ## Just call parent's divert
         self.parent.divert( annotation )

@@ -148,9 +148,11 @@ class ARContext( Context ):
 
     def __init__( self, container_id ):
         self.container_id = container_id
+        self.container_type = 'R'
+        
         ## Initialize predefined base attributes for CA context.
         for attrname in AR_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, 'AR',
+            attr = Attribute( attrname, BASE_ATTR, self,
                               AR_base_attributes[attrname][0], 1,
                               description=AR_base_attributes[attrname][1] )
             setattr( self, attrname, attr )
@@ -220,13 +222,15 @@ class AOContext( Context ):
 
     :type: string
     """
+    
     def __init__( self, astro_id ):
         """'continer_id' is the ID of the object that owns the context."""
         self.container_id = astro_id
+        self.container_type = 'A'
 
         ## Initialize predefined base attributes for AO context.
         for attrname in AO_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, 'CA',
+            attr = Attribute( attrname, BASE_ATTR, self,
                               AO_base_attributes[attrname][0], 1,
                               description=AO_base_attributes[attrname][1] )
             setattr( self, attrname, attr )
