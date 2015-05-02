@@ -23,16 +23,31 @@ def main():
     replica_id = alert.createReplica( astro_id=17249 )
     print( 'Created replica {0}'.format(replica_id) )
     ## Construct replica object given ID
-    replica = ConstructAlertFromID( replica_id, 'R' )
-    print( replica )
+    replica = ConstructAlertFromID( replica_id, 'R', parent=alert )
+    #print( replica )
 
-    ## Create another replica from the current replica
-    replica_replica_id = replica.createReplica()
-    print( 'Created replica {0}'.format(replica_replica_id) )
+    # ## Create another replica from the current replica
+    # replica_replica_id = replica.createReplica()
+    # print( 'Created replica {0}'.format(replica_replica_id) )
 
-    ## Construct replica object given ID
-    replica = ConstructAlertFromID( replica_replica_id, 'R' )
-    print( replica )
+    # ## Construct replica object given ID
+    # replica = ConstructAlertFromID( replica_replica_id, 'R' )
+    # print( replica )
+
+    parents = []
+    for i in range(0, 4):
+        replica_replica_id = replica.createReplica()
+        #print( replica.parent.__repr__() )
+        parents.append( replica.parent )
+        print( 'Replica ID: ', replica_replica_id )
+        ## Construct replica object given ID
+        replica = ConstructAlertFromID( replica_replica_id, 'R', parent=replica.parent )
+        #print( replica )
+
+    if parents[0] == parents[1]:
+        print( 'Same object' )
+    else:
+        print( 'Different object' )
 
 if __name__ == '__main__':
     sys.path.append( '../' )
