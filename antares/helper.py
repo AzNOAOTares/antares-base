@@ -117,7 +117,7 @@ def ConstructAlertReplicaFromID( replica_id, parent ):
     #print( "Parent: {0}, Astro: {1}".format(parent_id, astro_id) )
     parent = ConstructCameraAlertFromID( parent_id )
 
-    print( parent )
+    #print( parent )
     return AlertReplica( parent, astro_id=astro_id,
                          init_from_db=True, replica_id=replica_id,
                          replica_num=replica_num)

@@ -98,7 +98,7 @@ class CameraAlert( Alert ):
                 to be associated with the created replica. It is optional.
         """
         id_postfix = hashuuid( uuid.uuid4() )
-        print( 'id_postfix = ', id_postfix )
+        #print( 'id_postfix = ', id_postfix )
         replica_id = int( str(self.ID) + str(id_postfix) )
 
         #print( 'replica count = ', self.replica_count )
