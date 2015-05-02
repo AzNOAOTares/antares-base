@@ -1,5 +1,17 @@
 from antares.context import *
+#from antares.helper import hashuuid
 import threading
+import uuid
+
+HASH_SIZE = 256
+
+def hashuuid( s ):
+    n = 0
+    for c in str(s):
+        n += ord( c )
+
+    return n % HASH_SIZE
+
 
 class Alert:
     """Represents a general alert. It is the super class of :py:class:`CameraAlert`
@@ -85,13 +97,13 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        with self.lock:
-            replica_id = int( str(self.ID) + str(self.replica_counter) )
+        id_postfix = hashuuid( uuid.uuid4() )
+        print( 'id_postfix = ', id_postfix )
+        replica_id = int( str(self.ID) + str(id_postfix) )
 
-            self.replica_counter += 1
-            #print( 'replica count = ', self.replica_count )
-            replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
-                                    replica_id=replica_id, replica_num=self.replica_counter )
+        #print( 'replica count = ', self.replica_count )
+        replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
+                                replica_id=replica_id, replica_num=id_postfix )
         
         ## Update status for the newly created replica.
 

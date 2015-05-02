@@ -9,6 +9,7 @@ import os
 import pandas as pd
 import pymysql
 
+
 def GenerateCameraAlertStream( alert_num=10 ):
     """
     Generate a stream of camera alert IDs from the demo database.
@@ -114,7 +115,7 @@ def ConstructAlertReplicaFromID( replica_id, parent ):
     astro_id = replica_row[ 5 ]
     replica_num = replica_row[ 1 ]
     #print( "Parent: {0}, Astro: {1}".format(parent_id, astro_id) )
-    #parent = ConstructCameraAlertFromID( parent_id )
+    parent = ConstructCameraAlertFromID( parent_id )
 
     print( parent )
     return AlertReplica( parent, astro_id=astro_id,
