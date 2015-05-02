@@ -3,7 +3,7 @@ from antares.context import *
 import threading
 import uuid
 
-HASH_SIZE = 256
+HASH_SIZE = 1024
 
 def hashuuid( s ):
     n = 0
