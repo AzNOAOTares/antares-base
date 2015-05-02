@@ -2,6 +2,7 @@ from antares.context import *
 #from antares.helper import hashuuid
 import threading
 import uuid
+import random
 
 HASH_SIZE = 1024
 
@@ -10,6 +11,7 @@ def hashuuid( s ):
     for c in str(s):
         n += ord( c )
 
+    n = n - random.randint(1, 1000)
     return n % HASH_SIZE
 
 
