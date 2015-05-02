@@ -256,7 +256,6 @@ class AlertReplica( CameraAlert ):
         self.CA = parent.CA
         self.LA = parent.LA
         self.parent = parent
-        self.parent.replica_counter += 1
         self.ra = self.parent.ra
         self.decl = self.parent.decl
         self.astro_id = astro_id
@@ -298,8 +297,8 @@ class AlertReplica( CameraAlert ):
             self.ID, self.parent.ID, self.AR, self.AO )
 
     def createReplica( self ):
-#        print( 'replica num = ', self.num )
-        self.parent.replica_counter = self.num + 1
+        #print( 'replica num = ', self.num )
+        #self.parent.replica_counter = self.num + 1
         return self.parent.createReplica( astro_id=self.astro_id )
 
     def divert( self, annotation ):

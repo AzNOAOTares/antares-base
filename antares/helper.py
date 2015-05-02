@@ -99,7 +99,7 @@ def ConstructCameraAlertFromID( alert_id ):
     conn.close()
     return alert # return the generated camera alert
 
-def ConstructAlertReplicaFromID( replica_id ):
+def ConstructAlertReplicaFromID( replica_id, parent ):
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
                             user='root',
@@ -114,16 +114,18 @@ def ConstructAlertReplicaFromID( replica_id ):
     astro_id = replica_row[ 5 ]
     replica_num = replica_row[ 1 ]
     #print( "Parent: {0}, Astro: {1}".format(parent_id, astro_id) )
-    parent = ConstructCameraAlertFromID( parent_id )
+    #parent = ConstructCameraAlertFromID( parent_id )
+
+    print( parent )
     return AlertReplica( parent, astro_id=astro_id,
                          init_from_db=True, replica_id=replica_id,
                          replica_num=replica_num)
 
-def ConstructAlertFromID( target_id, target_type ):
+def ConstructAlertFromID( target_id, target_type, parent=None ):
     """
     Generate an alert from the demo database given its ID and type.
     """
     if target_type == 'E':
         return ConstructCameraAlertFromID( target_id )
     if target_type == 'R':
-        return ConstructAlertReplicaFromID( target_id )
+        return ConstructAlertReplicaFromID( target_id, parent )
