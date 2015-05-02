@@ -83,7 +83,6 @@ class CameraAlert( Alert ):
         self.replica_num = 1 # used to keep track of replica numbers. Start with 1.
         self.replicas = []
         self.replica_counter = 0
-        self.lock = threading.Lock()
 
     def __str__( self ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
