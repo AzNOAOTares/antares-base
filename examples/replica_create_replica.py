@@ -23,7 +23,7 @@ def main():
     replica_id = alert.createReplica( astro_id=17249 )
     print( 'Created replica {0}'.format(replica_id) )
     ## Construct replica object given ID
-    replica = ConstructAlertFromID( replica_id, 'R', parent=alert )
+    replica = ConstructAlertFromID( replica_id, 'R' )
     #print( replica )
 
     # ## Create another replica from the current replica
@@ -41,7 +41,7 @@ def main():
         parents.append( replica.parent )
         print( 'Replica ID: ', replica_replica_id )
         ## Construct replica object given ID
-        replica = ConstructAlertFromID( replica_replica_id, 'R', parent=replica.parent )
+        replica = ConstructAlertFromID( replica_replica_id, 'R' )
         #print( replica )
 
     if parents[0] == parents[1]:
