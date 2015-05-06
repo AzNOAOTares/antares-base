@@ -125,6 +125,8 @@ class Attribute:
             cursor.execute( query )
             rows = cursor.fetchall()
             if len(rows) == 1:
+                if rows[0][0] == None:
+                    return None
                 self._value = self.datatype( rows[0][0] )
                 #print( 'Value for {0} of alert {1} has been computed as {2}!'.
                 #       format( self.name, self.context.container_id, self._value ) )

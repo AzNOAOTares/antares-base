@@ -9,6 +9,8 @@ import os
 import pandas as pd
 import pymysql
 
+def GenerateFakeAlerts():
+    return [ 777001, 777002, 777003 ]
 
 def GenerateCameraAlertStream( alert_num=10 ):
     """
