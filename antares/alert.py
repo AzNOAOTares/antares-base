@@ -4,7 +4,7 @@ import threading
 import uuid
 import random
 
-HASH_SIZE = 1024
+HASH_SIZE = 100
 
 def hashuuid( s ):
     n = 0
