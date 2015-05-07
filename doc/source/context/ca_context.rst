@@ -27,11 +27,7 @@ CA Context ( :py:class:`antares.context.CAContext` )
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-   .. autoattribute:: replicas
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: createReplica
-   .. automethod:: createCombo
-   .. automethod:: hasReplicas
    .. automethod:: assembleVector
