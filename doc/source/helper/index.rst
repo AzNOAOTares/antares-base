@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ******************************************************
-Camera Alert ( :py:class:`antares.alert.CameraAlert` )
+Helper Functions( ``antares.helper`` )
 ******************************************************
 
 .. automodule:: antares.helper
