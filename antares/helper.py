@@ -16,7 +16,7 @@ def GenerateCameraAlertStream( alert_num=10 ):
     """
     Generate a stream of camera alert IDs from the demo database.
 
-    :param: int alert_num: the number of camera alerts to be generated.
+    :param int alert_num: the number of camera alerts to be generated.
     :return: list a list of camera alert IDs.
     """
     ## Connect to mysql database.
@@ -131,11 +131,11 @@ def ConstructAlertFromID( target_id, target_type ):
     """
     Generate an alert from the demo database given its ID and type.
 
-    :param: int target_id: ID of the alert to be constructed.
-    :param: string target_type: type of the alert to be constructed.
+    :param int target_id: ID of the alert to be constructed.
+    :param string target_type: type of the alert to be constructed.
             'E': camera alert, 'R': alert replica.
 
-    :return: alert object.
+    :return: :py:class:`antares.alert.Alert` constructed alert object.
     """
     if target_type == 'E':
         return ConstructCameraAlertFromID( target_id )
