@@ -15,6 +15,9 @@ def GenerateFakeAlerts():
 def GenerateCameraAlertStream( alert_num=10 ):
     """
     Generate a stream of camera alert IDs from the demo database.
+
+    :param: int alert_num: the number of camera alerts to be generated.
+    :return: list a list of camera alert IDs.
     """
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
@@ -102,7 +105,7 @@ def ConstructCameraAlertFromID( alert_id ):
     conn.close()
     return alert # return the generated camera alert
 
-def ConstructAlertReplicaFromID( replica_id, parent ):
+def ConstructAlertReplicaFromID( replica_id ):
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
                             user='root',
@@ -124,9 +127,15 @@ def ConstructAlertReplicaFromID( replica_id, parent ):
                          init_from_db=True, replica_id=replica_id,
                          replica_num=replica_num)
 
-def ConstructAlertFromID( target_id, target_type, parent=None ):
+def ConstructAlertFromID( target_id, target_type ):
     """
     Generate an alert from the demo database given its ID and type.
+
+    :param: int target_id: ID of the alert to be constructed.
+    :param: string target_type: type of the alert to be constructed.
+            'E': camera alert, 'R': alert replica.
+
+    :return: alert object.
     """
     if target_type == 'E':
         return ConstructCameraAlertFromID( target_id )

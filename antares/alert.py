@@ -120,7 +120,7 @@ class CameraAlert( Alert ):
         Create an alert replica which is associated with an
         optional astro object id ``astro_id``.
 
-        :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
+        :param: :py:class:`int` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
         conn = pymysql.connect(host='localhost', user='root',
