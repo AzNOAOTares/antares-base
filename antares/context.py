@@ -41,6 +41,8 @@ class CAContext( Context ):
     """
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CA context.
+
+    :param: container_id(int): ID of the object that owns the context.
     """
     name = 'CA'
     """
@@ -49,13 +51,6 @@ class CAContext( Context ):
     :type: string
     """
     
-    replicas = None
-    """
-    A set of the alert replicas created by camera alert.
-
-    :type: list
-    """
-
     container_type = 'E'
 
     def __init__( self, container_id ):
@@ -93,23 +88,6 @@ class CAContext( Context ):
 
         return buf.getvalue()
 
-    def createCombo( self, replicas ):
-        """
-        Create an alert combo object which contains a set of
-        alert replicas.
-
-        :param list replicas: a set of alert replicas
-        """
-        pass
-
-    def hasReplicas( self ):
-        """
-        Check whether alert has replicas.
-
-        :return: :py:data:`True` if alert has replicas, otherwise :py:data:`False`.
-        """
-        pass
-
     def assembleVector( self, context, attrname ):
         """
         The function assembles a vector of all the values of an attribute inside
@@ -142,6 +120,8 @@ class ARContext( Context ):
     """
     Represents a AR (Alert Replica) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AR context.
+
+    :param: container_id(int): ID of the object that owns the context.
     """
     name = 'AR'
     """Name of AR context."""
@@ -215,6 +195,8 @@ class AOContext( Context ):
     """
     Represents a AO (Astro Object) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AO context.
+
+    :param: astro_id(int): ID of the astro object that owns the context.
     """
     name = 'AO'
     """
@@ -277,6 +259,8 @@ class LAContext( Context ):
     """
     Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under LA context.
+
+    :param: container_id(int): ID of the object that owns the context.
     """
     name = 'LA'
     """

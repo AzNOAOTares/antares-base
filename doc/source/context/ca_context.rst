@@ -17,15 +17,11 @@ CA Context ( :py:class:`antares.context.CAContext` )
    .. autosummary::
 
       ~CAContext.name
-      ~CAContext.replicas
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~CAContext.createReplica
-      ~CAContext.createCombo
-      ~CAContext.hasReplicas
       ~CAContext.assembleVector
 
    .. rubric:: Attributes Documentation

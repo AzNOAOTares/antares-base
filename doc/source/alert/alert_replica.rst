@@ -25,6 +25,11 @@ Alert Replica ( :py:class:`antares.alert.AlertReplica` )
 
    .. autosummary::
 
+      ~AlertReplica.createReplica
+      ~AlertReplica.divert
+      ~AlertReplica.mark_as_rare
+      ~AlertReplica.commit
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: AR
