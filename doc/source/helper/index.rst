@@ -18,6 +18,6 @@ Helper Functions( ``antares.helper`` )
 
 .. rubric:: Methods Documentation
 
-.. automethod:: GenerateCameraAlertStream
-.. automethod:: ConstructAlertFromID
+.. automethod:: antares.helper.GenerateCameraAlertStream
+.. automethod:: antares.helper.ConstructAlertFromID
 
