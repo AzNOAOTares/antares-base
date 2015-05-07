@@ -113,6 +113,9 @@ class Attribute:
         self.loaded = False
 
     def get_value( self ):
+        if self.valueAssigned == True:
+            return self._value
+
         if self.loaded == False:
             ## Query the DB to see if the value for the attribute has already been computed.
             conn = pymysql.connect(host='localhost', user='root',

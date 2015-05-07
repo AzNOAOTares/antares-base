@@ -98,7 +98,14 @@ class CameraAlert( Alert ):
         :param: :py:class:`antares.alert.AstroObject` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        id_postfix = hashuuid( uuid.uuid4() )
+        conn = pymysql.connect(host='localhost', user='root',
+                               passwd='', db='antares_demo')
+        cursor = conn.cursor()
+        query = "select ReplicaID from AlertReplica where AlertID={0}".format(self.ID)
+        cursor.execute(query)
+        id_postfix = len(cursor.fetchall()) + 1
+        
+        #id_postfix = hashuuid( uuid.uuid4() )
         #print( 'id_postfix = ', id_postfix )
         replica_id = int( str(self.ID) + str(id_postfix) )
 

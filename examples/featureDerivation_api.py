@@ -12,6 +12,7 @@ def derivePeriod( alert ):
     period = alert.CA.P.value
     
     if period == None:
+        print( 'None period' )
         lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
         times = []
         for time in lightcurve.index.values: # ndarray
@@ -81,12 +82,12 @@ def deriveStdev( alert ):
 
 if __name__ == '__main__':
     sys.path.append( '../' )
-    from antares.helper import GenerateCameraAlertStream
+    from antares.helper import GenerateFakeAlerts
     from antares.helper import ConstructAlertFromID
 
     ## Construct a camera alert.
-    alert_ids = GenerateCameraAlertStream( alert_num=1 )
-    alert_id = alert_ids[ 0 ]
+    alert_ids = GenerateFakeAlerts()
+    alert_id = alert_ids[ 1 ]
     alert = ConstructAlertFromID( alert_id, 'E' )
 
     replica_id = alert.createReplica()
