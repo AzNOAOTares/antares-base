@@ -62,6 +62,14 @@ Attribute related
    attribute/prob_curve
    attribute/time_period
 
+Helper functions
+^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
+   helper/index
+
 *************************
 Class inheritance diagram
 *************************
