@@ -17,7 +17,8 @@ def GenerateCameraAlertStream( alert_num=10 ):
     Generate a stream of camera alert IDs from the demo database.
 
     :param int alert_num: the number of camera alerts to be generated.
-    :return: py:class:`list` a list of camera alert IDs.
+    :return: a list of camera alert IDs.
+    :rtype list
     """
     ## Connect to mysql database.
     conn = pymysql.connect( host='127.0.0.1',
