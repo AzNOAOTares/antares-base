@@ -18,15 +18,6 @@ class Context:
     def __init__( self ):
         pass
 
-    def isPresent( self ):
-        """
-        Check if the context is currently present.
-
-        :return: :py:data:`True` if the context is currently present,
-                 otherwise :py:data:`False`.
-        """
-        pass
-
     def isValidAttribute( self, attrname ):
         """
         Check whether the given attribute 'attrname' is valid.

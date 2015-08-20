@@ -13,4 +13,10 @@ General Alert ( :py:class:`antares.alert.Alert` )
    :show-inheritance:
    :members:
 
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~Alert.isPresent
+
    .. automethod:: isPresent
