@@ -11,9 +11,7 @@ This is the repo for making documentation for Antares API.
 
 ## Documentation source code structure.
 
-doc/
-
-|---source
+doc/source
 
     |--- _static (resources, like png, js files, etc.)
 	
