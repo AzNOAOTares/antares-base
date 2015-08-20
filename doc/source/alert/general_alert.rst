@@ -12,3 +12,5 @@ General Alert ( :py:class:`antares.alert.Alert` )
 .. autoclass:: Alert
    :show-inheritance:
    :members:
+
+   .. automethod:: isPresent

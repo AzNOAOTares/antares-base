@@ -27,5 +27,4 @@ Context ( :py:class:`antares.context.Context` )
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: isPresent
    .. automethod:: isValidAttribute

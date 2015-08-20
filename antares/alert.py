@@ -26,6 +26,21 @@ class Alert( object ):
         self.ra = ra
         self.decl = decl
 
+    def isPresent( self, context ):
+        """
+        Check if the context for the Alert is currently present.
+
+        :param string context: name of the context. e.g. 'CA', 'AR', etc.
+
+        :return: :py:data:`True` if the context is currently present,
+                 otherwise :py:data:`False`.
+        """
+        if hasattr(self, context):
+            return True
+        else:
+            return False
+
+
 class ExternalAlert( Alert ):
     """Represents an external alert which is a sub-class of :py:class:`Alert`.
     An external alert is from sources other than LSST."""
