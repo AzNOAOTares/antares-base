@@ -1,6 +1,6 @@
 # antares-base
 
-This is a temporary repo for making documentation for Antares API.
+This is the repo for making documentation for Antares API.
 
 ## Directory structure
 
@@ -12,15 +12,15 @@ This is a temporary repo for making documentation for Antares API.
 ## Documentation source code structure.
 
 doc/
-└── source
-    ├── _static (resources, like png, js files, etc.)
-	├── alert (where docs for alert goes)
-	├── attribute (where docs for attribute goes)
-	├── context (where docs for context goes)
-	├── examples (where docs for examples goes)
-	├── helper (where docs for helper functions goes)
-	├── index.rst (where docs for the index page goes)
-	└── rules_constraints.rst (where docs for rules&constraints goes)
+|---source
+    |--- _static (resources, like png, js files, etc.)
+	|--- alert (where docs for alert goes)
+	|--- attribute (where docs for attribute goes)
+	|--- context (where docs for context goes)
+	|--- examples (where docs for examples goes)
+	|--- helper (where docs for helper functions goes)
+	|--- index.rst (where docs for the index page goes)
+	|--- rules_constraints.rst (where docs for rules&constraints goes)
 
 ## How to generate online documentations
 
