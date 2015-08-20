@@ -19,4 +19,3 @@ General Alert ( :py:class:`antares.alert.Alert` )
 
       ~Alert.isPresent
 
-   .. automethod:: isPresent
