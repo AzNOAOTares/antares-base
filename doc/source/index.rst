@@ -70,6 +70,14 @@ Helper functions
 
    helper/index
 
+Pre-defined Attribute
+^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
+   attribute/predefined
+
 *************************
 Class inheritance diagram
 *************************
