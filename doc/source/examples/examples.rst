@@ -13,7 +13,7 @@ attribute ``GMinusR`` which belongs to ``CA`` context, we can do::
 
   def computeGMinusR( alert ):
       """'alert' is a camera alert """
-      alert.CA.GMinusR = alert.CA.G - alert.CA.R
+      alert.CA.GMinusR.value = alert.CA.G.value - alert.CA.R.value
       alert.CA.GMinusR.confidence = 1.0
       alert.CA.GMinusR.annotation = "High confidence because we don't know"
       alert.CA.GMinusR.description = "G value minus R value"
@@ -26,9 +26,9 @@ Diverting an alert
 =====================================================
 
 If we want to divert a camera alert ``alert`` based on the size of
-attribute ``LightCurve`` under ``LA`` context, we can do::
+attribute ``SizeOfLightCurve`` under ``LA`` context, we can do::
 
-  if len( alert.LA.Lightcurve ) > MAX_LIGHT_CURVE_SIZE:
+  if len( alert.LA.SizeOfLightCurve ) > MAX_LIGHT_CURVE_SIZE:
       alert.divert( "Light curve is too big" )
 
 Creating an alert replica
@@ -71,6 +71,14 @@ of attribute ``RedShift`` which belongs to ``AR`` context::
         alert.CA.createCombo( replica_set1 )
     if len(replica_set2) > 0:
         alert.CA.createCombo( replica_set2 )
+
+Assemble a light curve
+======================
+If we want to assemble a light curve of a camera alert ``alert``, we
+can do::
+
+  lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
+
 
 Different ways of iterating attribute values
 ============================================
