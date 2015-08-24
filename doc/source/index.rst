@@ -146,14 +146,17 @@ NOTE: we decided to leave for later discussion the identification of structures 
 
 Note: the Antares Data Model document (https://docs.google.com/document/d/1xjYmhd8W9pyiwCBLA6o8mJeAz99Qbz9NvYFpICvYfSA/) had an example of
 
-`LA-LightCurve = F2( LA-CameraAlerts.TimeSeries(CA-Brightness),
-                                        CA-Brightness, CA-Time )`
+.. code-block:: python
+
+   LA-LightCurve = F2( LA-CameraAlerts.TimeSeries(CA-Brightness), CA-Brightness, CA-Time )
 
 Such an assignment would be allowed within a camera alert, because a Locus-Aggregated Alert (LA) has exactly one Camera Alert (CA) at any time. However, that would not be allowed within a replica or combo.
 
 NOTE: We discussed computing something like the count of the number of alerts by allowing something like
 
-IM-CountAlerts =+ 1;
+.. code-block:: python
+
+   IM-CountAlerts =+ 1
 
 which reads IM-CountAlerts, adds one, and writes it. That is explicitly forbidden above. However, for such *accumulative* calculations, there may be ways to incorporate them by having a separate process that accepts such accumulations and coalesces them into a single assignment, rather than a complex sequence of parallel reads and write, which we want to avoid allowing.
 
