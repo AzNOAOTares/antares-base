@@ -7,6 +7,8 @@
 CA Context ( :py:class:`antares.context.CAContext` )
 ****************************************************
 
+For predefined attributes for CA context, see :ref:`Predefined_CA_Attributes_ref_lable`.
+
 .. automodule:: antares.context
 
 .. autoclass:: CAContext
