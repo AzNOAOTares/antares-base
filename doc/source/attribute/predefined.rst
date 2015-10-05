@@ -21,7 +21,7 @@ Predefined Attributes for CA context
 Predefined Attributes for AR context
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- ``HasAstroObject``: Associated with an astro object or not
+- ``HasAstroObject``: (bool) Associated with an astro object or not
 
 
 Predefined Attributes for AO context
