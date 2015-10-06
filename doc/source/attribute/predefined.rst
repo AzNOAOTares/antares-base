@@ -22,6 +22,7 @@ Predefined Attributes for AR context
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - ``HasAstroObject``: (bool) Associated with an astro object or not
+- ``SourceAstroObjectTable``: (string) The name of source astro-object table
 
 
 Predefined Attributes for AO context
