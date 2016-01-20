@@ -13,9 +13,8 @@ Predefined Attributes for CA context
 
 - ``RA``: (float) Right ascension
 - ``Decl``: (float) Declination
-- ``Magnitude``: (float) Logarithmic measure of the brightness of an alert
-- ``MagnitudeErr``: (float) Error of magnitude of an alert
-- ``DeltaMagnitude``: (float) Absolute value of change of magnitude between
+- ``PhotometricObservation``: (array?) Contains the aper and series magnitudes (uncertain floats), shape (4 uncertain floats), background flux (uncertain float), and verified x and y positions (uncertain floats)
+- ``DeltaMagnitude``: (uncertain float) Absolute value of change of magnitude between
   two most observations
 
 Predefined Attributes for AR context
@@ -45,3 +44,4 @@ Predefined Attributes for AO context
 - ``stdev``: (float) Standard deviation of LINEAR magnitudes
 - ``mmed``: (float) Median LINEAR magnitude
 - ``kurt``: (float) Kurtosis in LINEAR light curves
+- ``period``: (float) The period of the light curve here

@@ -1,8 +1,8 @@
-from antares.context import *
-#from antares.helper import hashuuid
+from antares.model.context import *
 import threading
 import uuid
 import random
+
 
 HASH_SIZE = 100
 
@@ -45,7 +45,7 @@ class ExternalAlert( Alert ):
     """Represents an external alert which is a sub-class of :py:class:`Alert`.
     An external alert is from sources other than LSST."""
     pass
-    
+
 class CameraAlert( Alert ):
     """
     Represents a camera alert which is a sub-class of :py:class:`Alert`.
@@ -58,7 +58,7 @@ class CameraAlert( Alert ):
     :param: :py:class:`antares.context.ISContext` IS: IS context object
     :param: :py:class:`antares.context.LAContext` LA: LA context object
     """
-    
+
     CA = None
     """
     CA (Camera Alert) context object. CA attributes are always available.
@@ -80,7 +80,7 @@ class CameraAlert( Alert ):
 
     IS = None
     """IS (Image Section) context object.
-    
+
     :type: :py:class:`antares.context.ISContext`
     """
 
@@ -138,13 +138,12 @@ class CameraAlert( Alert ):
         :param: :py:class:`int` astro_id: ID of the astro object
                 to be associated with the created replica. It is optional.
         """
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
+        conn = GetDBConn()
         cursor = conn.cursor()
         query = "select ReplicaID from AlertReplica where AlertID={0}".format(self.ID)
         cursor.execute(query)
         id_postfix = len(cursor.fetchall()) + 1
-        
+
         #id_postfix = hashuuid( uuid.uuid4() )
         #print( 'id_postfix = ', id_postfix )
         replica_id = int( str(self.ID) + str(id_postfix) )
@@ -152,22 +151,17 @@ class CameraAlert( Alert ):
         #print( 'replica count = ', self.replica_count )
         replica = AlertReplica( self, astro_id=astro_id, init_from_db=False,
                                 replica_id=replica_id, replica_num=id_postfix )
-        
+
         ## Update status for the newly created replica.
 
         ## TODO: call Zhe's system API.
 
-        # conn = pymysql.connect(host='localhost', user='root',
-        #                        passwd='', db='antares_demo')
-        # cursor = conn.cursor()
-        # query = "INSERT INTO AlertStatus VALUES \
-        # ({}, 'a', 'w', 0, {}, {})".format(replica.ID, self.ID, self.ID)
-        # cursor.execute(query)
-        # conn.commit()
-        # conn.close()
+        query = "select * from AlertReplica where ReplicaID={0}".format(replica_id)
+        cursor.execute(query)
+        if len(cursor.fetchall()) == 0:
+            replica.commit()
+            replica.flushed2DB = True
 
-        replica.commit()
-        replica.flushed2DB = True
         self.replicas.append( replica )
         return replica.ID
 
@@ -183,7 +177,7 @@ class CameraAlert( Alert ):
     def throttle( self, annotation ):
         """
         Throttle the alert.
-        
+
         :param string annotation: a short description of why the alert is throttled.
         """
         pass
@@ -197,25 +191,15 @@ class CameraAlert( Alert ):
         self.decision = 'D'
 
         ## TODO: reflect the change of decision immediately to DB.
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
+        conn = GetDBConn()
         cursor = conn.cursor()
         sql_update = """update Alert set Decision="{0}", Annotation="{1}" where AlertID={2}""".format(
             self.decision, annotation, self.ID )
         cursor.execute( sql_update )
         conn.commit()
         conn.close()
-        
+
         ## TODO: call Zhe's system API.
-        
-        #conn = pymysql.connect(host='localhost', user='root',
-        #                       passwd='', db='antares_demo')
-        # cursor = conn.cursor()
-        # query = "INSERT INTO AlertStatus VALUES \
-        # ({}, 'a', 'f', 0, {}, {})".format(self.ID, self.ID, self.ID)
-        # cursor.execute(query)
-        # conn.commit()
-        # conn.close()
 
     def mark_as_rare( self, annotation ):
         """
@@ -223,8 +207,7 @@ class CameraAlert( Alert ):
 
         :param string annotation: a short description of why the alert is rare.
         """
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
+        conn = GetDBConn()
         cursor = conn.cursor()
 
         if self.decision == 'R':
@@ -242,13 +225,12 @@ class CameraAlert( Alert ):
         cursor.execute( sql_update )
         conn.commit()
         conn.close()
-        
+
         ## TODO: call Zhe's system API.
 
     @property
     def annotation( self ):
-        conn = pymysql.connect(host='localhost', user='root',
-                               passwd='', db='antares_demo')
+        conn = GetDBConn()
         cursor = conn.cursor()
 
         sql_query = """select Annotation from Alert where AlertID={0}""".format(self.ID)
@@ -259,16 +241,15 @@ class CameraAlert( Alert ):
         """
         Commit the alert data to Locus-aggregated Alerts DB.
         """
-        conn = pymysql.connect( host='127.0.0.1', user='root',
-                                passwd='', db='antares_demo' )
+        conn = GetDBConn()
         cur = conn.cursor()
 
         # Nothing to commit for CA context now since all attributes are pre-loaded to DB.
         # self.CA.commit( cur )
-        
+
         if self.decision != 'NA':
             ## Update corresponding Alert table to reflect decision change.
-            ## Connect to mysql database.            
+            ## Connect to mysql database.
             sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
                 self.decision, self.ID )
             cur.execute( sql_update )
@@ -288,12 +269,12 @@ class AlertReplica( CameraAlert ):
     Replica is initialized with its associated astro object (optional).
 
     :param: parent(:py:class:`antares.alert.CameraAlert`): parent of the alert replica.
-    :param: astr_id(int): ID of the associated astro object (optional). 
+    :param: astr_id(int): ID of the associated astro object (optional).
     :param: init_from_db(boolean): indicate if the replica is initialized from Database (optional).
     :param: replica_id(int): ID of the alert replica (unique among all replicas).
     :param: replica_num(int): Number of the alert replica (unique among all replicas that share the same parent).
     """
-    
+
     AR = None
     """
     AR (Alert Replica) context object.
@@ -336,13 +317,6 @@ class AlertReplica( CameraAlert ):
         self.ID = replica_id
         self.num = replica_num
 
-        # conn = pymysql.connect(host='localhost', user='root',
-        #                        passwd='', db='antares_demo')
-        # cursor = conn.cursor()
-        # query = """select ReplicaNumber from AlertReplica where AlertID={0}""".format(parent.ID)
-        # cursor.execute( query )
-        # replica_num = len(cursor.fetchall()) + 1
-        
         if init_from_db == False:
             ## Assign Replica ID.
             # query = """select ReplicaID from AlertReplica"""
@@ -357,7 +331,6 @@ class AlertReplica( CameraAlert ):
             self.flushed2DB = True
             self.num = replica_num
 
-        #conn.close()
         ## Populate AR context.
         self.AR = ARContext( self.ID )
 
@@ -374,8 +347,6 @@ class AlertReplica( CameraAlert ):
         """
         Create a replica of the current alert replica.
         """
-        #print( 'replica num = ', self.num )
-        #self.parent.replica_counter = self.num + 1
         return self.parent.createReplica( astro_id=self.astro_id )
 
     def divert( self, annotation ):
@@ -399,10 +370,11 @@ class AlertReplica( CameraAlert ):
         """
         Commit the alert replica to Locus-aggregated Alerts DB.
         """
-        conn = pymysql.connect( host='127.0.0.1', user='root',
-                                passwd='', db='antares_demo' )
+        conn = GetDBConn()
         cur = conn.cursor()
-        if self.flushed2DB == False:
+        query = """select * from AlertReplica where ReplicaID={0}""".format(self.ID)
+        cur.execute( query )
+        if len(cur.fetchall()) == 0: # only insert when not exists
             if self.astro_id != None:
                 query = """select * from AstroObject where AstroObjectID={0}""".format(self.astro_id)
                 cur.execute( query )
@@ -411,7 +383,7 @@ class AlertReplica( CameraAlert ):
                                                                                                          "SDSS", self.astro_id,
                                                                                                          1, self.parent.locus_id )
                     cur.execute( sql_insert )
-                
+
                 sql_insert = """insert into AlertReplica(ReplicaID,ReplicaNumber,AlertID,AstroObjectID,LocusID) \
                 values({0}, {1}, {2}, {3}, {4})""".format( self.ID, self.num, self.parent.ID,
                                                            self.astro_id, self.parent.locus_id )
@@ -419,7 +391,10 @@ class AlertReplica( CameraAlert ):
                 sql_insert = """insert into AlertReplica(ReplicaID,ReplicaNumber,AlertID,LocusID) \
                 values({0}, {1}, {2}, {3})""".format( self.ID, self.num, self.parent.ID, self.parent.locus_id )
 
-            cur.execute( sql_insert )
+            try:
+                cur.execute( sql_insert )
+            except:
+                pass
 
             self.flushed2DB = True
 
@@ -428,6 +403,7 @@ class AlertReplica( CameraAlert ):
             self.AO.commit( cur )
 
         conn.commit()
+        conn.close()
 
 class AlertCombo( CameraAlert ):
     """
@@ -439,7 +415,7 @@ class AlertCombo( CameraAlert ):
 
     :param: alert_replicas (:py:class:`list`): a list of :py:class:`AlertReplica`
     """
-    
+
     CB = None
     """CB (Combo) context object. CB attributes are only visible during
     per-combo processing.
@@ -447,16 +423,22 @@ class AlertCombo( CameraAlert ):
     :type: :py:class:`antares.context.CBContext`
     """
 
-    def __init__( self, alert_replicas ):
+    def __init__( self, combo_id, parent, replicas ):
         """Combo is initialized with a set of alert replicas."""
-        pass
+        self.combo_id = combo_id
+        self.parent = parent
+        self.replicas = replicas
+
+    def __str__( self ):
+        return 'Alert Combo {0} belongs to camera alert {1} with {2} replicas.'.format(
+            self.combo_id, self.parent.ID, len(self.replicas))
 
 
 class AstroObject:
     """
     Represents an astro object.
     """
-    
+
     def __init__( self ):
         pass
 

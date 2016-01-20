@@ -2,9 +2,9 @@
 Global helper functions.
 """
 
-from antares.alert import *
-from antares.context import *
-from antares.config import *
+from antares.model.alert import *
+from antares.model.context import *
+from antares.model.config import *
 import os
 import pandas as pd
 import pymysql
@@ -21,12 +21,9 @@ def GenerateCameraAlertStream( alert_num=10 ):
     :rtype: list
     """
     ## Connect to mysql database.
-    conn = pymysql.connect( host='127.0.0.1',
-                            user='root',
-                            passwd='',
-                            db='antares_demo' )
+    conn = GetDBConn()
     cur = conn.cursor()
-    
+
     alert_ids = [] # list of camera alert ids to be returned to caller.
 
     query = """select AlertID from Alert"""
@@ -35,7 +32,7 @@ def GenerateCameraAlertStream( alert_num=10 ):
     for row in alert_rows:
         if alert_num == 0:
             break
-        
+
         alert_id = row[ 0 ]
         query = """select Value from AttributeValue where ContainerID={0} \
         and ContainerType='E' and attrname='DeltaMagnitude'""".format(alert_id)
@@ -48,12 +45,46 @@ def GenerateCameraAlertStream( alert_num=10 ):
     conn.close()
     return alert_ids # return the generated camera alert stream
 
+def CreateCombo( parent_id, replica_ids ):
+    conn = GetDBConn()
+    cur = conn.cursor()
+    query = "select ComboID from Combo"
+    cur.execute(query)
+    combo_id = len(cur.fetchall())
+    sql_insert = """insert into Combo values({0},{1})""".format(combo_id, parent_id)
+    cur.execute( sql_insert )
+
+    for replica_id in replica_ids:
+        sql_insert = """insert into InCombo(ComboID,ReplicaID) values({0},{1})""".format(combo_id, replica_id)
+        cur.execute( sql_insert )
+
+    conn.commit()
+    conn.close()
+
+    return combo_id
+
+def ConstructComboFromID( combo_id ):
+    conn = GetDBConn()
+    cursor = conn.cursor()
+    query = "select AlertID from Combo where ComboID={0}".format(combo_id)
+    cursor.execute(query)
+    alert_id = cursor.fetchall()[0][0]
+    print('alert id=', alert_id)
+    parent = ConstructCameraAlertFromID(alert_id)
+    replicas = []
+    query = "select ReplicaID from InCombo where ComboID={0}".format(combo_id)
+    cursor.execute(query)
+    replica_rows = cursor.fetchall();
+    for row in replica_rows:
+        replica_id = row[0]
+        replica = ConstructAlertReplicaFromID(replica_id)
+        replicas.append(replica)
+
+    return AlertCombo(combo_id, parent, replicas)
+
 def ConstructCameraAlertFromID( alert_id ):
     ## Connect to mysql database.
-    conn = pymysql.connect( host='127.0.0.1',
-                            user='root',
-                            passwd='',
-                            db='antares_demo' )
+    conn = GetDBConn()
     cur = conn.cursor()
 
     ## Fetch alert data
@@ -102,16 +133,13 @@ def ConstructCameraAlertFromID( alert_id ):
     #print( type(magnitude) )
 
     alert = CameraAlert( alert_id, ra, decl, ca_context, decision, locus_id )
-    
+
     conn.close()
     return alert # return the generated camera alert
 
 def ConstructAlertReplicaFromID( replica_id ):
     ## Connect to mysql database.
-    conn = pymysql.connect( host='127.0.0.1',
-                            user='root',
-                            passwd='',
-                            db='antares_demo' )
+    conn = GetDBConn()
     cur = conn.cursor()
     ## Fetch alert replica data
     query = """select * from AlertReplica where ReplicaID={0}""".format( replica_id )
@@ -141,4 +169,4 @@ def ConstructAlertFromID( target_id, target_type ):
     if target_type == 'E':
         return ConstructCameraAlertFromID( target_id )
     if target_type == 'R':
-        return ConstructAlertReplicaFromID( target_id, parent )
+        return ConstructAlertReplicaFromID( target_id )

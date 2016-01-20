@@ -1,8 +1,8 @@
-from datetime import datetime
-from antares.config import *
+from antares.model.config import *
 import numpy as np
 import pymysql
-    
+from datetime import datetime
+
 class Attribute:
     """
     Represents an attribute object. An attribute is initialized with its name,
@@ -118,8 +118,7 @@ class Attribute:
 
         if self.loaded == False:
             ## Query the DB to see if the value for the attribute has already been computed.
-            conn = pymysql.connect(host='localhost', user='root',
-                                   passwd='', db='antares_demo')
+            conn = GetDBConn()
             cursor = conn.cursor()
             query = """select Value from AttributeValue where ContainerID={0} \
             and ContainerType="{1}" and AttrName="{2}" """.format( self.context.container_id,
@@ -148,7 +147,7 @@ class Attribute:
                 val = self.datatype( val )
             except ValueError:
                 raise TypeError( '{0} should be a {1}!'.format(val, self.datatype) )
-        
+
         self._value = val
         self.valueAssigned = True
         if self.atype == DERIVED_ATTR:
@@ -158,7 +157,7 @@ class Attribute:
             # Indicate the value of derived attribute has not been written
             # to DB yet. When alert.commit() is called, this flag will become True.
             self.flushed2DB = False
-        
+
     def get_confidence( self ):
         if hasattr( self, '_confidence' ):
             return self._confidence
@@ -171,7 +170,7 @@ class Attribute:
             self._confidence = confid
         else:
             raise TypeError( '{0} should be a {1}!'.format(confid, float) )
-    
+
     def get_annotation( self ):
         if hasattr( self, '_annotation' ):
             return self._annotation
@@ -182,7 +181,7 @@ class Attribute:
         ## Check if 'val' is of the desired type.
         if not isinstance( annotation, str ):
             raise TypeError( '{0} should be a {1}!'.format(confid, str) )
-        
+
         self._annotation = annotation
 
     def timeDelimitedSeries( self, start_time, end_time ):
@@ -214,7 +213,7 @@ class UncertainFloat:
 
     :type: float
     """
-    
+
     lower_stddev = None
     """
     The second float: lower std dev (one std dev below).
@@ -238,7 +237,7 @@ class ProbabilityCurve:
 
     :type: numpy array
     """
-    
+
 class IntPair:
     """Represents a pair of int (providing lower and upper bounds)
     which is one of the data type of :py:class:`Attribute`."""
@@ -248,7 +247,7 @@ class IntPair:
 
     :type: int
     """
-    
+
     upper_bound = None
     """
     The value of upper bound.
@@ -282,10 +281,11 @@ class TimePeriod:
 
     :type: timestamp
     """
-    
+
     end = None
     """
     The end of the time period.
 
     :type: timestamp
     """
+

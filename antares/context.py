@@ -2,8 +2,8 @@
 Antares context module.
 """
 
-from antares.config import *
-from antares.attribute import *
+from antares.model.config import *
+from antares.model.attribute import *
 from io import StringIO
 import pymysql
 import pandas as pd
@@ -11,8 +11,8 @@ from pandas.lib import Timestamp
 
 class Context:
     """
-    Represents a context object in general. 
-    It is the super class for all 11 concrete context objects.    
+    Represents a context object in general.
+    It is the super class for all 11 concrete context objects.
     """
 
     def __init__( self ):
@@ -41,7 +41,7 @@ class CAContext( Context ):
 
     :type: string
     """
-    
+
     container_type = 'E'
 
     def __init__( self, container_id ):
@@ -120,7 +120,7 @@ class ARContext( Context ):
     def __init__( self, container_id ):
         self.container_id = container_id
         self.container_type = 'R'
-        
+
         ## Initialize predefined base attributes for CA context.
         for attrname in AR_base_attributes.keys():
             attr = Attribute( attrname, BASE_ATTR, self,
@@ -161,7 +161,7 @@ class CBContext( Context ):
 
     :type: string
     """
-    
+
     replicas = None
     """
     A set of the alert replicas associated with the combo.
@@ -195,7 +195,7 @@ class AOContext( Context ):
 
     :type: string
     """
-    
+
     def __init__( self, astro_id ):
         """'continer_id' is the ID of the object that owns the context."""
         self.container_id = astro_id
@@ -209,10 +209,7 @@ class AOContext( Context ):
             setattr( self, attrname, attr )
 
         ## Connect to mysql database.
-        conn = pymysql.connect( host='127.0.0.1',
-                                user='root',
-                                passwd='',
-                                db='antares_demo' )
+        conn = GetDBConn()
         cur = conn.cursor()
         query = """select * from PLV_SDSS where object_id={0}""".format(astro_id)
         cur.execute( query )
@@ -273,13 +270,12 @@ class LAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a time series of values. Here the value is a dict that maps
-                 replica ID to the real value of ``attrname``.
-        :rtype: :py:class:`pandas.Series`
+        :return: a time series of values. Here the values are tuples of magnitude and passbands.
+        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
         """
         pass
 
-    def assembleTimeSeries_cameraAlerts( self, context, attrname ):
+    def assembleTimeSeries( self, context, attrname ):
         """
         The function assembles a time series of all the past values
         of an attribute inside a context of the camera alerts associated
@@ -288,14 +284,11 @@ class LAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a time series of values
-        :rtype: Pandas TimeSeries
+        :return: a time series of values. Here the values are tuples of magnitude and passbands.
+        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
         """
         ## Connect to mysql database.
-        conn = pymysql.connect( host='127.0.0.1',
-                                user='root',
-                                passwd='',
-                                db='antares_demo' )
+        conn = GetDBConn()
         cur = conn.cursor()
 
         query = """select ComputedAt, Value from AttributeValue where ContainerID={0} and
@@ -310,7 +303,7 @@ class LAContext( Context ):
 
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
-    
+
 class EAContext( Context ):
     """
     Represents a EA (External Alert) context object which is a sub-class of :py:class:`Context`.

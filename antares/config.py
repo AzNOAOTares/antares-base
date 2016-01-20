@@ -3,6 +3,8 @@ Configurations for Antares project.
 """
 
 import numpy
+import pymysql
+from antares.conf import settings
 
 ## Path to the astro catalog data used for demo
 demo_data_path = '../demo-data'
@@ -55,3 +57,13 @@ DERIVED_ATTR = 1  # indicate derived attribute
 
 ## We can generate upto this many camera alerts for the demo.
 total_num_alerts = 7194
+
+def GetDBConn():
+    try:
+        conn = pymysql.Connect(host=settings.db_host_local, user=settings.db_user,
+                               passwd=settings.db_pwd, db=settings.db_name)
+    except:
+        conn = pymysql.Connect(host=settings.db_host_remote, user=settings.db_user,
+                               passwd=settings.db_pwd, db=settings.db_name)
+
+    return conn
