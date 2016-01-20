@@ -61,7 +61,7 @@ gh-pages:
 	git checkout gh-pages
 	rm -rf build _sources _static alert context attribute examples _images helper
 	git checkout master $(GH_PAGE_SRCS)
-	git reset HEAD
+	git reset --hard HEAD
 	mv ./doc/source ./
 	make html
 	rm -rf source
