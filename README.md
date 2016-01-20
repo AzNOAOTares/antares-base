@@ -9,7 +9,7 @@ This is the repo for making documentation for Antares API.
 - `Makefile`: used to generate online documentation at
   [here](http://aznoaotares.github.io/antares-base/index.html).
 
-## Documentation source code structure.##
+## Documentation source code structure.
 
 doc/source
 
