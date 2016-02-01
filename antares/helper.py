@@ -2,9 +2,9 @@
 Global helper functions.
 """
 
-from antares.model.alert import *
-from antares.model.context import *
-from antares.model.config import *
+from antares.alert import *
+from antares.context import *
+from antares.config import *
 import os
 import pandas as pd
 import pymysql

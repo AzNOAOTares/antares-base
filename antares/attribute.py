@@ -1,4 +1,4 @@
-from antares.model.config import *
+from antares.config import *
 import numpy as np
 import pymysql
 from datetime import datetime

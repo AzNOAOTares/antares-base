@@ -1,4 +1,4 @@
-from antares.model.context import *
+from antares.context import *
 import threading
 import uuid
 import random
