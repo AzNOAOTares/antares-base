@@ -4,7 +4,6 @@ Configurations for Antares project.
 
 import numpy
 import pymysql
-from antares.conf import settings
 
 ## Path to the astro catalog data used for demo
 demo_data_path = '../demo-data'
