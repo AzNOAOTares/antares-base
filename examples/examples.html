@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Examples of using API &mdash; Antares API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Antares API 1.0 documentation" href="../index.html" />
+    <link rel="prev" title="Rules &amp; Constraints" href="../rules_constraints.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../rules_constraints.html" title="Rules &amp; Constraints"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="examples-of-using-api">
+<h1>Examples of using API<a class="headerlink" href="#examples-of-using-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-assign-retrieve-the-value-to-from-an-attribute">
+<h2>How to assign/retrieve the value to/from an attribute<a class="headerlink" href="#how-to-assign-retrieve-the-value-to-from-an-attribute" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have a camera alert <code class="docutils literal"><span class="pre">alert</span></code> with some base attributes, for example,
+its <code class="docutils literal"><span class="pre">G</span></code> value and <code class="docutils literal"><span class="pre">R</span></code> value, if want to compute the derived
+attribute <code class="docutils literal"><span class="pre">GMinusR</span></code> which belongs to <code class="docutils literal"><span class="pre">CA</span></code> context, we can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">antares.alert</span> <span class="kn">import</span> <span class="n">CameraAlert</span>
+
+<span class="k">def</span> <span class="nf">computeGMinusR</span><span class="p">(</span> <span class="n">alert</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&#39;alert&#39; is a camera alert &quot;&quot;&quot;</span>
+    <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">GMinusR</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">GMinusR</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">GMinusR</span><span class="o">.</span><span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;High confidence because we don&#39;t know&quot;</span>
+    <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">GMinusR</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;G value minus R value&quot;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">alert</span></code> does not have <code class="docutils literal"><span class="pre">CA</span></code> context or
+attribute <code class="docutils literal"><span class="pre">GMinusR</span></code> is not valid under <code class="docutils literal"><span class="pre">CA</span></code> context,
+<a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception will be raised.</p>
+</div>
+<div class="section" id="diverting-an-alert">
+<h2>Diverting an alert<a class="headerlink" href="#diverting-an-alert" title="Permalink to this headline">¶</a></h2>
+<p>If we want to divert a camera alert <code class="docutils literal"><span class="pre">alert</span></code> based on the size of
+attribute <code class="docutils literal"><span class="pre">SizeOfLightCurve</span></code> under <code class="docutils literal"><span class="pre">LA</span></code> context, we can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">alert</span><span class="o">.</span><span class="n">LA</span><span class="o">.</span><span class="n">SizeOfLightCurve</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_LIGHT_CURVE_SIZE</span><span class="p">:</span>
+    <span class="n">alert</span><span class="o">.</span><span class="n">divert</span><span class="p">(</span> <span class="s2">&quot;Light curve is too big&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-an-alert-replica">
+<h2>Creating an alert replica<a class="headerlink" href="#creating-an-alert-replica" title="Permalink to this headline">¶</a></h2>
+<p>If we want to create a replica of a camera alert <code class="docutils literal"><span class="pre">alert</span></code> without
+associating an astro object, we can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">alert</span><span class="o">.</span><span class="n">createReplica</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To associate an astro object <code class="docutils literal"><span class="pre">astro</span></code> when creating a replica, we
+do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">alert</span><span class="o">.</span><span class="n">createReplica</span><span class="p">(</span> <span class="n">astroobj</span><span class="o">=</span><span class="n">astro</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-combo-based-on-the-value-of-attribute-redshift">
+<h2>Creating a combo based on the value of attribute <code class="docutils literal"><span class="pre">RedShift</span></code><a class="headerlink" href="#creating-a-combo-based-on-the-value-of-attribute-redshift" title="Permalink to this headline">¶</a></h2>
+<p>We can create combos for a camera alert <code class="docutils literal"><span class="pre">alert</span></code> based on the value
+of attribute <code class="docutils literal"><span class="pre">RedShift</span></code> which belongs to <code class="docutils literal"><span class="pre">AR</span></code> context:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">CreateComboOnRedshift</span><span class="p">(</span> <span class="n">alert</span> <span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Create combos based on attribute redshift. &#39;alert&#39; is a camera alert.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">alert</span><span class="o">.</span><span class="n">Type</span> <span class="o">!=</span> <span class="n">CAMERA_ALERT</span><span class="p">:</span>
+      <span class="k">return</span>
+
+  <span class="c1">## combo forking</span>
+  <span class="n">replica_set1</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">replica_set2</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">replica</span> <span class="ow">in</span> <span class="n">alert</span><span class="o">.</span><span class="n">replicas</span><span class="p">:</span>
+      <span class="c1">## group replicas with lower redshift value together</span>
+      <span class="k">if</span> <span class="n">replica</span><span class="o">.</span><span class="n">AR</span><span class="o">.</span><span class="n">RedShift</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+          <span class="n">replica_set1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">replica</span> <span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">replica_set2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">replica</span> <span class="p">)</span>
+
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">replica_set1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">createCombo</span><span class="p">(</span> <span class="n">replica_set1</span> <span class="p">)</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">replica_set2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">createCombo</span><span class="p">(</span> <span class="n">replica_set2</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="assemble-a-light-curve">
+<h2>Assemble a light curve<a class="headerlink" href="#assemble-a-light-curve" title="Permalink to this headline">¶</a></h2>
+<p>If we want to assemble a light curve of a camera alert <code class="docutils literal"><span class="pre">alert</span></code>, we
+can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lightcurve</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">LA</span><span class="o">.</span><span class="n">assembleTimeSeries_cameraAlerts</span><span class="p">(</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;Magnitude&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="different-ways-of-iterating-attribute-values">
+<h2>Different ways of iterating attribute values<a class="headerlink" href="#different-ways-of-iterating-attribute-values" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="iterating-attribute-values-of-alert-replicas-of-a-camera-alert">
+<h3>Iterating attribute values of alert replicas of a camera alert<a class="headerlink" href="#iterating-attribute-values-of-alert-replicas-of-a-camera-alert" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">assembleVector</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span> <span class="n">values</span> <span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span> <span class="n">val</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">alert</span></code> is a camera alert. The second line of code returns a
+numpy array of all the values of attribute <code class="docutils literal"><span class="pre">Redshift</span></code> under <code class="docutils literal"><span class="pre">AR</span></code>
+context of replicas of <code class="docutils literal"><span class="pre">alert</span></code>.</p>
+</div>
+<div class="section" id="iterating-attribute-values-of-alert-replicas-of-an-alert-combo">
+<h3>Iterating attribute values of alert replicas of an alert combo<a class="headerlink" href="#iterating-attribute-values-of-alert-replicas-of-an-alert-combo" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">combo</span><span class="o">.</span><span class="n">CB</span><span class="o">.</span><span class="n">assembleVector</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span> <span class="n">values</span> <span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span> <span class="n">val</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">combo</span></code> is an alert combo. The second line of code returns a
+numpy array of all the values of attribute <code class="docutils literal"><span class="pre">Redshift</span></code> under <code class="docutils literal"><span class="pre">AR</span></code>
+context of replicas that belongs to <code class="docutils literal"><span class="pre">combo</span></code>.</p>
+</div>
+<div class="section" id="iterating-a-time-series-of-all-past-values-an-attribute">
+<h3>Iterating a time series of all past values an attribute<a class="headerlink" href="#iterating-a-time-series-of-all-past-values-an-attribute" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">alert</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">GMinusR</span><span class="o">.</span><span class="n">time_series</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span> <span class="n">item</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">value</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">alert</span></code> is a camera alert. <code class="docutils literal"><span class="pre">alert.CA.GMinusR.time_series</span></code> is
+a Pandas time series, so <code class="docutils literal"><span class="pre">item.index</span></code> is a timestamp and
+<code class="docutils literal"><span class="pre">item.value</span></code> is the actual value of <code class="docutils literal"><span class="pre">GMinusR</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Examples of using API</a><ul>
+<li><a class="reference internal" href="#how-to-assign-retrieve-the-value-to-from-an-attribute">How to assign/retrieve the value to/from an attribute</a></li>
+<li><a class="reference internal" href="#diverting-an-alert">Diverting an alert</a></li>
+<li><a class="reference internal" href="#creating-an-alert-replica">Creating an alert replica</a></li>
+<li><a class="reference internal" href="#creating-a-combo-based-on-the-value-of-attribute-redshift">Creating a combo based on the value of attribute <code class="docutils literal"><span class="pre">RedShift</span></code></a></li>
+<li><a class="reference internal" href="#assemble-a-light-curve">Assemble a light curve</a></li>
+<li><a class="reference internal" href="#different-ways-of-iterating-attribute-values">Different ways of iterating attribute values</a><ul>
+<li><a class="reference internal" href="#iterating-attribute-values-of-alert-replicas-of-a-camera-alert">Iterating attribute values of alert replicas of a camera alert</a></li>
+<li><a class="reference internal" href="#iterating-attribute-values-of-alert-replicas-of-an-alert-combo">Iterating attribute values of alert replicas of an alert combo</a></li>
+<li><a class="reference internal" href="#iterating-a-time-series-of-all-past-values-an-attribute">Iterating a time series of all past values an attribute</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../rules_constraints.html"
+                        title="previous chapter">Rules &amp; Constraints</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/examples.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../rules_constraints.html" title="Rules &amp; Constraints"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Antares Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.4.
+    </div>
+  </body>
+</html>

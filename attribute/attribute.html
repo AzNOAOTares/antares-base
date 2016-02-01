@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Attribute ( antares.attribute.Attribute ) &mdash; Antares API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Antares API 1.0 documentation" href="../index.html" />
+    <link rel="next" title="Uncertain Float ( antares.attribute.UncertainFloat )" href="uncertain_float.html" />
+    <link rel="prev" title="ES Context ( antares.context.ESContext)" href="../context/es_context.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uncertain_float.html" title="Uncertain Float ( antares.attribute.UncertainFloat )"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../context/es_context.html" title="ES Context ( antares.context.ESContext)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-antares.attribute">
+<span id="attribute-antares-attribute-attribute"></span><h1>Attribute ( <a class="reference internal" href="#antares.attribute.Attribute" title="antares.attribute.Attribute"><code class="xref py py-class docutils literal"><span class="pre">antares.attribute.Attribute</span></code></a> )<a class="headerlink" href="#module-antares.attribute" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="antares.attribute.Attribute">
+<em class="property">class </em><code class="descclassname">antares.attribute.</code><code class="descname">Attribute</code><span class="sig-paren">(</span><em>name</em>, <em>atype</em>, <em>context</em>, <em>datatype</em>, <em>scale</em>, <em>description=''</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.attribute.Attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an attribute object. An attribute is initialized with its name,
+the context it belongs to, the datatype of its value, a description and the scale of its value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">name(string): name of the attribute</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">context(<a class="reference internal" href="../context/context.html#antares.context.Context" title="antares.context.Context"><code class="xref py py-class docutils literal"><span class="pre">antares.context.Context</span></code></a>): context the attribute belongs to</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">datatype(string): data type of the attribute value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">scale(<a class="reference internal" href="int_pair.html#antares.attribute.IntPair" title="antares.attribute.IntPair"><code class="xref py py-class docutils literal"><span class="pre">IntPair</span></code></a>): the range to which the attribute value scales</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">description(string): description of the attribute</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.vector" title="antares.attribute.Attribute.vector"><code class="xref py py-obj docutils literal"><span class="pre">vector</span></code></a></td>
+<td>The vector of all the past values computed for the attribute.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.attribute.Attribute.time_series" title="antares.attribute.Attribute.time_series"><code class="xref py py-obj docutils literal"><span class="pre">time_series</span></code></a></td>
+<td>The time series of all the past values computed for the attribute.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.description" title="antares.attribute.Attribute.description"><code class="xref py py-obj docutils literal"><span class="pre">description</span></code></a></td>
+<td>A short description of the attribute.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.attribute.Attribute.name" title="antares.attribute.Attribute.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
+<td>The name of the attribute.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.context" title="antares.attribute.Attribute.context"><code class="xref py py-obj docutils literal"><span class="pre">context</span></code></a></td>
+<td>The context that the attribute belongs to.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.attribute.Attribute.datatype" title="antares.attribute.Attribute.datatype"><code class="xref py py-obj docutils literal"><span class="pre">datatype</span></code></a></td>
+<td>The data type of the attribute.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.annotation" title="antares.attribute.Attribute.annotation"><code class="xref py py-obj docutils literal"><span class="pre">annotation</span></code></a></td>
+<td>Annotation for the most-recently computed value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.attribute.Attribute.confidence" title="antares.attribute.Attribute.confidence"><code class="xref py py-obj docutils literal"><span class="pre">confidence</span></code></a></td>
+<td>Confidence for the most-recently computed value.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.enum_ints" title="antares.attribute.Attribute.enum_ints"><code class="xref py py-obj docutils literal"><span class="pre">enum_ints</span></code></a></td>
+<td>A finite list of possible int values for the attribute.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.attribute.Attribute.enum_strs" title="antares.attribute.Attribute.enum_strs"><code class="xref py py-obj docutils literal"><span class="pre">enum_strs</span></code></a></td>
+<td>A finite list of possible string values for the attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.attribute.Attribute.timeDelimitedSeries" title="antares.attribute.Attribute.timeDelimitedSeries"><code class="xref py py-obj docutils literal"><span class="pre">timeDelimitedSeries</span></code></a>(start_time,&nbsp;end_time)</td>
+<td>A time-delimited series of all the past values of the attribute.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.vector">
+<code class="descname">vector</code><em class="property"> = None</em><a class="headerlink" href="#antares.attribute.Attribute.vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>The vector of all the past values computed for the attribute.
+It is a Numpy array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.time_series">
+<code class="descname">time_series</code><em class="property"> = None</em><a class="headerlink" href="#antares.attribute.Attribute.time_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time series of all the past values computed for the attribute.
+It is a Pandas Time Series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">pandas series</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.description">
+<code class="descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#antares.attribute.Attribute.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A short description of the attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.name">
+<code class="descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#antares.attribute.Attribute.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.context">
+<code class="descname">context</code><em class="property"> = ''</em><a class="headerlink" href="#antares.attribute.Attribute.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>The context that the attribute belongs to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.datatype">
+<code class="descname">datatype</code><em class="property"> = ''</em><a class="headerlink" href="#antares.attribute.Attribute.datatype" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data type of the attribute. The valid data type could be either
+a Python&#8217;s built-in type (boolean, int, float, string, timestamp) or a composite
+object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.annotation">
+<code class="descname">annotation</code><a class="headerlink" href="#antares.attribute.Attribute.annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotation for the most-recently computed value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.confidence">
+<code class="descname">confidence</code><a class="headerlink" href="#antares.attribute.Attribute.confidence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Confidence for the most-recently computed value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.enum_ints">
+<code class="descname">enum_ints</code><em class="property"> = None</em><a class="headerlink" href="#antares.attribute.Attribute.enum_ints" title="Permalink to this definition">¶</a></dt>
+<dd><p>A finite list of possible int values for the attribute. It is
+available only when datatype = &#8220;enumerated int&#8221;. In that case the
+attribute value can be only picked from this list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of ints</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="antares.attribute.Attribute.enum_strs">
+<code class="descname">enum_strs</code><em class="property"> = None</em><a class="headerlink" href="#antares.attribute.Attribute.enum_strs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A finite list of possible string values for the attribute. It is
+available only when datatype = &#8220;enumerated string&#8221;. In that case the
+attribute value can be only picked from this list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of strings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="antares.attribute.Attribute.timeDelimitedSeries">
+<code class="descname">timeDelimitedSeries</code><span class="sig-paren">(</span><em>start_time</em>, <em>end_time</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.attribute.Attribute.timeDelimitedSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>A time-delimited series of all the past values of the attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_time</strong> (<em>timestamp</em>) &#8211; the start of time series</li>
+<li><strong>end_time</strong> (<em>timestamp</em>) &#8211; the end of time series</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">time series of the attribute values from <cite>start_time</cite> to
+<cite>end_time</cite>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pandas Time Series</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../context/es_context.html"
+                        title="previous chapter">ES Context ( <code class="docutils literal"><span class="pre">antares.context.ESContext</span></code>)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="uncertain_float.html"
+                        title="next chapter">Uncertain Float ( <code class="docutils literal"><span class="pre">antares.attribute.UncertainFloat</span></code> )</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/attribute/attribute.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uncertain_float.html" title="Uncertain Float ( antares.attribute.UncertainFloat )"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../context/es_context.html" title="ES Context ( antares.context.ESContext)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Antares Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.4.
+    </div>
+  </body>
+</html>
