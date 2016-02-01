@@ -2,8 +2,8 @@
 Antares context module.
 """
 
-from antares.model.config import *
-from antares.model.attribute import *
+from antares.config import *
+from antares.attribute import *
 from io import StringIO
 import pymysql
 import pandas as pd
