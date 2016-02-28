@@ -143,17 +143,21 @@ Examples
 ************************
 Assumptions and Comments
 ************************
-* The atomic alerts (including Combo and Replica Alerts) can be processed entirely in parallel and entirely independently of one another.  If a stage requires Attributes from earlier stages, it will only be executed after those earlier stages (this in part relies on stage configuration).  Only one stage may be executed on each Alert at a given time.
+* Alerts are atomic; at any given point in time, only one stage will have access to a given alert and, redundancy concerns excepted, the alert will only exist in one state and in one place.  Combos and replicas use duplicates of other alerts rather than references to the original alert.
+
+* The alerts (including Combo and Replica Alerts) can be processed entirely in parallel and entirely independently of one another.  If a stage requires Attributes from earlier stages, it will only be executed after those earlier stages (this in part relies on stage configuration).  Only one stage may be executed on each Alert at a given time.
 
 NOTE: we decided to leave for later discussion the identification of structures of camera alerts within an image (e.g., a cluster of say 100 alerts within a small area). We can incorporate such identification as a separate analysis, outside that of the stages.  This may be done through the creation of Combo Alerts in stage processing, but algorithms independant of the stages may prove more effective.
 
 * Each Alert within a stage will have access only to Attributes within that Alert.
 
-* Values of an attribute in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  **Note: Discuss this point with Rick.  Make clear- stages may not change Parameters for alerts outside of that stage.**
+* Values of an attribute in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  Larger contexts' attributes will derive from the aggregate of the smaller contexts.
 
 * Each alert within a stage will write a new value for one or more attributes within multiple contexts.
 
-* Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to attributes in the CA context but not to the Image or AstroObject contexts.  **Which contexts are writable?  Just CA?**
+* ANTARES assumes that, once written at the end of a stage, a given attribute becomes final and immutable.  Subsequent stages do not change the value of the attribute.  This assumption may need to be reexamined as the stage code base grows beyond management.
+
+* Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to attributes in the CA context but not to the Image or AstroObject contexts.  For more details on which contexts are writable, see Rules & Constraints above.
 
 Note: the Antares Data Model document (https://docs.google.com/document/d/1xjYmhd8W9pyiwCBLA6o8mJeAz99Qbz9NvYFpICvYfSA/) had an example of
 
