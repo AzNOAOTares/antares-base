@@ -24,7 +24,7 @@ Data for processing is located in the Alert object(s).  Each Alert object organi
 
 Within the ANTARES pipeline, stage code accesses the Alerts, Contexts, and Attributes, as well as calling helper functions, through the ANTARES API.  At the beginning of a stage, ANTARES- as defined in the API- passes the Alert for processing (including any Contexts and Attributes associated with as well as Replicas in the case of a Combo Alert) to the stage code.  ANTARES then retrieves this data from the Locus Aggregated Database (which is initially populated with data from the LSST).  At the end of the stage, ANTARES stores data generated and used by stages in the Locus Aggregated Database for use in further stages.  The helper functions supplied in the API, among other things, allows the stage code to direct what to do with an alert- discard, mark as rare, or simply continue processing- following the stage.
 
-.. image:: ./_static/api_processing.png
+.. figure:: ./_static/api_processing.png
    
    This figure demonstrates how ANTARES processes stage code.  Here, workers are individual threads operating on nodes.  They receive alert data to process from the master node and execute stages on that data as shown here.
 
