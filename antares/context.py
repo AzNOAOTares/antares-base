@@ -13,7 +13,7 @@ from pandas.lib import Timestamp
 class Context:
     """
     Represents a context object in general.
-    It is the super class for all 11 concrete context objects.
+    It is the super class for all of the concrete context objects.
     """
 
     def __init__( self ):
@@ -253,7 +253,7 @@ class LAContext( Context ):
     """
     name = 'LA'
     """
-    Name of LA context.
+    Name of LA context ('LA').
 
     :type: string
     """
@@ -271,7 +271,7 @@ class LAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a time series of values. Here the values are tuples of magnitude and passbands.
+        :return: a time series of values.
         :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
         """
         pass
@@ -285,7 +285,7 @@ class LAContext( Context ):
         :param string context: the name of the context
         :param string attrname: the name of the attribute
 
-        :return: a time series of values. Here the values are tuples of magnitude and passbands.
+        :return: a time series of values.
         :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
         """
         ## Connect to mysql database.

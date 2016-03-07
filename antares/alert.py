@@ -119,11 +119,11 @@ class CameraAlert( Alert ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
             self.ID, self.ra, self.decl, self.decision, self.CA)
 
-    def hasReplicas( self ):
+    def numReplicas( self ):
         """
-        Check whether alert has replicas.
+        Check how many replicas a Camera Alert has.
 
-        :return: :py:data:`True` if alert has replicas, otherwise :py:data:`False`.
+        :return: The number of replicas generated from this alert.
         """
         if len(self.replicas) == 0:
             return False
@@ -238,9 +238,6 @@ class CameraAlert( Alert ):
         return cursor.fetchall()[0][0]
 
     def commit( self ):
-        """
-        Commit the alert data to Locus-aggregated Alerts DB.
-        """
         conn = GetDBConn()
         cur = conn.cursor()
 

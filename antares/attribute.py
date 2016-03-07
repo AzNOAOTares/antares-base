@@ -6,12 +6,13 @@ from datetime import datetime
 class Attribute:
     """
     Represents an attribute object. An attribute is initialized with its name,
-    the context it belongs to, the datatype of its value, a description and the scale of its value.
+    the context it belongs to, the datatype of its value, a description, and the scale of its value.
 
     :param: name(string): name of the attribute
     :param: context(:py:class:`antares.context.Context`): context the attribute belongs to
     :param: datatype(string): data type of the attribute value
     :param: scale(:py:class:`IntPair`): the range to which the attribute value scales
+    :param: scale(:py:class:`FloatPair`): the range to which the attribute value scales
     :param: description(string): description of the attribute
     """
 
@@ -21,14 +22,6 @@ class Attribute:
     It is a Numpy array.
 
     :type: numpy array
-    """
-
-    time_series = None
-    """
-    The time series of all the past values computed for the attribute.
-    It is a Pandas Time Series.
-
-    :type: pandas series
     """
 
     description = ""
