@@ -87,15 +87,6 @@ class Attribute:
     :type: list of ints
     """
 
-    #enum_strs = None
-    #"""
-    #A finite list of possible string values for the attribute. It is
-    #available only when datatype = "enumerated string". In that case the
-    #attribute value can be only picked from this list.
-
-    #:type: list of strings
-    #"""
-
     def __init__( self, name, atype, context, datatype, scale, description="" ):
         self.name = name
         self.atype = atype
