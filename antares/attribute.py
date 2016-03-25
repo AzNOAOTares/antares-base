@@ -5,13 +5,13 @@ from datetime import datetime
 
 class Attribute:
     """
-    Represents an attribute object. An attribute is initialized with its name,
+    This is the Attribute class. An attribute is initialized with its name,
     the context it belongs to, the datatype of its value, a description, and the scale of its value.
 
     :param: name(string): name of the attribute
     :param: context(:py:class:`antares.context.Context`): context the attribute belongs to
     :param: datatype(string): data type of the attribute value
-    :param: scale(:py:class:`IntPair`): the range to which the attribute value scales
+    :param: scale(:py:class:`IntPair` or :py:class:`FloatPair`): the range to which the attribute value scales
     :param: scale(:py:class:`FloatPair`): the range to which the attribute value scales
     :param: description(string): description of the attribute
     """
@@ -47,9 +47,12 @@ class Attribute:
 
     datatype = ""
     """
-    The data type of the attribute. The valid data type could be either
-    a Python's built-in type (boolean, int, float, string, timestamp) or a composite
-    object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod).
+    The data type of the attribute. The valid data type could be one of the following:
+    (1) a Python's built-in primitive type ("boolean", "int", "float", "string"), (2) a Python package
+    ("timestamp"), or (3) a proprietary, composite object provided by ANTARES
+    (:py:class:`antares.context.UncertainFloat`, :py:class:`antares.context.ProbabilityCurve`,
+    :py:class:`antares.context.IntPair`, :py:class:`antares.context.FloatPair`, :py:class:`antares.context.TimePeriod`)
+    as are documented within the API.
 
     :type: string
     """
@@ -84,14 +87,14 @@ class Attribute:
     :type: list of ints
     """
 
-    enum_strs = None
-    """
-    A finite list of possible string values for the attribute. It is
-    available only when datatype = "enumerated string". In that case the
-    attribute value can be only picked from this list.
+    #enum_strs = None
+    #"""
+    #A finite list of possible string values for the attribute. It is
+    #available only when datatype = "enumerated string". In that case the
+    #attribute value can be only picked from this list.
 
-    :type: list of strings
-    """
+    #:type: list of strings
+    #"""
 
     def __init__( self, name, atype, context, datatype, scale, description="" ):
         self.name = name
@@ -177,18 +180,19 @@ class Attribute:
 
         self._annotation = annotation
 
-    def timeDelimitedSeries( self, start_time, end_time ):
-        """
-        A time-delimited series of all the past values of the attribute.
+    #def timeDelimitedSeries( self, start_time, end_time ):
+    #    """
+    #    A time-delimited series of the past values of the attribute.  Returns a time series of the attribute
+    #    values from `start_time` to `end_time`, inclusive.
 
-        :param timestamp start_time: the start of time series
-        :param timestamp end_time: the end of time series
+    #    :param timestamp start_time: the start of time series
+    #    :param timestamp end_time: the end of time series
 
-        :return: time series of the attribute values from `start_time` to
-                  `end_time`.
-        :rtype: Pandas Time Series
-        """
-        pass
+    #    :return: time series of the attribute values from `start_time` to
+    #              `end_time`.
+    #    :rtype: Pandas Time Series
+    #    """
+    #    pass
 
     ## Attach getters & setters
     value = property( get_value, set_value )
@@ -196,7 +200,7 @@ class Attribute:
     annotation = property( get_annotation, set_annotation )
 
 class UncertainFloat:
-    """Represents a triple floats which is one of the data type of
+    """Represents a triple floats which is one of the data types available to
     :py:class:`antares.attribute.Attribute`. It consists of three float values, one being the expected
     value, a second being the lower std dev (one std dev below) and the
     third being the upper std dev (one std dev above)."""
@@ -222,18 +226,21 @@ class UncertainFloat:
     """
 
 class ProbabilityCurve:
-    """Represents a probability curve which is one of the data type of
-    :py:class:`Attribute`. It is used for variability."""
+    """Represents a probability curve which is one of the data types available to
+    :py:class:`Attribute`. It is used to encapsulate numerical values which have statistical certainty."""
     probabilities = None
     """
-    A list of probability values.
+    A set of variables which include the estimated value (any of the types available to Attribute) and
+    statistical measures (floats) describing the certainty of that value.  The exact nature of the statistical
+    measures depends on data type and desired statistical model, but generally include (for a numerical value)
+    mean, median, Q1, Q3, and standard deviation.
 
     :type: numpy array
     """
 
 class IntPair:
     """Represents a pair of int (providing lower and upper bounds)
-    which is one of the data type of :py:class:`Attribute`."""
+    which is one of the data types available to :py:class:`Attribute`."""
     lower_bound = None
     """
     The value of lower bound.
@@ -250,7 +257,7 @@ class IntPair:
 
 class FloatPair:
     """Represents a pair of float (providing lower and upper bounds)
-    which is one of the data type of :py:class:`Attribute`."""
+    which is one of the data types available to :py:class:`Attribute`."""
     lower_bound = None
     """
     The value of lower bound.
@@ -267,7 +274,7 @@ class FloatPair:
 
 class TimePeriod:
     """A derived attribute of the existence time for the
-    locus-aggregated alert. It is a data type of :py:class:`Attribute`."""
+    locus-aggregated alert. It is a data type available to :py:class:`Attribute`."""
     start = None
     """
     The start of the time period.

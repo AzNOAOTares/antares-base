@@ -249,7 +249,7 @@ class LAContext( Context ):
     Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under LA context.
 
-    :param: container_id(int): ID of the object that owns the context.
+    :param: container_id(int): ID of the object (the Alert) that owns the context.
     """
     name = 'LA'
     """
@@ -259,7 +259,7 @@ class LAContext( Context ):
     """
 
     def __init__( self, container_id ):
-        """'continer_id' is the ID of the object that owns the context."""
+        """'continer_id' is the ID of the object (the Alert) that owns the context."""
         self.container_id = container_id
 
     def assembleTimeSeries_replicas( self, context, attrname ):
