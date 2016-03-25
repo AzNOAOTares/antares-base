@@ -180,20 +180,6 @@ class Attribute:
 
         self._annotation = annotation
 
-    #def timeDelimitedSeries( self, start_time, end_time ):
-    #    """
-    #    A time-delimited series of the past values of the attribute.  Returns a time series of the attribute
-    #    values from `start_time` to `end_time`, inclusive.
-
-    #    :param timestamp start_time: the start of time series
-    #    :param timestamp end_time: the end of time series
-
-    #    :return: time series of the attribute values from `start_time` to
-    #              `end_time`.
-    #    :rtype: Pandas Time Series
-    #    """
-    #    pass
-
     ## Attach getters & setters
     value = property( get_value, set_value )
     confidence = property( get_confidence, set_confidence )
