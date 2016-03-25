@@ -364,9 +364,9 @@ class AlertReplica( CameraAlert ):
         self.parent.mark_as_rare( annotation )
 
     def commit( self ):
-        """
-        Commit the alert replica to Locus-aggregated Alerts DB.
-        """
+        #"""
+        #Commit the alert replica to Locus-aggregated Alerts DB.
+        #"""
         conn = GetDBConn()
         cur = conn.cursor()
         query = """select * from AlertReplica where ReplicaID={0}""".format(self.ID)
