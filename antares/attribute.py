@@ -6,7 +6,7 @@ from datetime import datetime
 class Attribute:
     """
     This is the Attribute class. An attribute is initialized with its name,
-    the context it belongs to, the datatype of its value, a description, and the scale of its value.
+    the context it belongs to, the datatype of its value, a scale, and the description of its value.
 
     :param: name(string): name of the attribute
     :param: context(:py:class:`antares.context.Context`): context the attribute belongs to
@@ -210,7 +210,8 @@ class ProbabilityCurve:
     A set of variables which include the estimated value (any of the types available to Attribute) and
     statistical measures (floats) describing the certainty of that value.  The exact nature of the statistical
     measures depends on data type and desired statistical model, but generally include (for a numerical value)
-    mean, median, Q1, Q3, and standard deviation.
+    mean, median, Q1, Q3, and standard deviation.  This type will be developed as it is used and more
+    statistical models are needed.
 
     :type: numpy array
     """

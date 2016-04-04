@@ -52,11 +52,11 @@ class CameraAlert( Alert ):
     A camera alert is associated with CA, IM, IR, IS and LA context objects.
     and is initialized with these 5 available contexts.
 
-    :param: :py:class:`antares.context.CAContext` CA: CA context object
-    :param: :py:class:`antares.context.IMContext` IM: IM context object
-    :param: :py:class:`antares.context.IRContext` IR: IR context object
-    :param: :py:class:`antares.context.ISContext` IS: IS context object
-    :param: :py:class:`antares.context.LAContext` LA: LA context object
+    :param: :py:class:`antares.context.CAContext` CA: CA context object that belongs to this alert.
+    :param: :py:class:`antares.context.IMContext` IM: IM context object that this alert is in.
+    :param: :py:class:`antares.context.IRContext` IR: IR context object that this alert is in.
+    :param: :py:class:`antares.context.ISContext` IS: IS context object that this alert is in.
+    :param: :py:class:`antares.context.LAContext` LA: LA context object that this alert is in.
     """
 
     CA = None
@@ -67,25 +67,25 @@ class CameraAlert( Alert ):
     """
 
     IM = None
-    """IM (Image) context object.
+    """IM (Image) context object that this alert is in.
 
     :type: :py:class:`antares.context.IMContext`
     """
 
     IR = None
-    """IR (Image RAFT) context object.
+    """IR (Image RAFT) context object that this alert is in.
 
     :type: :py:class:`antares.context.IRContext`
     """
 
     IS = None
-    """IS (Image Section) context object.
+    """IS (Image Section) context object that this alert is in.
 
     :type: :py:class:`antares.context.ISContext`
     """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object. LA attributes are always available.
+    """LA (Locus-aggregated Alert) context object that this alert is in. LA attributes are always available.
 
     :type: :py:class:`antares.context.LAContext`
     """
@@ -237,26 +237,26 @@ class CameraAlert( Alert ):
         cursor.execute( sql_query )
         return cursor.fetchall()[0][0]
 
-    def commit( self ):
-        conn = GetDBConn()
-        cur = conn.cursor()
+    #def commit( self ):
+    #    conn = GetDBConn()
+    #    cur = conn.cursor()
 
         # Nothing to commit for CA context now since all attributes are pre-loaded to DB.
         # self.CA.commit( cur )
 
-        if self.decision != 'NA':
+    #    if self.decision != 'NA':
             ## Update corresponding Alert table to reflect decision change.
             ## Connect to mysql database.
-            sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
-                self.decision, self.ID )
-            cur.execute( sql_update )
+    #        sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
+    #            self.decision, self.ID )
+    #        cur.execute( sql_update )
 
         # Replicas will be written to DB when they are created.
         # for replica in self.replicas:
         #    replica.commit()
 
-        conn.commit()
-        conn.close()
+    #    conn.commit()
+    #    conn.close()
 
 class AlertReplica( CameraAlert ):
     """

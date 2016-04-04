@@ -249,7 +249,7 @@ class LAContext( Context ):
     Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under LA context.
 
-    :param: container_id(int): ID of the object (the Alert) that owns the context.
+    :param: container_id(int): ID of the object (the Alert) that contains the context.
     """
     name = 'LA'
     """
