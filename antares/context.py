@@ -291,6 +291,7 @@ class LAContext( Context ):
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
 
+
 class EAContext( Context ):
     """
     Represents a EA (External Alert) context object which is a sub-class of :py:class:`Context`.
