@@ -262,19 +262,19 @@ class LAContext( Context ):
         """'continer_id' is the ID of the object (the Alert) that owns the context."""
         self.container_id = container_id
 
-    def assembleTimeSeries_replicas( self, context, attrname ):
-        """
-        The function assembles a time series of all the past values
-        of an attribute inside a context of the alert replicas associated
-        with a locus aggregated alert.
+    #def assembleTimeSeries_replicas( self, context, attrname ):
+    #    """
+    #    The function assembles a time series of all the past values
+    #    of an attribute inside a context of the alert replicas associated
+    #    with a locus aggregated alert.
 
-        :param string context: the name of the context
-        :param string attrname: the name of the attribute
+    #    :param string context: the name of the context
+    #    :param string attrname: the name of the attribute
 
-        :return: a time series of values.
-        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
-        """
-        pass
+    #    :return: a time series of values.
+    #    :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
+    #    """
+    #    pass
 
     def assembleTimeSeries( self, context, attrname ):
         """
@@ -282,7 +282,7 @@ class LAContext( Context ):
         of an attribute inside a context of the camera alerts associated
         with a locus aggregated alert.
 
-        :param string context: the name of the context
+        :param string context: the name of the context; valid contexts include the CA, IM, IR, and IS contexts.
         :param string attrname: the name of the attribute
 
         :return: a time series of values.
