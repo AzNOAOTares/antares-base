@@ -30,11 +30,10 @@ Camera Alert ( :py:class:`antares.alert.CameraAlert` )
 
       ~CameraAlert.createReplica
       ~CameraAlert.createCombo
-      ~CameraAlert.hasReplicas
+      ~CameraAlert.numReplicas
       ~CameraAlert.throttle
       ~CameraAlert.divert
       ~CameraAlert.mark_as_rare
-      ~CameraAlert.commit
 
    .. rubric:: Attributes Documentation
 
@@ -52,7 +51,5 @@ Camera Alert ( :py:class:`antares.alert.CameraAlert` )
    .. automethod:: divert
    .. automethod:: createReplica
    .. automethod:: createCombo
-   .. automethod:: hasReplicas
+   .. automethod:: numReplicas
    .. automethod:: mark_as_rare
-   .. automethod:: commit
-

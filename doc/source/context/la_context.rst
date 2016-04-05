@@ -22,8 +22,7 @@ LA Context ( :py:class:`antares.context.LAContext` )
 
    .. autosummary::
 
-      ~LAContext.assembleTimeSeries_replicas
-      ~LAContext.assembleTimeSeries_cameraAlerts
+      ~LAContext.assembleTimeSeries
 
    .. rubric:: Attributes Documentation
 
@@ -31,6 +30,5 @@ LA Context ( :py:class:`antares.context.LAContext` )
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: assembleTimeSeries_replicas
-   .. automethod:: assembleTimeSeries_cameraAlerts
+   .. automethod:: assembleTimeSeries
 
