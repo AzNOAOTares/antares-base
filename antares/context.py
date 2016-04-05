@@ -268,7 +268,8 @@ class LAContext( Context ):
         of an attribute inside a context of the camera alerts associated
         with a locus aggregated alert.
 
-        :param string context: the name of the context; valid contexts include the CA, IM, IR, and IS contexts.
+        :param string context: the name of the context; valid contexts for this method include the CA, IM, IR, 
+        and IS contexts.
         :param string attrname: the name of the attribute
 
         :return: a time series of values.
