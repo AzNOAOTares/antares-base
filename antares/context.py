@@ -266,7 +266,8 @@ class LAContext( Context ):
         """
         The function assembles a time series of all the past values
         of an attribute inside a context of the camera alerts associated
-        with a locus aggregated alert.
+        with a locus aggregated alert.  Time series may be generated from
+        CA, IM, IR, and IS contexts.
 
         :param string context: the name of the context; valid contexts for this method include the CA, IM, IR, 
         and IS contexts.
