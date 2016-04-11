@@ -34,7 +34,7 @@ class CAContext( Context ):
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CA context.
 
-    :param: container_id(int): ID of the object that owns the context.
+    :param: container_id(int): ID of the object that owns the context, which will be a LAContext.
     """
     name = 'CA'
     """
@@ -113,7 +113,7 @@ class ARContext( Context ):
     Represents a AR (Alert Replica) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AR context.
 
-    :param: container_id(int): ID of the object that owns the context.
+    :param: container_id(int): ID of the object that owns the context, which is a CAContext.
     """
     name = 'AR'
     """Name of AR context."""
@@ -155,6 +155,7 @@ class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CB context.
+    :param: container_id(int): ID of the object that owns the context, which is a CAContext.
     """
     name = 'CB'
     """
@@ -324,6 +325,7 @@ class ISContext( Context ):
     """
     Represents a IS (Image Section) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IS context.
+    :param: container_id(int): ID of the object that owns the context, which is a IMContext.
     """
     name = 'IS'
     """
@@ -337,6 +339,7 @@ class IRContext( Context ):
     """
     Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IR context.
+    :param: container_id(int): ID of the object that owns the context, which is a ISContext.
     """
     name = 'IR'
     """
