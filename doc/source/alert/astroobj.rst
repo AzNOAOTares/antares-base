@@ -16,6 +16,10 @@ Astro Object ( :py:class:`antares.alert.AstroObject` )
 
    .. autosummary::
 
+      ~AstroObject.AO
+      ~AstroObject.PS
+      ~AstroObject.ES
+
    .. rubric:: Methods Summary
 
    .. autosummary::

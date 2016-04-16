@@ -17,6 +17,7 @@ Alert Combo ( :py:class:`antares.alert.AlertCombo` )
    .. autosummary::
 
       ~AlertCombo.CB
+      ~AlertCombo.replicas
 
    .. rubric:: Methods Summary
 

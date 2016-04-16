@@ -93,6 +93,14 @@ class CAContext( Context ):
         """
         pass
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is a LAContext in this case.
+        :rtype: LAContext
+        """
+        pass
+
+
     ## Flush attriubtes under CA to DB if their values is not synced.
     def commit( self, cur ):
         for attrname in CA_derived_attributes.keys():
@@ -150,6 +158,13 @@ class ARContext( Context ):
                 values({0},"{1}",{2},"{3}")""".format( self.container_id,'R' , attr.value, attr.name )
                 cur.execute( sql_insert )
                 #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is a CAContext in this case.
+        :rtype: CAContext
+        """
+        pass
 
 class CBContext( Context ):
     """
@@ -244,6 +259,13 @@ class AOContext( Context ):
                 cur.execute( sql_insert )
                 #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an AstroObject in this case.
+        :rtype: AstroObject
+        """
+        pass
+
 
 class LAContext( Context ):
     """
@@ -263,7 +285,7 @@ class LAContext( Context ):
         """'continer_id' is the ID of the object (the Alert) that owns the context."""
         self.container_id = container_id
 
-    def assembleTimeSeries( self, context, attrname ):
+    def assembleTimeSeries( self, context, attrname, start_time, end_time ):
         """
         The function assembles a time series of all the past values
         of an attribute inside a context of the camera alerts associated
@@ -293,6 +315,13 @@ class LAContext( Context ):
 
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an Alert in this case.
+        :rtype: Alert
+        """
+        pass
 
 
 class EAContext( Context ):

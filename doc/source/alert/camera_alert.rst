@@ -22,6 +22,7 @@ Camera Alert ( :py:class:`antares.alert.CameraAlert` )
       ~CameraAlert.IR
       ~CameraAlert.IS
       ~CameraAlert.replicas
+      ~CameraAlert.combos
       ~CameraAlert.annotation
 
    .. rubric:: Methods Summary

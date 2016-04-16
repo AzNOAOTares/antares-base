@@ -97,6 +97,13 @@ class CameraAlert( Alert ):
     :type: list
     """
 
+    combos = None
+    """
+    A list of the alert combos created by camera alert.
+
+    :type: list
+    """
+
     annotation = ''
     """
     Annotation of the camera alert.
@@ -281,7 +288,7 @@ class AlertReplica( CameraAlert ):
     """
 
     AO = None
-    """AO (Astro Object) context object. AO attributes are available if
+    """AO (Astro Object) context object (optional). AO attributes are available if
     ``AR.HasAstroObject`` = :py:data:`True`.
 
     :type: :py:class:`antares.context.AOContext`
@@ -420,6 +427,13 @@ class AlertCombo( CameraAlert ):
     :type: :py:class:`antares.context.CBContext`
     """
 
+    replicas = None
+    """
+    A list of the alert replicas created by the combo.
+
+    :type: list
+    """
+
     def __init__( self, combo_id, parent, replicas ):
         """Combo is initialized with a set of alert replicas."""
         self.combo_id = combo_id
@@ -433,7 +447,27 @@ class AlertCombo( CameraAlert ):
 
 class AstroObject:
     """
-    Represents an astro object.
+    Represents an astro object.  AstroObjects have an AO context and may have a PS or ES context(s).
+    """
+
+    AO = None
+    """AO (AstroObject) context object.
+
+    :type: :py:class:`antares.context.AOContext`
+    """
+
+    ES = None
+    """ES (Extended Source) context object. ES attributes are available only
+    if ``AO.kind = "extended source"``.
+
+    :type: :py:class:`antares.context.ESContext`
+    """
+
+    PS = None
+    """PS (Point Source) context object. PS attributes are available only
+    if ``AO.kind = "point source"``.
+
+    :type: :py:class:`antares.context.PSContext`
     """
 
     def __init__( self ):
