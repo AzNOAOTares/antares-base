@@ -100,7 +100,7 @@ class CAContext( Context ):
 
         :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
 
-        :rtype: Alert
+        :rtype: CameraAlert
         """
         pass
 
@@ -166,6 +166,9 @@ class ARContext( Context ):
     def getContainer( self ):
         """
         This returns the Context's container, which is a CAContext in this case.
+
+        :return: The parent context.
+
         :rtype: CAContext
         """
         pass
@@ -276,6 +279,9 @@ class AOContext( Context ):
     def getContainer( self ):
         """
         This returns the Context's container, which is an AstroObject in this case.
+        
+        :return: The parent AstroObject.
+
         :rtype: AstroObject
         """
         pass
@@ -478,6 +484,9 @@ class PSContext( Context ):
     def getContainer( self ):
         """
         This returns the Context's container, which is an AstroObject in this case.
+        
+        :return: The parent AstroObject.
+
         :rtype: AstroObject
         """
         pass
@@ -499,6 +508,9 @@ class ESContext( Context ):
     def getContainer( self ):
         """
         This returns the Context's container, which is an AstroObject in this case.
+        
+        :return: The parent AstroObject.
+
         :rtype: AstroObject
         """
         pass
