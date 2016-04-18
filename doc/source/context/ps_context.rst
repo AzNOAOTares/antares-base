@@ -22,8 +22,12 @@ PS Context ( :py:class:`antares.context.PSContext`)
 
    .. autosummary::
 
+      ~PSContext.getContainer
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
    .. rubric:: Methods Documentation
+
+   .. automethod:: getContainer

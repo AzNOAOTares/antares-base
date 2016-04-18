@@ -29,6 +29,7 @@ class Context:
         pass
 
 
+
 class CAContext( Context ):
     """
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
@@ -93,10 +94,13 @@ class CAContext( Context ):
         """
         pass
 
-    def getContainer( self ):
+    def getAlert( self ):
         """
-        This returns the Context's container, which is a LAContext in this case.
-        :rtype: LAContext
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+
+        :rtype: Alert
         """
         pass
 
@@ -199,6 +203,16 @@ class CBContext( Context ):
         """
         pass
 
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an Alert Combo in this case.
+
+        :rtype: Alert
+        """
+        pass
+
 class AOContext( Context ):
     """
     Represents a AO (Astro Object) context object which is a sub-class of :py:class:`Context`.
@@ -285,7 +299,7 @@ class LAContext( Context ):
         """'continer_id' is the ID of the object (the Alert) that owns the context."""
         self.container_id = container_id
 
-    def assembleTimeSeries( self, context, attrname, start_time, end_time ):
+    def assembleTimeSeriesAttribute( self, context, attrname, start_time, end_time ):
         """
         The function assembles a time series of all the past values
         of an attribute inside a context of the camera alerts associated
@@ -316,10 +330,38 @@ class LAContext( Context ):
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
 
-    def getContainer( self ):
+    def assembleTimeSeriesContext( self, context, start_time, end_time ):
         """
-        This returns the Context's container, which is an Alert in this case.
-        :rtype: Alert
+        The function assembles a time series of all the past contexts,
+        which hold past attributes associated with those contexts.
+        Time series may be generated from
+        CA, IM, IR, and IS contexts.
+
+        :param string context: the name of the context; valid contexts for this method include the CA, IM, IR, 
+        and IS contexts.
+
+        :return: a time series of values.
+        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
+        """
+        pass
+
+    def assembleTimeSeriesAlert( self, start_time, end_time ):
+        """
+        The function assembles a time series of all the past alerts,
+        which hold past contexts associated with those alerts.
+
+        :return: a time series of values.
+        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
+        """
+        pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+
+        :rtype: CameraAlert
         """
         pass
 
@@ -337,6 +379,17 @@ class EAContext( Context ):
     """
     pass
 
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an External Alert in this case.
+
+        :rtype: ExternalAlert
+        """
+        pass
+
+
 class IMContext( Context ):
     """
     Represents a IM (Image) context object which is a sub-class of :py:class:`Context`.
@@ -349,6 +402,16 @@ class IMContext( Context ):
     :type: string
     """
     pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+
+        :rtype: CameraAlert
+        """
+        pass
 
 class ISContext( Context ):
     """
@@ -364,6 +427,16 @@ class ISContext( Context ):
     """
     pass
 
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+
+        :rtype: CameraAlert
+        """
+        pass
+
 class IRContext( Context ):
     """
     Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
@@ -377,6 +450,16 @@ class IRContext( Context ):
     :type: string
     """
     pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+
+        :rtype: CameraAlert
+        """
+        pass
 
 class PSContext( Context ):
     """
@@ -392,6 +475,13 @@ class PSContext( Context ):
     """
     pass
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an AstroObject in this case.
+        :rtype: AstroObject
+        """
+        pass
+
 class ESContext( Context ):
     """
     Represents a ES (Extended-source AstroObject) context object
@@ -405,3 +495,10 @@ class ESContext( Context ):
     :type: string
     """
     pass
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an AstroObject in this case.
+        :rtype: AstroObject
+        """
+        pass

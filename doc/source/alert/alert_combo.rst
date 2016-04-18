@@ -27,5 +27,7 @@ Alert Combo ( :py:class:`antares.alert.AlertCombo` )
 
    .. autoattribute:: CB
 
+   .. autoattribute:: replicas
+
    .. rubric:: Methods Documentation
 

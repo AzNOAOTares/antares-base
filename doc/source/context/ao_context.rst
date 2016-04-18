@@ -22,8 +22,12 @@ AO Context ( :py:class:`antares.context.AOContext` )
 
    .. autosummary::
 
+      ~AOContext.getContainer
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
    .. rubric:: Methods Documentation
+
+   .. automethod:: getContainer

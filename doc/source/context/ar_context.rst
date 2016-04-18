@@ -22,8 +22,12 @@ AR Context ( :py:class:`antares.context.ARContext`)
 
    .. autosummary::
 
+      ~ARContext.getContainer
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
    .. rubric:: Methods Documentation
+
+   .. automethod:: getContainer
