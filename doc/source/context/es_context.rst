@@ -24,6 +24,8 @@ ES Context ( :py:class:`antares.context.ESContext`)
 
       ~ESContext.getContainer
 
+      ~ESContext.getAlert
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -31,3 +33,5 @@ ES Context ( :py:class:`antares.context.ESContext`)
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
+
+   .. automethod:: getAlert

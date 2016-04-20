@@ -25,6 +25,8 @@ CB Context ( :py:class:`antares.context.CBContext` )
 
       ~CBContext.assembleVector_replicas
 
+      ~CBContext.getContainer
+
       ~CBContext.getAlert
 
    .. rubric:: Attributes Documentation
@@ -35,5 +37,7 @@ CB Context ( :py:class:`antares.context.CBContext` )
    .. rubric:: Methods Documentation
 
    .. automethod:: assembleVector_replicas
+
+   .. automethod:: getContainer
 
    .. automethod:: getAlert

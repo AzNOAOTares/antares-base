@@ -24,6 +24,8 @@ AO Context ( :py:class:`antares.context.AOContext` )
 
       ~AOContext.getContainer
 
+      ~AOContext.getAlert
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -31,3 +33,5 @@ AO Context ( :py:class:`antares.context.AOContext` )
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
+
+   .. automethod:: getAlert

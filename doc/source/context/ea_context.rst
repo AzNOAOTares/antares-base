@@ -22,6 +22,8 @@ EA Context ( :py:class:`antares.context.EAContext`)
 
    .. autosummary::
 
+      ~LAContext.getContainer
+
       ~LAContext.getAlert
 
    .. rubric:: Attributes Documentation
@@ -29,5 +31,7 @@ EA Context ( :py:class:`antares.context.EAContext`)
    .. autoattribute:: name
 
    .. rubric:: Methods Documentation
+
+   .. automethod:: getContainer
 
    .. automethod:: getAlert

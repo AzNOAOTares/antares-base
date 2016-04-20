@@ -98,7 +98,17 @@ class CAContext( Context ):
         """
         Returns the Alert that holds the Context.
 
-        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+        :return: Returns the Alert that holds the Context, which is a CameraAlert in this case.
+
+        :rtype: CameraAlert
+        """
+        pass
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is a CameraAlert in this case.
+        
+        :return: The parent CameraAlert.
 
         :rtype: CameraAlert
         """
@@ -173,6 +183,16 @@ class ARContext( Context ):
         """
         pass
 
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an AlertReplica in this case.
+
+        :rtype: AlertReplica
+        """
+        pass
+
 class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
@@ -210,9 +230,19 @@ class CBContext( Context ):
         """
         Returns the Alert that holds the Context.
 
-        :return: Returns the Alert that holds the Context, which is an Alert Combo in this case.
+        :return: Returns the Alert that holds the Context, which is an AlertCombo in this case.
 
-        :rtype: Alert
+        :rtype: AlertCombo
+        """
+        pass
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is a CAContext in this case.
+
+        :return: The parent context.
+
+        :rtype: CAContext
         """
         pass
 
@@ -281,6 +311,16 @@ class AOContext( Context ):
         This returns the Context's container, which is an AstroObject in this case.
         
         :return: The parent AstroObject.
+
+        :rtype: AstroObject
+        """
+        pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
 
         :rtype: AstroObject
         """
@@ -365,9 +405,19 @@ class LAContext( Context ):
         """
         Returns the Alert that holds the Context.
 
-        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+        :return: Returns the Alert that holds the Context, which is an Alert in this case.
 
-        :rtype: CameraAlert
+        :rtype: Alert
+        """
+        pass
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an Alert in this case.
+
+        :return: The parent Alert.
+
+        :rtype: Alert
         """
         pass
 
@@ -395,6 +445,16 @@ class EAContext( Context ):
         """
         pass
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an ExternalAlert in this case.
+
+        :return: The parent Alert.
+
+        :rtype: ExternalAlert
+        """
+        pass
+
 
 class IMContext( Context ):
     """
@@ -413,7 +473,17 @@ class IMContext( Context ):
         """
         Returns the Alert that holds the Context.
 
-        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
+        :return: Returns the Alert that holds the Context, which is a CameraAlert in this case.
+
+        :rtype: CameraAlert
+        """
+        pass
+
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is a CameraAlert in this case.
+
+        :return: The parent Alert.
 
         :rtype: CameraAlert
         """
@@ -423,6 +493,7 @@ class ISContext( Context ):
     """
     Represents a IS (Image Section) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IS context.
+
     :param: container_id(int): ID of the object that owns the context, which is a IMContext.
     """
     name = 'IS'
@@ -443,11 +514,21 @@ class ISContext( Context ):
         """
         pass
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an IMContext in this case.
+
+        :return: The parent context.
+
+        :rtype: IMContext
+        """
+        pass
+
 class IRContext( Context ):
     """
     Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IR context.
-    :param: container_id(int): ID of the object that owns the context, which is a ISContext.
+    :param: container_id(int): ID of the object that owns the context, which is an ISContext.
     """
     name = 'IR'
     """
@@ -467,6 +548,16 @@ class IRContext( Context ):
         """
         pass
 
+    def getContainer( self ):
+        """
+        This returns the Context's container, which is an ISContext in this case.
+
+        :return: The parent context.
+
+        :rtype: ISContext
+        """
+        pass
+
 class PSContext( Context ):
     """
     Represents a PS (Point-source AstroObject) context object
@@ -483,9 +574,19 @@ class PSContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is an AstroObject in this case.
+        This returns the Context's container, which is an AOContext in this case.
         
-        :return: The parent AstroObject.
+        :return: The parent Context.
+
+        :rtype: AOContext
+        """
+        pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
 
         :rtype: AstroObject
         """
@@ -507,9 +608,19 @@ class ESContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is an AstroObject in this case.
+        This returns the Context's container, which is an AOContext in this case.
         
-        :return: The parent AstroObject.
+        :return: The parent Context.
+
+        :rtype: AOContext
+        """
+        pass
+
+    def getAlert( self ):
+        """
+        Returns the Alert that holds the Context.
+
+        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
 
         :rtype: AstroObject
         """

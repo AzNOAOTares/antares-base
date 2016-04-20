@@ -20,7 +20,6 @@ Context ( :py:class:`antares.context.Context` )
 
    .. autosummary::
 
-      ~Context.isPresent
       ~Context.isValidAttribute
 
    .. rubric:: Attributes Documentation

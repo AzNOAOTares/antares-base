@@ -24,6 +24,8 @@ PS Context ( :py:class:`antares.context.PSContext`)
 
       ~PSContext.getContainer
 
+      ~PSContext.getAlert
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -31,3 +33,5 @@ PS Context ( :py:class:`antares.context.PSContext`)
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
+
+   .. automethod:: getAlert
