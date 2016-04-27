@@ -24,8 +24,6 @@ AR Context ( :py:class:`antares.context.ARContext`)
 
       ~ARContext.getContainer
 
-      ~ARContext.getAlert
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -33,5 +31,3 @@ AR Context ( :py:class:`antares.context.ARContext`)
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
-
-   .. automethod:: getAlert

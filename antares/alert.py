@@ -52,16 +52,20 @@ class CameraAlert( Alert ):
     A camera alert is associated with CA, IM, IR, IS and LA context objects.
     and is initialized with these 5 available contexts.
 
-    :param: :py:class:`antares.context.CAContext` CA: CA context object that belongs to this alert.
-    :param: :py:class:`antares.context.IMContext` IM: IM context object that this alert is in.
-    :param: :py:class:`antares.context.IRContext` IR: IR context object that this alert is in.
-    :param: :py:class:`antares.context.ISContext` IS: IS context object that this alert is in.
-    :param: :py:class:`antares.context.LAContext` LA: LA context object that this alert is in.
+    :param: :py:class:`int` alert_id: The unique ID of this Camera Alert.
+    :param: :py:class:`float` ra: The right ascension of the Camera Alert's observation, in radians.
+    :param: :py:class:`float` decl: The declination of the Camera Alert's observation, in radians.
+    :param: :py:class:`antares.context.CAContext` CA: The CAContext which this Camera Alert contains.
+    :param: :py:class:`int` decision: The decision whether to divert, mark as rare, or undecided.
+    :param: :py:class:`int` locus_id: The ID of the locus to which this Camera Alert belongs.
+    :param: :py:class:`antares.context.CAContext` IM: The IMContext which this Camera Alert has.
+    :param: :py:class:`antares.context.CAContext` IR: The IRContext which this Camera Alert has.
+    :param: :py:class:`antares.context.CAContext` IS: The ISContext which this Camera Alert has.
     """
 
     CA = None
     """
-    CA (Camera Alert) context object. CA attributes are always available.
+    CA (Camera Alert) context object. CA attributes are always available.  The Camera Alert contains its CAContext.
 
     :type: :py:class:`antares.context.CAContext`
     """
@@ -85,28 +89,28 @@ class CameraAlert( Alert ):
     """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object that this alert is in. LA attributes are always available.
+    """LA (Locus-aggregated Alert) context object that this alert is in. LA attributes are always available.  The LAContext owns this CameraAlert.
 
     :type: :py:class:`antares.context.LAContext`
     """
 
     replicas = None
     """
-    A list of the alert replicas created by camera alert.
+    A list of the alert replicas created by camera alert.  The Camera Alert contains these Replicas.
 
     :type: list
     """
 
     combos = None
     """
-    A list of the alert combos created by camera alert.
+    A list of the alert combos created by camera alert.  The Camera Alert contains these Combos.
 
     :type: list
     """
 
-    annotation = ''
+    annotation = None
     """
-    Annotation of the camera alert.
+    The annotation notes the cause for diverting or marking as rare.
 
     :type: string
     """
@@ -281,7 +285,7 @@ class AlertReplica( CameraAlert ):
 
     AR = None
     """
-    AR (Alert Replica) context object.
+    AR (Alert Replica) context object.  The Alert Replica contains the ARContext.
     AR attributes are only accessible during per-replica processing.
 
     :type: :py:class:`antares.context.ARContext`
@@ -417,11 +421,13 @@ class AlertCombo( CameraAlert ):
     an alert combo is also associated with CB context objects.
     Combo is initialized with a set of alert replicas.
 
+    :param: combo_id (:py:class:`int`): The unique ID of the Combo.
+    :param: parent (:py:class:`CAContext`): The CAContext which contains this Combo.
     :param: alert_replicas (:py:class:`list`): a list of :py:class:`AlertReplica`
     """
 
     CB = None
-    """CB (Combo) context object. CB attributes are only visible during
+    """CB (Combo) context object. The Alert Combo contains the CBContext. CB attributes are only visible during
     per-combo processing.
 
     :type: :py:class:`antares.context.CBContext`

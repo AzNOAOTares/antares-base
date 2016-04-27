@@ -24,13 +24,7 @@ LA Context ( :py:class:`antares.context.LAContext` )
 
       ~LAContext.assembleTimeSeriesAttribute
 
-      ~LAContext.assembleTimeSeriesContext
-
-      ~LAContext.assembleTimeSeriesAlert
-
       ~LAContext.getContainer
-
-      ~LAContext.getAlert
 
    .. rubric:: Attributes Documentation
 
@@ -40,11 +34,5 @@ LA Context ( :py:class:`antares.context.LAContext` )
 
    .. automethod:: assembleTimeSeriesAttribute
 
-   .. automethod:: assembleTimeSeriesContext
-
-   .. automethod:: assembleTimeSeriesAlert
-
    .. automethod:: getContainer
-
-   .. automethod:: getAlert
 

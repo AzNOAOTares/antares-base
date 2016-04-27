@@ -24,8 +24,6 @@ IR Context ( :py:class:`antares.context.IRContext`)
 
       ~IRContext.getContainer
 
-      ~IRContext.getAlert
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -33,5 +31,3 @@ IR Context ( :py:class:`antares.context.IRContext`)
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
-
-   .. automethod:: getAlert

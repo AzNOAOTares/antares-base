@@ -28,8 +28,6 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Attribut
 
       ~CAContext.getContainer
 
-      ~CAContext.getAlert
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -39,5 +37,3 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Attribut
    .. automethod:: assembleVector
 
    .. automethod:: getContainer
-
-   .. automethod:: getAlert

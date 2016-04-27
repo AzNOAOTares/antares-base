@@ -27,8 +27,6 @@ CB Context ( :py:class:`antares.context.CBContext` )
 
       ~CBContext.getContainer
 
-      ~CBContext.getAlert
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -39,5 +37,3 @@ CB Context ( :py:class:`antares.context.CBContext` )
    .. automethod:: assembleVector_replicas
 
    .. automethod:: getContainer
-
-   .. automethod:: getAlert

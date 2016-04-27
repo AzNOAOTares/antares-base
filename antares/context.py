@@ -35,7 +35,7 @@ class CAContext( Context ):
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CA context.
 
-    :param: container_id(int): ID of the object that owns the context, which will be a LAContext.
+    :param: container_id(int): ID of the object that owns the context, which will be a :py:class:`CameraAlert`.
     """
     name = 'CA'
     """
@@ -94,23 +94,13 @@ class CAContext( Context ):
         """
         pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is a CameraAlert in this case.
-
-        :rtype: CameraAlert
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is a CameraAlert in this case.
+        This returns the Context's container, which is a :py:class:`CameraAlert` in this case.
         
-        :return: The parent CameraAlert.
+        :return: The parent :py:class:`CameraAlert`.
 
-        :rtype: CameraAlert
+        :rtype: :py:class:`CameraAlert`
         """
         pass
 
@@ -135,7 +125,7 @@ class ARContext( Context ):
     Represents a AR (Alert Replica) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AR context.
 
-    :param: container_id(int): ID of the object that owns the context, which is a CAContext.
+    :param: container_id(int): ID of the object that owns the context, which is a :py:class:`AlertReplica`.
     """
     name = 'AR'
     """Name of AR context."""
@@ -175,21 +165,11 @@ class ARContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is a CAContext in this case.
+        This returns the Context's container, which is a :py:class:`AlertReplica` in this case.
 
-        :return: The parent context.
+        :return: The parent :py:class:`AlertReplica`.
 
-        :rtype: CAContext
-        """
-        pass
-
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an AlertReplica in this case.
-
-        :rtype: AlertReplica
+        :rtype: :py:class:`AlertReplica`
         """
         pass
 
@@ -197,7 +177,7 @@ class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CB context.
-    :param: container_id(int): ID of the object that owns the context, which is a CAContext.
+    :param: container_id(int): ID of the object that owns the context, which is a :py:class:`AlertCombo`.
     """
     name = 'CB'
     """
@@ -226,23 +206,13 @@ class CBContext( Context ):
         """
         pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an AlertCombo in this case.
-
-        :rtype: AlertCombo
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is a CAContext in this case.
+        This returns the Context's container, which is a :py:class:`AlertCombo` in this case.
 
-        :return: The parent context.
+        :return: The parent :py:class:`AlertCombo`.
 
-        :rtype: CAContext
+        :rtype: :py:class:`AlertCombo`
         """
         pass
 
@@ -251,7 +221,7 @@ class AOContext( Context ):
     Represents a AO (Astro Object) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under AO context.
 
-    :param: astro_id(int): ID of the astro object that owns the context.
+    :param: astro_id(int): ID of the :py:class:`AstroObject` that owns the context.
     """
     name = 'AO'
     """
@@ -308,21 +278,11 @@ class AOContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is an AstroObject in this case.
+        This returns the Context's container, which is an :py:class:`AstroObject` in this case.
         
-        :return: The parent AstroObject.
+        :return: The parent :py:class:`AstroObject`.
 
-        :rtype: AstroObject
-        """
-        pass
-
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
-
-        :rtype: AstroObject
+        :rtype: :py:class:`AstroObject`
         """
         pass
 
@@ -332,7 +292,7 @@ class LAContext( Context ):
     Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under LA context.
 
-    :param: container_id(int): ID of the object (the Alert) that contains the context.
+    :param: container_id(int): ID of the object (the Alert) that contains the context. **WHAT IS THE CONTAINER?**
     """
     name = 'LA'
     """
@@ -376,41 +336,6 @@ class LAContext( Context ):
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
 
-    def assembleTimeSeriesContext( self, context, start_time, end_time ):
-        """
-        The function assembles a time series of all the past contexts,
-        which hold past attributes associated with those contexts.
-        Time series may be generated from
-        CA, IM, IR, and IS contexts.
-
-        :param string context: the name of the context; valid contexts for this method include the CA, IM, IR, 
-        and IS contexts.
-
-        :return: a time series of values.
-        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
-        """
-        pass
-
-    def assembleTimeSeriesAlert( self, start_time, end_time ):
-        """
-        The function assembles a time series of all the past alerts,
-        which hold past contexts associated with those alerts.
-
-        :return: a time series of values.
-        :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
-        """
-        pass
-
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an Alert in this case.
-
-        :rtype: Alert
-        """
-        pass
-
     def getContainer( self ):
         """
         This returns the Context's container, which is an Alert in this case.
@@ -435,23 +360,13 @@ class EAContext( Context ):
     """
     pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an External Alert in this case.
-
-        :rtype: ExternalAlert
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is an ExternalAlert in this case.
+        This returns the Context's container, which is an :py:class:`ExternalAlert` in this case.
 
-        :return: The parent Alert.
+        :return: The parent :py:class:`ExternalAlert`.
 
-        :rtype: ExternalAlert
+        :rtype: :py:class:`ExternalAlert`
         """
         pass
 
@@ -469,23 +384,13 @@ class IMContext( Context ):
     """
     pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is a CameraAlert in this case.
-
-        :rtype: CameraAlert
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is a CameraAlert in this case.
+        This returns the Context's container, which is a :py:class:`CAContext` in this case.
 
-        :return: The parent Alert.
+        :return: The parent :py:class:`CAContext`.
 
-        :rtype: CameraAlert
+        :rtype: :py:class:`CAContext`
         """
         pass
 
@@ -494,7 +399,7 @@ class ISContext( Context ):
     Represents a IS (Image Section) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IS context.
 
-    :param: container_id(int): ID of the object that owns the context, which is a IMContext.
+    :param: container_id(int): ID of the object that contains the context, which is an :py:class:`IMContext`.
     """
     name = 'IS'
     """
@@ -504,23 +409,13 @@ class ISContext( Context ):
     """
     pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
-
-        :rtype: CameraAlert
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is an IMContext in this case.
+        This returns the Context's container, which is an :py:class:`IMContext` in this case.
 
-        :return: The parent context.
+        :return: The parent :py:class:`IMContext`.
 
-        :rtype: IMContext
+        :rtype: :py:class:`IMContext`
         """
         pass
 
@@ -528,7 +423,7 @@ class IRContext( Context ):
     """
     Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under IR context.
-    :param: container_id(int): ID of the object that owns the context, which is an ISContext.
+    :param: container_id(int): ID of the object that owns the context, which is an :py:class:`ISContext`.
     """
     name = 'IR'
     """
@@ -538,23 +433,13 @@ class IRContext( Context ):
     """
     pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is a Camera Alert in this case.
-
-        :rtype: CameraAlert
-        """
-        pass
-
     def getContainer( self ):
         """
-        This returns the Context's container, which is an ISContext in this case.
+        This returns the Context's container, which is an :py:class:`ISContext` in this case.
 
-        :return: The parent context.
+        :return: The parent :py:class:`ISContext`.
 
-        :rtype: ISContext
+        :rtype: :py:class:`ISContext`
         """
         pass
 
@@ -574,21 +459,11 @@ class PSContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is an AOContext in this case.
+        This returns the Context's container, which is an :py:class:`AOContext` in this case.
         
-        :return: The parent Context.
+        :return: The parent :py:class:`AOContext`.
 
-        :rtype: AOContext
-        """
-        pass
-
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
-
-        :rtype: AstroObject
+        :rtype: :py:class:`AOContext`
         """
         pass
 
@@ -608,20 +483,11 @@ class ESContext( Context ):
 
     def getContainer( self ):
         """
-        This returns the Context's container, which is an AOContext in this case.
+        This returns the Context's container, which is an :py:class:`AOContext` in this case.
         
-        :return: The parent Context.
+        :return: The parent :py:class:`AOContext`.
 
-        :rtype: AOContext
+        :rtype: :py:class:`AOContext`
         """
         pass
 
-    def getAlert( self ):
-        """
-        Returns the Alert that holds the Context.
-
-        :return: Returns the Alert that holds the Context, which is an AstroObject in this case.
-
-        :rtype: AstroObject
-        """
-        pass

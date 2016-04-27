@@ -24,8 +24,6 @@ IM Context ( :py:class:`antares.context.IMContext`)
 
       ~IMContext.getContainer
 
-      ~IMContext.getAlert
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
@@ -33,5 +31,3 @@ IM Context ( :py:class:`antares.context.IMContext`)
    .. rubric:: Methods Documentation
 
    .. automethod:: getContainer
-
-   .. automethod:: getAlert
