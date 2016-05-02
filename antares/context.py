@@ -35,13 +35,20 @@ class CAContext( Context ):
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
     It contains all the attributes defined under CA context.
 
-    :param: container_id(int): ID of the object that owns the context, which will be a :py:class:`CameraAlert`.
+    :param: container_id(int): ID of the object that contains the context, which will be a :py:class:`CameraAlert`.
     """
     name = 'CA'
     """
     Name of CA context.
 
     :type: string
+    """
+
+    camera_alert = None
+    """
+    This is the CameraAlert which contains this CAContext.
+
+    :type: :py:class:`CameraAlert`
     """
 
     container_type = 'E'
@@ -94,16 +101,6 @@ class CAContext( Context ):
         """
         pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is a :py:class:`CameraAlert` in this case.
-        
-        :return: The parent :py:class:`CameraAlert`.
-
-        :rtype: :py:class:`CameraAlert`
-        """
-        pass
-
 
     ## Flush attriubtes under CA to DB if their values is not synced.
     def commit( self, cur ):
@@ -129,6 +126,13 @@ class ARContext( Context ):
     """
     name = 'AR'
     """Name of AR context."""
+
+    alert_replica = None
+    """
+    This is the AlertReplica which contains this ARContext.
+
+    :type: :py:class:`AlertReplica`
+    """
 
     def __init__( self, container_id ):
         self.container_id = container_id
@@ -163,16 +167,6 @@ class ARContext( Context ):
                 cur.execute( sql_insert )
                 #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is a :py:class:`AlertReplica` in this case.
-
-        :return: The parent :py:class:`AlertReplica`.
-
-        :rtype: :py:class:`AlertReplica`
-        """
-        pass
-
 class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
@@ -184,6 +178,13 @@ class CBContext( Context ):
     Name of CB context.
 
     :type: string
+    """
+
+    alert_combo = None
+    """
+    This is the AlertCombo which contains this CBContext.
+
+    :type: :py:class:`AlertCombo`
     """
 
     replicas = None
@@ -206,15 +207,6 @@ class CBContext( Context ):
         """
         pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is a :py:class:`AlertCombo` in this case.
-
-        :return: The parent :py:class:`AlertCombo`.
-
-        :rtype: :py:class:`AlertCombo`
-        """
-        pass
 
 class AOContext( Context ):
     """
@@ -228,6 +220,13 @@ class AOContext( Context ):
     Name of AO context.
 
     :type: string
+    """
+
+    astro_object = None
+    """
+    This is the AstroObject which contains this AOContext.
+
+    :type: :py:class:`AstroObject`
     """
 
     def __init__( self, astro_id ):
@@ -275,16 +274,6 @@ class AOContext( Context ):
                 values({0},"{1}",{2},"{3}")""".format( self.container_id,'O' , attr.value, attr.name )
                 cur.execute( sql_insert )
                 #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
-
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`AstroObject` in this case.
-        
-        :return: The parent :py:class:`AstroObject`.
-
-        :rtype: :py:class:`AstroObject`
-        """
-        pass
 
 
 class LAContext( Context ):
@@ -336,16 +325,6 @@ class LAContext( Context ):
         # Return a Pandas TimeSeries
         return pd.Series( values, index=timestamps )
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an Alert in this case.
-
-        :return: The parent Alert.
-
-        :rtype: Alert
-        """
-        pass
-
 
 class EAContext( Context ):
     """
@@ -358,17 +337,13 @@ class EAContext( Context ):
 
     :type: string
     """
-    pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`ExternalAlert` in this case.
+    external_alert = None
+    """
+    This is the ExternalAlert which contains this EAContext.
 
-        :return: The parent :py:class:`ExternalAlert`.
-
-        :rtype: :py:class:`ExternalAlert`
-        """
-        pass
+    :type: :py:class:`ExternalAlert`
+    """
 
 
 class IMContext( Context ):
@@ -382,17 +357,6 @@ class IMContext( Context ):
 
     :type: string
     """
-    pass
-
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is a :py:class:`CAContext` in this case.
-
-        :return: The parent :py:class:`CAContext`.
-
-        :rtype: :py:class:`CAContext`
-        """
-        pass
 
 class ISContext( Context ):
     """
@@ -409,15 +373,12 @@ class ISContext( Context ):
     """
     pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`IMContext` in this case.
+    ir_context = None
+    """
+    This is the IRContext which contains this ISContext.
 
-        :return: The parent :py:class:`IMContext`.
-
-        :rtype: :py:class:`IMContext`
-        """
-        pass
+    :type: :py:class:`IRContext`
+    """
 
 class IRContext( Context ):
     """
@@ -431,17 +392,13 @@ class IRContext( Context ):
 
     :type: string
     """
-    pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`ISContext` in this case.
+    im_context = None
+    """
+    This is the IMContext which contains this IRContext.
 
-        :return: The parent :py:class:`ISContext`.
-
-        :rtype: :py:class:`ISContext`
-        """
-        pass
+    :type: :py:class:`IMContext`
+    """
 
 class PSContext( Context ):
     """
@@ -455,17 +412,13 @@ class PSContext( Context ):
 
     :type: string
     """
-    pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`AOContext` in this case.
-        
-        :return: The parent :py:class:`AOContext`.
+    astro_object = None
+    """
+    This is the AstroObject which contains this PSContext.
 
-        :rtype: :py:class:`AOContext`
-        """
-        pass
+    :type: :py:class:`AstroObject`
+    """
 
 class ESContext( Context ):
     """
@@ -479,15 +432,11 @@ class ESContext( Context ):
 
     :type: string
     """
-    pass
 
-    def getContainer( self ):
-        """
-        This returns the Context's container, which is an :py:class:`AOContext` in this case.
-        
-        :return: The parent :py:class:`AOContext`.
+    astro_object = None
+    """
+    This is the AstroObject which contains this PSContext.
 
-        :rtype: :py:class:`AOContext`
-        """
-        pass
+    :type: :py:class:`AstroObject`
+    """
 

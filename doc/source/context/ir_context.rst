@@ -16,18 +16,18 @@ IR Context ( :py:class:`antares.context.IRContext`)
 
    .. autosummary::
 
-      ~ARContext.name
+      ~IRContext.name
+
+      ~IRContext.im_context
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~IRContext.getContainer
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
-   .. rubric:: Methods Documentation
+   .. autoattribute:: im_context
 
-   .. automethod:: getContainer
+   .. rubric:: Methods Documentation

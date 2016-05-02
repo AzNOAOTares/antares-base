@@ -16,18 +16,18 @@ EA Context ( :py:class:`antares.context.EAContext`)
 
    .. autosummary::
 
-      ~ARContext.name
+      ~EAContext.name
+
+      ~EAContext.external_alert
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~LAContext.getContainer
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
-   .. rubric:: Methods Documentation
+   .. autoattribute:: external_alert
 
-   .. automethod:: getContainer
+   .. rubric:: Methods Documentation

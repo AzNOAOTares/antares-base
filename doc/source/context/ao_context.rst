@@ -18,17 +18,17 @@ AO Context ( :py:class:`antares.context.AOContext` )
 
       ~AOContext.name
 
+      ~AOContext.astro_object
+
    .. rubric:: Methods Summary
 
    .. autosummary::
-
-      ~AOContext.getContainer
 
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
-   .. rubric:: Methods Documentation
+   .. autoattribute:: astro_object
 
-   .. automethod:: getContainer
+   .. rubric:: Methods Documentation
 

@@ -53,8 +53,8 @@ class CameraAlert( Alert ):
     and is initialized with these 5 available contexts.
 
     :param: :py:class:`int` alert_id: The unique ID of this Camera Alert.
-    :param: :py:class:`float` ra: The right ascension of the Camera Alert's observation, in radians.
-    :param: :py:class:`float` decl: The declination of the Camera Alert's observation, in radians.
+    :param: :py:class:`float` ra: The right ascension of the Camera Alert's observation, in degrees.
+    :param: :py:class:`float` decl: The declination of the Camera Alert's observation, in degrees.
     :param: :py:class:`antares.context.CAContext` CA: The CAContext which this Camera Alert contains.
     :param: :py:class:`int` decision: The decision whether to divert, mark as rare, or undecided.
     :param: :py:class:`int` locus_id: The ID of the locus to which this Camera Alert belongs.
@@ -89,7 +89,7 @@ class CameraAlert( Alert ):
     """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object that this alert is in. LA attributes are always available.  The LAContext owns this CameraAlert.
+    """LA (Locus-aggregated Alert) context object that contains this alert. LA attributes are always available.  The LAContext contains this CameraAlert.
 
     :type: :py:class:`antares.context.LAContext`
     """
@@ -271,12 +271,12 @@ class CameraAlert( Alert ):
 
 class AlertReplica( CameraAlert ):
     """
-    Represents an alert replica. It is a sub-class of :py:class:`CameraAlert`.
+    Represents an alert replica.
     Beyond contexts available for CameraAlert, an alert replica is also
     associated with AO, AR, ES, LA, and PS context objects.
     Replica is initialized with its associated astro object (optional).
 
-    :param: parent(:py:class:`antares.alert.CameraAlert`): parent of the alert replica.
+    :param: parent(:py:class:`antares.alert.CameraAlert`): container of the alert replica.
     :param: astr_id(int): ID of the associated astro object (optional).
     :param: init_from_db(boolean): indicate if the replica is initialized from Database (optional).
     :param: replica_id(int): ID of the alert replica (unique among all replicas).
@@ -310,6 +310,13 @@ class AlertReplica( CameraAlert ):
     if ``AO.kind = "point source"``.
 
     :type: :py:class:`antares.context.PSContext`
+    """
+
+    camera_alert = None
+    """
+    This is the CameraAlert which contains this AlertReplica.
+
+    :type: :py:class:`CameraAlert`
     """
 
     def __init__( self, parent, astro_id=None, init_from_db=False,
@@ -416,13 +423,13 @@ class AlertReplica( CameraAlert ):
 class AlertCombo( CameraAlert ):
     """
     Represents an alert combo which consists of a set of alert replicas
-    together with associated astro objects. It is a sub-class of CameraAlert.
+    together with associated astro objects.
     Beyond contexts available for CameraAlert,
     an alert combo is also associated with CB context objects.
     Combo is initialized with a set of alert replicas.
 
     :param: combo_id (:py:class:`int`): The unique ID of the Combo.
-    :param: parent (:py:class:`CAContext`): The CAContext which contains this Combo.
+    :param: parent (:py:class:`antares.alert.CameraAlert`): The CameraAlert which contains this Combo.
     :param: alert_replicas (:py:class:`list`): a list of :py:class:`AlertReplica`
     """
 
@@ -438,6 +445,13 @@ class AlertCombo( CameraAlert ):
     A list of the alert replicas created by the combo.
 
     :type: list
+    """
+
+    camera_alert = None
+    """
+    This is the CameraAlert which contains this AlertReplica.
+
+    :type: :py:class:`CameraAlert`
     """
 
     def __init__( self, combo_id, parent, replicas ):

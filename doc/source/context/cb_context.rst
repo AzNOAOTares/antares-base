@@ -19,21 +19,21 @@ CB Context ( :py:class:`antares.context.CBContext` )
       ~CBContext.name
       ~CBContext.replicas
 
+      ~CBContext.alert_combo
+
    .. rubric:: Methods Summary
 
    .. autosummary::
 
       ~CBContext.assembleVector_replicas
 
-      ~CBContext.getContainer
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
    .. autoattribute:: replicas
 
+   .. autoattribute:: alert_combo
+
    .. rubric:: Methods Documentation
 
    .. automethod:: assembleVector_replicas
-
-   .. automethod:: getContainer

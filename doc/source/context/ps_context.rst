@@ -16,19 +16,19 @@ PS Context ( :py:class:`antares.context.PSContext`)
 
    .. autosummary::
 
-      ~ARContext.name
+      ~PSContext.name
+
+      ~PSContext.astro_object
 
    .. rubric:: Methods Summary
 
    .. autosummary::
 
-      ~PSContext.getContainer
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
-   .. rubric:: Methods Documentation
+   .. autoattribute:: astro_object
 
-   .. automethod:: getContainer
+   .. rubric:: Methods Documentation
 

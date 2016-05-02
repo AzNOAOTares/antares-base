@@ -30,13 +30,6 @@ Within the ANTARES pipeline, stage code accesses the Alerts, Contexts, and Attri
 
 This document specifies the ANTARES API, which allows development of stage code for execution on ANTARES.
 
-Definitions
-^^^^^^^^^^^^^
-
-1. "Contains" denotes that the "container" is the single object which "contains;" only a single object may be a "container" of the "contained" object.  The term denotes ownership of the "contained" object.
-
-2. "Has" denotes a reference from one object to another.  The object may "have" references to multiple objects with this relationship.  Relationships between objects are, by default, "has" relationships; "contains" relationships will be explicitally noted.
-
 Alert related
 ^^^^^^^^^^^^^
 
@@ -97,6 +90,20 @@ Pre-defined Attributes
    :maxdepth: 2
 
    attribute/predefined
+
+Definitions
+^^^^^^^^^^^^^
+
+1. "Contains" denotes that the "container" is the single object which "contains;" only a single object may be a "container" of the "contained" object.  The term denotes ownership of the "contained" object.
+
+2. "Has" denotes a reference from one object to another.  The object may "have" references to multiple objects with this relationship.  Relationships between objects are, by default, "has" relationships; "contains" relationships will be explicitally noted.
+
+Container Hierarchy
+^^^^^^^^^^^^^^^^^^^
+
+The way in which Contexts and Alerts are organized and linked directs how various pieces of data may be accessed and altered.  The diagram below illustrates that organization.
+
+.. image:: ./_static/containerDiagram.png
 
 *************************
 Class inheritance diagram

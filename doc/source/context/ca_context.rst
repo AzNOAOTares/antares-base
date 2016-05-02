@@ -20,20 +20,20 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Attribut
 
       ~CAContext.name
 
+      ~CAContext.camera_alert
+
    .. rubric:: Methods Summary
 
    .. autosummary::
 
       ~CAContext.assembleVector
 
-      ~CAContext.getContainer
-
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
+   .. autoattribute:: camera_alert
+
    .. rubric:: Methods Documentation
 
    .. automethod:: assembleVector
-
-   .. automethod:: getContainer

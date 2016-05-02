@@ -18,16 +18,16 @@ AR Context ( :py:class:`antares.context.ARContext`)
 
       ~ARContext.name
 
+      ~ARContext.alert_replica
+
    .. rubric:: Methods Summary
 
    .. autosummary::
-
-      ~ARContext.getContainer
 
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
-   .. rubric:: Methods Documentation
+   .. autoattribute:: alert_replica
 
-   .. automethod:: getContainer
+   .. rubric:: Methods Documentation
