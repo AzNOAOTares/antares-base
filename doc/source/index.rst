@@ -84,7 +84,7 @@ Helper functions
    helper/index
 
 Pre-defined Properties
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
@@ -104,14 +104,6 @@ Container Hierarchy
 The way in which Contexts and Alerts are organized and linked directs how various pieces of data may be accessed and altered.  The diagram below illustrates that organization.
 
 .. image:: ./_static/containerDiagram.png
-
-*************************
-Class inheritance diagram
-*************************
-
-.. image:: ./_static/classes.png
-   :width: 500px
-   :height: 480px
 
 *************************************************
 Rules & Constraints
@@ -189,6 +181,10 @@ Rules & Constraints
 
 15. A derived property cannot have a circular definition (and so
     definitions form a directed acyclic graph).
+
+16. Alert Replicas will not be processed until Camera Alerts have finished processing.
+
+17. Alert Combos will not be processed until Alert Replicas have finished processing.
 
 *********************
 Examples
