@@ -17,7 +17,6 @@ CB Context ( :py:class:`antares.context.CBContext` )
    .. autosummary::
 
       ~CBContext.name
-      ~CBContext.replicas
 
       ~CBContext.alert_combo
 
@@ -30,7 +29,6 @@ CB Context ( :py:class:`antares.context.CBContext` )
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-   .. autoattribute:: replicas
 
    .. autoattribute:: alert_combo
 

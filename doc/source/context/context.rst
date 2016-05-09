@@ -20,10 +20,10 @@ Context ( :py:class:`antares.context.Context` )
 
    .. autosummary::
 
-      ~Context.isValidAttribute
+      ~Context.isValidProperty
 
    .. rubric:: Attributes Documentation
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: isValidAttribute
+   .. automethod:: isValidProperty

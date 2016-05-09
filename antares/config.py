@@ -8,8 +8,8 @@ import pymysql
 ## Path to the astro catalog data used for demo
 demo_data_path = '../demo-data'
 
-## Base attributes under CA context.
-CA_base_attributes = {
+## Base properties under CA context.
+CA_base_properties = {
     'RA' : (float, 'Right ascension'),
     'Decl' : (float, 'Declination'),
     'Magnitude' : (float, 'Logarithmic measure of the brightness of an alert'),
@@ -17,8 +17,8 @@ CA_base_attributes = {
     'DeltaMagnitude' : (float, 'Absolute value of change of magnitude between two most observations'),
 }
 
-## Derived attributes under CA context.
-CA_derived_attributes = {
+## Derived properties under CA context.
+CA_derived_properties = {
     'P' : (float, 'Best fit period'),
     'A' : (float, 'Light curve amplitude'),
     'mmed' : (float, 'Median LINEAR magnitude'),
@@ -27,13 +27,13 @@ CA_derived_attributes = {
     #'skew' : (float, 'skewness in LINEAR light curves'),
 }
 
-## Base attributes under AR context.
-AR_base_attributes = {
+## Base properties under AR context.
+AR_base_properties = {
     'HasAstroObject' : (int, 'Associated with an astro object or not'),
 }
 
-## Base attributes under CA context.
-AO_base_attributes = {
+## Base properties under CA context.
+AO_base_properties = {
     'RA' : (float, 'Right ascension', 1),
     'Decl' : (float, 'Declination', 2),
     'oType' : (int, 'SDSS object type', 3),
@@ -51,8 +51,8 @@ AO_base_attributes = {
     'iErr' : (float, 'i-magnitude error', 15),
 }
 
-BASE_ATTR = 0     # indicate base attribute
-DERIVED_ATTR = 1  # indicate derived attribute
+BASE_ATTR = 0     # indicate base property
+DERIVED_ATTR = 1  # indicate derived property
 
 ## We can generate upto this many camera alerts for the demo.
 total_num_alerts = 7194

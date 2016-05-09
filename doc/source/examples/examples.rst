@@ -2,12 +2,12 @@
 Examples of using API
 ***************************************
 
-How to assign/retrieve the value to/from an attribute
+How to assign/retrieve the value to/from an property
 =====================================================
 
-Suppose we have a camera alert ``alert`` with some base attributes, for example,
+Suppose we have a camera alert ``alert`` with some base properties, for example,
 its ``G`` value and ``R`` value, if want to compute the derived
-attribute ``GMinusR`` which belongs to ``CA`` context, we can do::
+property ``GMinusR`` which belongs to ``CA`` context, we can do::
 
   from antares.alert import CameraAlert
 
@@ -19,14 +19,14 @@ attribute ``GMinusR`` which belongs to ``CA`` context, we can do::
       alert.CA.GMinusR.description = "G value minus R value"
 
 If ``alert`` does not have ``CA`` context or 
-attribute ``GMinusR`` is not valid under ``CA`` context,
-:py:exc:`AttributeError` exception will be raised.
+property ``GMinusR`` is not valid under ``CA`` context,
+:py:exc:`PropertyError` exception will be raised.
 		
 Diverting an alert
 =====================================================
 
 If we want to divert a camera alert ``alert`` based on the size of
-attribute ``SizeOfLightCurve`` under ``LA`` context, we can do::
+property ``SizeOfLightCurve`` under ``LA`` context, we can do::
 
   if len( alert.LA.SizeOfLightCurve ) > MAX_LIGHT_CURVE_SIZE:
       alert.divert( "Light curve is too big" )
@@ -44,15 +44,15 @@ do::
 
   alert.createReplica( astroobj=astro )
 
-Creating a combo based on the value of attribute ``RedShift``
+Creating a combo based on the value of property ``RedShift``
 =============================================================
 
 We can create combos for a camera alert ``alert`` based on the value
-of attribute ``RedShift`` which belongs to ``AR`` context::
+of property ``RedShift`` which belongs to ``AR`` context::
 
   def CreateComboOnRedshift( alert ):
     """
-    Create combos based on attribute redshift. 'alert' is a camera alert.
+    Create combos based on property redshift. 'alert' is a camera alert.
     """
     if alert.Type != CAMERA_ALERT:
         return
@@ -80,10 +80,10 @@ can do::
   lightcurve = alert.LA.assembleTimeSeries_cameraAlerts( "CA", "Magnitude" )
 
 
-Different ways of iterating attribute values
+Different ways of iterating property values
 ============================================
 
-Iterating attribute values of alert replicas of a camera alert
+Iterating property values of alert replicas of a camera alert
 --------------------------------------------------------------
 
 >>> import numpy as np
@@ -92,10 +92,10 @@ Iterating attribute values of alert replicas of a camera alert
 >>>     print( val )
 
 Here, ``alert`` is a camera alert. The second line of code returns a
-numpy array of all the values of attribute ``Redshift`` under ``AR``
+numpy array of all the values of property ``Redshift`` under ``AR``
 context of replicas of ``alert``.
 
-Iterating attribute values of alert replicas of an alert combo
+Iterating property values of alert replicas of an alert combo
 --------------------------------------------------------------
 
 >>> import numpy as np
@@ -104,10 +104,10 @@ Iterating attribute values of alert replicas of an alert combo
 >>>     print( val )
 
 Here, ``combo`` is an alert combo. The second line of code returns a
-numpy array of all the values of attribute ``Redshift`` under ``AR``
+numpy array of all the values of property ``Redshift`` under ``AR``
 context of replicas that belongs to ``combo``.
 
-Iterating a time series of all past values an attribute
+Iterating a time series of all past values an property
 -------------------------------------------------------
 
 >>> for item in alert.CA.GMinusR.time_series.iteritems():

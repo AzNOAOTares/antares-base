@@ -35,7 +35,7 @@ class Alert( object ):
         :return: :py:data:`True` if the context is currently present,
                  otherwise :py:data:`False`.
         """
-        if hasattr(self, context):
+        if hasprop(self, context):
             return True
         else:
             return False
@@ -58,38 +58,38 @@ class CameraAlert( Alert ):
     :param: :py:class:`antares.context.CAContext` CA: The CAContext which this Camera Alert contains.
     :param: :py:class:`int` decision: The decision whether to divert, mark as rare, or undecided.
     :param: :py:class:`int` locus_id: The ID of the locus to which this Camera Alert belongs.
-    :param: :py:class:`antares.context.CAContext` IM: The IMContext which this Camera Alert has.
-    :param: :py:class:`antares.context.CAContext` IR: The IRContext which this Camera Alert has.
-    :param: :py:class:`antares.context.CAContext` IS: The ISContext which this Camera Alert has.
+    :param: :py:class:`antares.context.IMContext` IM: The IMContext which this Camera Alert has.
+    :param: :py:class:`antares.context.IRContext` IR: The IRContext which this Camera Alert has.
+    :param: :py:class:`antares.context.ISContext` IS: The ISContext which this Camera Alert has.
     """
 
     CA = None
     """
-    CA (Camera Alert) context object. CA attributes are always available.  The Camera Alert contains its CAContext.
+    CA (Camera Alert) context object. CA propibutes are always available.  The Camera Alert contains its CAContext.
 
     :type: :py:class:`antares.context.CAContext`
     """
 
     IM = None
-    """IM (Image) context object that this alert is in.
+    """IM (Image) context object that this alert is in.  The CameraAlert has the IMContext.
 
     :type: :py:class:`antares.context.IMContext`
     """
 
     IR = None
-    """IR (Image RAFT) context object that this alert is in.
+    """IR (Image RAFT) context object that this alert is in.  The CameraAlert has the IRContext.
 
     :type: :py:class:`antares.context.IRContext`
     """
 
     IS = None
-    """IS (Image Section) context object that this alert is in.
+    """IS (Image Section) context object that this alert is in.  The CameraAlert has the ISContext.
 
     :type: :py:class:`antares.context.ISContext`
     """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object that contains this alert. LA attributes are always available.  The LAContext contains this CameraAlert.
+    """LA (Locus-aggregated Alert) context object that contains this alert. LA propibutes are always available.  The LAContext contains this CameraAlert.
 
     :type: :py:class:`antares.context.LAContext`
     """
@@ -252,7 +252,7 @@ class CameraAlert( Alert ):
     #    conn = GetDBConn()
     #    cur = conn.cursor()
 
-        # Nothing to commit for CA context now since all attributes are pre-loaded to DB.
+        # Nothing to commit for CA context now since all propibutes are pre-loaded to DB.
         # self.CA.commit( cur )
 
     #    if self.decision != 'NA':
@@ -276,7 +276,7 @@ class AlertReplica( CameraAlert ):
     associated with AO, AR, ES, LA, and PS context objects.
     Replica is initialized with its associated astro object (optional).
 
-    :param: parent(:py:class:`antares.alert.CameraAlert`): container of the alert replica.
+    :param: parent(:py:class:`antares.alert.CameraAlert`): The CameraAlert which contains the alert replica.
     :param: astr_id(int): ID of the associated astro object (optional).
     :param: init_from_db(boolean): indicate if the replica is initialized from Database (optional).
     :param: replica_id(int): ID of the alert replica (unique among all replicas).
@@ -286,27 +286,27 @@ class AlertReplica( CameraAlert ):
     AR = None
     """
     AR (Alert Replica) context object.  The Alert Replica contains the ARContext.
-    AR attributes are only accessible during per-replica processing.
+    AR propibutes are only accessible during per-replica processing.
 
     :type: :py:class:`antares.context.ARContext`
     """
 
     AO = None
-    """AO (Astro Object) context object (optional). AO attributes are available if
+    """AO (Astro Object) context object that this AlertReplica has (optional). AO propibutes are available if
     ``AR.HasAstroObject`` = :py:data:`True`.
 
     :type: :py:class:`antares.context.AOContext`
     """
 
     ES = None
-    """ES (Extended Source) context object. ES attributes are available only
+    """ES (Extended Source) context object that this AlertReplica has (optional). ES propibutes are available only
     if ``AO.kind = "extended source"``.
 
     :type: :py:class:`antares.context.ESContext`
     """
 
     PS = None
-    """PS (Point Source) context object. PS attributes are available only
+    """PS (Point Source) context object that this AlertReplica has (optional). PS propibutes are available only
     if ``AO.kind = "point source"``.
 
     :type: :py:class:`antares.context.PSContext`
@@ -357,12 +357,6 @@ class AlertReplica( CameraAlert ):
     def __str__( self ):
         return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
             self.ID, self.parent.ID, self.AR, self.AO )
-
-    def createReplica( self ):
-        """
-        Create a replica of the current alert replica.
-        """
-        return self.parent.createReplica( astro_id=self.astro_id )
 
     def divert( self, annotation ):
         """
@@ -434,7 +428,7 @@ class AlertCombo( CameraAlert ):
     """
 
     CB = None
-    """CB (Combo) context object. The Alert Combo contains the CBContext. CB attributes are only visible during
+    """CB (Combo) context object. The Alert Combo contains the CBContext. CB propibutes are only visible during
     per-combo processing.
 
     :type: :py:class:`antares.context.CBContext`
@@ -442,7 +436,7 @@ class AlertCombo( CameraAlert ):
 
     replicas = None
     """
-    A list of the alert replicas created by the combo.
+    A list of the alert replicas created by the combo.  The AlertCombo has these AlertReplicas; the parent CameraAlert contains them.
 
     :type: list
     """
@@ -471,20 +465,20 @@ class AstroObject:
     """
 
     AO = None
-    """AO (AstroObject) context object.
+    """AO (AstroObject) context object that the AstroObject contains.
 
     :type: :py:class:`antares.context.AOContext`
     """
 
     ES = None
-    """ES (Extended Source) context object. ES attributes are available only
+    """ES (Extended Source) context object that the AstroObject contains. ES propibutes are available only
     if ``AO.kind = "extended source"``.
 
     :type: :py:class:`antares.context.ESContext`
     """
 
     PS = None
-    """PS (Point Source) context object. PS attributes are available only
+    """PS (Point Source) context object that the AstroObject contains. PS propibutes are available only
     if ``AO.kind = "point source"``.
 
     :type: :py:class:`antares.context.PSContext`

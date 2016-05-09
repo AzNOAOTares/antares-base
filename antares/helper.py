@@ -34,8 +34,8 @@ def GenerateCameraAlertStream( alert_num=10 ):
             break
 
         alert_id = row[ 0 ]
-        query = """select Value from AttributeValue where ContainerID={0} \
-        and ContainerType='E' and attrname='DeltaMagnitude'""".format(alert_id)
+        query = """select Value from PropertyValue where ContainerID={0} \
+        and ContainerType='E' and propname='DeltaMagnitude'""".format(alert_id)
         cur.execute( query )
         delta_mag = cur.fetchall()[0][0]
         if delta_mag > 0.1:
@@ -105,22 +105,22 @@ def ConstructCameraAlertFromID( alert_id ):
     ca_context.RA.value = ra
     ca_context.Decl.value = decl
 
-    query = """select Value from AttributeValue where ContainerID={0} and
-    ContainerType="E" and AttrName="Magnitude" """.format( alert_id )
+    query = """select Value from PropertyValue where ContainerID={0} and
+    ContainerType="E" and PropName="Magnitude" """.format( alert_id )
     cur.execute( query )
     mag_rows = cur.fetchall()
     # The most-recenctly computed magnitude value.
     magnitude = mag_rows[len(mag_rows)-1][0]
 
-    query = """select Value from AttributeValue where ContainerID={0} and
-    ContainerType="E" and AttrName="MagnitudeErr" """.format( alert_id )
+    query = """select Value from PropertyValue where ContainerID={0} and
+    ContainerType="E" and PropName="MagnitudeErr" """.format( alert_id )
     cur.execute( query )
     magerr_rows = cur.fetchall()
     # The most-recenctly computed magnitude value.
     magnitude_err = magerr_rows[len(magerr_rows)-1][0]
 
-    query = """select Value from AttributeValue where ContainerID={0} and
-    ContainerType="E" and AttrName="DeltaMagnitude" """.format( alert_id )
+    query = """select Value from PropertyValue where ContainerID={0} and
+    ContainerType="E" and PropName="DeltaMagnitude" """.format( alert_id )
     cur.execute( query )
     delta_mag_rows = cur.fetchall()
     # The most-recenctly computed magnitude value.

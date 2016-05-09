@@ -3,7 +3,7 @@ Antares context module.
 """
 
 from antares.config import *
-from antares.attribute import *
+from antares.property import *
 
 from io import StringIO
 import pymysql
@@ -19,11 +19,11 @@ class Context:
     def __init__( self ):
         pass
 
-    def isValidAttribute( self, attrname ):
+    def isValidProperty( self, propname ):
         """
-        Check whether the given attribute 'attrname' is valid.
+        Check whether the given property 'propname' is valid.
 
-        :param string attrname: the name of attribute to be checked
+        :param string propname: the name of property to be checked
 
         :return: :py:data:`True` if valid, otherwise :py:data:`False`."""
         pass
@@ -33,7 +33,7 @@ class Context:
 class CAContext( Context ):
     """
     Represents a CA (Camera Alert) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under CA context.
+    It contains all the properties defined under CA context.
 
     :param: container_id(int): ID of the object that contains the context, which will be a :py:class:`CameraAlert`.
     """
@@ -57,44 +57,44 @@ class CAContext( Context ):
         """'container_id' is the ID of the object that owns the context."""
         self.container_id = container_id
 
-        ## Initialize predefined base attributes for CA context.
-        for attrname in CA_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, self,
-                              CA_base_attributes[attrname][0], 1,
-                              description=CA_base_attributes[attrname][1] )
-            setattr( self, attrname, attr )
+        ## Initialize predefined base properties for CA context.
+        for propname in CA_base_properties.keys():
+            prop = Property( propname, BASE_ATTR, self,
+                              CA_base_properties[propname][0], 1,
+                              description=CA_base_properties[propname][1] )
+            setprop( self, propname, prop )
 
-        ## Initialize predefined derived attributes for CA context.
-        for attrname in CA_derived_attributes.keys():
-            attr = Attribute( attrname, DERIVED_ATTR, self,
-                              CA_derived_attributes[attrname][0], 1,
-                              description=CA_derived_attributes[attrname][1] )
-            setattr( self, attrname, attr )
+        ## Initialize predefined derived properties for CA context.
+        for propname in CA_derived_properties.keys():
+            prop = Property( propname, DERIVED_ATTR, self,
+                              CA_derived_properties[propname][0], 1,
+                              description=CA_derived_properties[propname][1] )
+            setprop( self, propname, prop )
 
     ## string representation of the CA context object.
     def __str__( self ):
         buf = StringIO()
         buf.write( '{0} Context:\n'.format(self.name) )
-        for attrname in CA_base_attributes.keys():
-            attr = getattr( self, attrname )
-            buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
-                       .format(attr.name, attr.datatype, attr.value) )
+        for propname in CA_base_properties.keys():
+            prop = getprop( self, propname )
+            buf.write( 'Property: {0}, datatype: {1}, value: {2:.2f}\n'
+                       .format(prop.name, prop.datatype, prop.value) )
 
-        for attrname in CA_derived_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned:
-                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}, confidence: {3}, annotation: {4}\n'
-                           .format(attr.name, attr.datatype, attr.value, attr.confidence, attr.annotation) )
+        for propname in CA_derived_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned:
+                buf.write( 'Property: {0}, datatype: {1}, value: {2:.2f}, confidence: {3}, annotation: {4}\n'
+                           .format(prop.name, prop.datatype, prop.value, prop.confidence, prop.annotation) )
 
         return buf.getvalue()
 
-    def assembleVector( self, context, attrname ):
+    def assembleVector( self, context, propname ):
         """
-        The function assembles a vector of all the values of an attribute inside
+        The function assembles a vector of all the values of an property inside
         a context of the alert replicas of the camera alert.
 
         :param string context: the name of the context
-        :param string attrname: the name of the attribute
+        :param string propname: the name of the property
 
         :return: an array of values
         :rtype: numpy array
@@ -102,25 +102,25 @@ class CAContext( Context ):
         pass
 
 
-    ## Flush attriubtes under CA to DB if their values is not synced.
+    ## Flush propiubtes under CA to DB if their values is not synced.
     def commit( self, cur ):
-        for attrname in CA_derived_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned and attr.flushed2DB == False:
-                attr.flushed2DB = True
-                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,
-                ComputedAt,Value, Annotation,Confidence,AttrName)
+        for propname in CA_derived_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned and prop.flushed2DB == False:
+                prop.flushed2DB = True
+                sql_insert = """insert into PropertyValue(ContainerID,ContainerType,
+                ComputedAt,Value, Annotation,Confidence,PropName)
                 values({0},"{1}","{2}", {3},"{4}",{5},"{6}")""".format( self.container_id,
-                                                                        'E', attr.computedAt, attr.value,
-                                                                        attr.annotation, attr.confidence,
-                                                                        attr.name )
+                                                                        'E', prop.computedAt, prop.value,
+                                                                        prop.annotation, prop.confidence,
+                                                                        prop.name )
                 cur.execute( sql_insert )
-                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+                #print( 'Committing {0}, flushed flag={1}'.format(prop.name, prop.flushed2DB) )
 
 class ARContext( Context ):
     """
     Represents a AR (Alert Replica) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under AR context.
+    It contains all the properties defined under AR context.
 
     :param: container_id(int): ID of the object that owns the context, which is a :py:class:`AlertReplica`.
     """
@@ -138,39 +138,39 @@ class ARContext( Context ):
         self.container_id = container_id
         self.container_type = 'R'
 
-        ## Initialize predefined base attributes for CA context.
-        for attrname in AR_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, self,
-                              AR_base_attributes[attrname][0], 1,
-                              description=AR_base_attributes[attrname][1] )
-            setattr( self, attrname, attr )
+        ## Initialize predefined base properties for CA context.
+        for propname in AR_base_properties.keys():
+            prop = Property( propname, BASE_ATTR, self,
+                              AR_base_properties[propname][0], 1,
+                              description=AR_base_properties[propname][1] )
+            setprop( self, propname, prop )
 
     def __str__( self ):
         buf = StringIO()
         buf.write( '{0} Context:\n'.format(self.name) )
-        for attrname in AR_base_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned == True:
-                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
-                           .format(attr.name, attr.datatype, attr.value) )
+        for propname in AR_base_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned == True:
+                buf.write( 'Property: {0}, datatype: {1}, value: {2:.2f}\n'
+                           .format(prop.name, prop.datatype, prop.value) )
 
         return buf.getvalue()
 
-    ## Flush attriubtes under AR to DB if their values is not synced.
+    ## Flush propiubtes under AR to DB if their values is not synced.
     def commit( self, cur ):
-        for attrname in AR_base_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned and attr.flushed2DB == False:
-                attr.flushed2DB = True
-                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,Value, AttrName) \
-                values({0},"{1}",{2},"{3}")""".format( self.container_id,'R' , attr.value, attr.name )
+        for propname in AR_base_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned and prop.flushed2DB == False:
+                prop.flushed2DB = True
+                sql_insert = """insert into PropertyValue(ContainerID,ContainerType,Value, PropName) \
+                values({0},"{1}",{2},"{3}")""".format( self.container_id,'R' , prop.value, prop.name )
                 cur.execute( sql_insert )
-                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+                #print( 'Committing {0}, flushed flag={1}'.format(prop.name, prop.flushed2DB) )
 
 class CBContext( Context ):
     """
     Represents a CB (Alert Combo) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under CB context.
+    It contains all the properties defined under CB context.
     :param: container_id(int): ID of the object that owns the context, which is a :py:class:`AlertCombo`.
     """
     name = 'CB'
@@ -187,20 +187,13 @@ class CBContext( Context ):
     :type: :py:class:`AlertCombo`
     """
 
-    replicas = None
-    """
-    A set of the alert replicas associated with the combo.
-
-    :type: list
-    """
-
-    def assembleVector_replicas( self, context, attrname ):
+    def assembleVector_replicas( self, context, propname ):
         """
-        The function assembles a vector of all the values of an attribute
+        The function assembles a vector of all the values of an property
         inside a context of the alert replicas associated with the alert combo.
 
         :param string context: the name of the context
-        :param string attrname: the name of the attribute
+        :param string propname: the name of the property
 
         :return: a list of values
         :rtype: list
@@ -211,7 +204,7 @@ class CBContext( Context ):
 class AOContext( Context ):
     """
     Represents a AO (Astro Object) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under AO context.
+    It contains all the properties defined under AO context.
 
     :param: astro_id(int): ID of the :py:class:`AstroObject` that owns the context.
     """
@@ -234,12 +227,12 @@ class AOContext( Context ):
         self.container_id = astro_id
         self.container_type = 'A'
 
-        ## Initialize predefined base attributes for AO context.
-        for attrname in AO_base_attributes.keys():
-            attr = Attribute( attrname, BASE_ATTR, self,
-                              AO_base_attributes[attrname][0], 1,
-                              description=AO_base_attributes[attrname][1] )
-            setattr( self, attrname, attr )
+        ## Initialize predefined base properties for AO context.
+        for propname in AO_base_properties.keys():
+            prop = Property( propname, BASE_ATTR, self,
+                              AO_base_properties[propname][0], 1,
+                              description=AO_base_properties[propname][1] )
+            setprop( self, propname, prop )
 
         ## Connect to mysql database.
         conn = GetDBConn()
@@ -247,39 +240,39 @@ class AOContext( Context ):
         query = """select * from PLV_SDSS where object_id={0}""".format(astro_id)
         cur.execute( query )
         row = cur.fetchall()[0]
-        for attrname in AO_base_attributes.keys():
-            attr = getattr( self, attrname )
-            attr.value = row[ AO_base_attributes[attrname][2] ]
+        for propname in AO_base_properties.keys():
+            prop = getprop( self, propname )
+            prop.value = row[ AO_base_properties[propname][2] ]
 
         conn.close()
 
     def __str__( self ):
         buf = StringIO()
         buf.write( '{0} Context:\n'.format(self.name) )
-        for attrname in AO_base_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned == True:
-                buf.write( 'Attribute: {0}, datatype: {1}, value: {2:.2f}\n'
-                           .format(attr.name, attr.datatype, attr.value) )
+        for propname in AO_base_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned == True:
+                buf.write( 'Property: {0}, datatype: {1}, value: {2:.2f}\n'
+                           .format(prop.name, prop.datatype, prop.value) )
 
         return buf.getvalue()
 
-    ## Flush attriubtes under AR to DB if their values is not synced.
+    ## Flush propiubtes under AR to DB if their values is not synced.
     def commit( self, cur ):
-        for attrname in AO_base_attributes.keys():
-            attr = getattr( self, attrname )
-            if attr.valueAssigned and attr.flushed2DB == False:
-                attr.flushed2DB = True
-                sql_insert = """insert into AttributeValue(ContainerID,ContainerType,Value, AttrName) \
-                values({0},"{1}",{2},"{3}")""".format( self.container_id,'O' , attr.value, attr.name )
+        for propname in AO_base_properties.keys():
+            prop = getprop( self, propname )
+            if prop.valueAssigned and prop.flushed2DB == False:
+                prop.flushed2DB = True
+                sql_insert = """insert into PropertyValue(ContainerID,ContainerType,Value, PropName) \
+                values({0},"{1}",{2},"{3}")""".format( self.container_id,'O' , prop.value, prop.name )
                 cur.execute( sql_insert )
-                #print( 'Committing {0}, flushed flag={1}'.format(attr.name, attr.flushed2DB) )
+                #print( 'Committing {0}, flushed flag={1}'.format(prop.name, prop.flushed2DB) )
 
 
 class LAContext( Context ):
     """
     Represents a LA (Locus-aggregated Alert) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under LA context.
+    It contains all the properties defined under LA context.
 
     :param: container_id(int): ID of the object (the Alert) that contains the context. **WHAT IS THE CONTAINER?**
     """
@@ -290,20 +283,19 @@ class LAContext( Context ):
     :type: string
     """
 
-    def __init__( self, container_id ):
-        """'continer_id' is the ID of the object (the Alert) that owns the context."""
-        self.container_id = container_id
+    def __init__( self):
+        pass
 
-    def assembleTimeSeriesAttribute( self, context, attrname, start_time, end_time ):
+    def assembleTimeSeriesProperty( self, context, propname, start_time, end_time ):
         """
         The function assembles a time series of all the past values
-        of an attribute inside a context of the camera alerts associated
+        of an property inside a context of the camera alerts associated
         with a locus aggregated alert.  Time series may be generated from
         CA, IM, IR, and IS contexts.
 
         :param string context: the name of the context; valid contexts for this method include the CA, IM, IR, 
         and IS contexts.
-        :param string attrname: the name of the attribute
+        :param string propname: the name of the property
 
         :return: a time series of values.
         :rtype: :py:class:`pandas.TimeSeries` of (uncertainFloat, string)
@@ -312,8 +304,8 @@ class LAContext( Context ):
         conn = GetDBConn()
         cur = conn.cursor()
 
-        query = """select ComputedAt, Value from AttributeValue where ContainerID={0} and
-        ContainerType="E" and AttrName="{1}" """.format( self.container_id, attrname )
+        query = """select ComputedAt, Value from PropertyValue where ContainerID={0} and
+        ContainerType="E" and PropName="{1}" """.format( self.container_id, propname )
         cur.execute( query )
         rows = cur.fetchall()
         timestamps = []
@@ -329,7 +321,7 @@ class LAContext( Context ):
 class EAContext( Context ):
     """
     Represents a EA (External Alert) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under EA context.
+    It contains all the properties defined under EA context.
     """
     name = 'EA'
     """
@@ -349,7 +341,7 @@ class EAContext( Context ):
 class IMContext( Context ):
     """
     Represents a IM (Image) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under IM context.
+    It contains all the properties defined under IM context.
     """
     name = 'IM'
     """
@@ -361,7 +353,7 @@ class IMContext( Context ):
 class ISContext( Context ):
     """
     Represents a IS (Image Section) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under IS context.
+    It contains all the properties defined under IS context.
 
     :param: container_id(int): ID of the object that contains the context, which is an :py:class:`IMContext`.
     """
@@ -383,7 +375,7 @@ class ISContext( Context ):
 class IRContext( Context ):
     """
     Represents a IR (Image RAFT) context object which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under IR context.
+    It contains all the properties defined under IR context.
     :param: container_id(int): ID of the object that owns the context, which is an :py:class:`ISContext`.
     """
     name = 'IR'
@@ -404,7 +396,7 @@ class PSContext( Context ):
     """
     Represents a PS (Point-source AstroObject) context object
     which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under PS context.
+    It contains all the properties defined under PS context.
     """
     name = 'PS'
     """
@@ -424,7 +416,7 @@ class ESContext( Context ):
     """
     Represents a ES (Extended-source AstroObject) context object
     which is a sub-class of :py:class:`Context`.
-    It contains all the attributes defined under ES context.
+    It contains all the properties defined under ES context.
     """
     name = 'ES'
     """
