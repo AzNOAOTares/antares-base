@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Property:
     """
-    This is the Property class. An property is initialized with its name,
+    This is the Property class. A property is initialized with its name,
     the context it belongs to, the datatype of its value, a scale, and the description of its value.
 
     :param: name(string): name of the property
@@ -137,7 +137,7 @@ class Property:
 
         self._value = val
         self.valueAssigned = True
-        if self.atype == DERIVED_ATTR:
+        if self.atype == DERIVED_PROP:
             # Set timestamp of computation.
             self.computedAt = datetime.now().timestamp()
             self.history.append( (self.computedAt, self._value ) )

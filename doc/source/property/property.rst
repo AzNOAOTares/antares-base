@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 *****************************************************
-Attribute ( :py:class:`antares.property.Property` )
+Property ( :py:class:`antares.property.Property` )
 *****************************************************
 
 .. automodule:: antares.property
