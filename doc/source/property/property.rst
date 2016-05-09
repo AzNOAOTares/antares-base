@@ -9,7 +9,7 @@ Attribute ( :py:class:`antares.property.Property` )
 
 .. automodule:: antares.property
 
-.. autoclass:: Attribute
+.. autoclass:: Property
    :show-inheritance:
 
    .. rubric:: Attributes Summary
