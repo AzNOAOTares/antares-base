@@ -436,7 +436,7 @@ class AlertCombo( CameraAlert ):
 
     replicas = None
     """
-    A list of the alert replicas created by the combo.  The AlertCombo has these AlertReplicas; the parent CameraAlert contains them.
+    A list of the alert replicas which comprise the Combo.  The AlertCombo has these AlertReplicas; the parent CameraAlert contains them.
 
     :type: list
     """
