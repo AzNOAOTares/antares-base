@@ -1,8 +1,9 @@
-from antares.context import *
+from antares.model.context import *
 import threading
 import uuid
 import random
-
+import os
+import pickle
 
 HASH_SIZE = 100
 
@@ -25,6 +26,8 @@ class Alert( object ):
         self.ID = alert_id
         self.ra = ra
         self.decl = decl
+        self.MJDOBS = None
+        self.passband = None
 
     def isPresent( self, context ):
         """
@@ -35,7 +38,7 @@ class Alert( object ):
         :return: :py:data:`True` if the context is currently present,
                  otherwise :py:data:`False`.
         """
-        if hasprop(self, context):
+        if hasattr(self, context):
             return True
         else:
             return False
@@ -52,65 +55,54 @@ class CameraAlert( Alert ):
     A camera alert is associated with CA, IM, IR, IS and LA context objects.
     and is initialized with these 5 available contexts.
 
-    :param: :py:class:`int` alert_id: The unique ID of this Camera Alert.
-    :param: :py:class:`float` ra: The right ascension of the Camera Alert's observation, in degrees.
-    :param: :py:class:`float` decl: The declination of the Camera Alert's observation, in degrees.
-    :param: :py:class:`antares.context.CAContext` CA: The CAContext which this Camera Alert contains.
-    :param: :py:class:`int` decision: The decision whether to divert, mark as rare, or undecided.
-    :param: :py:class:`int` locus_id: The ID of the locus to which this Camera Alert belongs.
-    :param: :py:class:`antares.context.IMContext` IM: The IMContext which this Camera Alert has.
-    :param: :py:class:`antares.context.IRContext` IR: The IRContext which this Camera Alert has.
-    :param: :py:class:`antares.context.ISContext` IS: The ISContext which this Camera Alert has.
+    :param: :py:class:`antares.context.CAContext` CA: CA context object
+    :param: :py:class:`antares.context.IMContext` IM: IM context object
+    :param: :py:class:`antares.context.IRContext` IR: IR context object
+    :param: :py:class:`antares.context.ISContext` IS: IS context object
+    :param: :py:class:`antares.context.LAContext` LA: LA context object
     """
 
     CA = None
     """
-    CA (Camera Alert) context object. CA propibutes are always available.  The Camera Alert contains its CAContext.
+    CA (Camera Alert) context object. CA properties are always available.
 
     :type: :py:class:`antares.context.CAContext`
     """
 
     IM = None
-    """IM (Image) context object that this alert is in.  The CameraAlert has the IMContext.
+    """IM (Image) context object.
 
     :type: :py:class:`antares.context.IMContext`
     """
 
     IR = None
-    """IR (Image RAFT) context object that this alert is in.  The CameraAlert has the IRContext.
+    """IR (Image RAFT) context object.
 
     :type: :py:class:`antares.context.IRContext`
     """
 
     IS = None
-    """IS (Image Section) context object that this alert is in.  The CameraAlert has the ISContext.
+    """IS (Image Section) context object.
 
     :type: :py:class:`antares.context.ISContext`
     """
 
     LA = None
-    """LA (Locus-aggregated Alert) context object that contains this alert. LA propibutes are always available.  The LAContext contains this CameraAlert.
+    """LA (Locus-aggregated Alert) context object. LA properties are always available.
 
     :type: :py:class:`antares.context.LAContext`
     """
 
     replicas = None
     """
-    A list of the alert replicas created by camera alert.  The Camera Alert contains these Replicas.
+    A list of the alert replicas created by camera alert.
 
     :type: list
     """
 
-    combos = None
+    annotation = ''
     """
-    A list of the alert combos created by camera alert.  The Camera Alert contains these Combos.
-
-    :type: list
-    """
-
-    annotation = None
-    """
-    The annotation notes the cause for diverting or marking as rare.
+    Annotation of the camera alert.
 
     :type: string
     """
@@ -118,7 +110,7 @@ class CameraAlert( Alert ):
     def __init__( self, alert_id, ra, decl, CA, decision, locus_id, IM=None, IR=None, IS=None ):
         super().__init__( alert_id, ra, decl )
         self.CA = CA
-        self.LA = LAContext( alert_id ) # LA context is implicit
+        self.LA = LAContext( locus_id ) # LA context is implicit
         # When a camera alert is constructed, its decision is always not applicable.
         self.decision = decision
         self.locus_id = locus_id
@@ -130,11 +122,23 @@ class CameraAlert( Alert ):
         return 'Alert {0} at (ra={1}, dec={2}) Decision={3}\n{4}'.format(
             self.ID, self.ra, self.decl, self.decision, self.CA)
 
-    def numReplicas( self ):
-        """
-        Check how many replicas a Camera Alert has.
+    def associatedAstroObjs(self):
+        astro_path = '/home/antares/nfs_share/astro_dump'
+        fname = os.path.join(astro_path, str(self.ID)+'.pickle')
+        if os.path.isfile(fname):
+            f = open(fname, 'rb')
+            objs = pickle.load(f)
+            f.close()
+            return objs
+        else:
+            return {}
 
-        :return: The number of replicas generated from this alert.
+
+    def hasReplicas( self ):
+        """
+        Check whether alert has replicas.
+
+        :return: :py:data:`True` if alert has replicas, otherwise :py:data:`False`.
         """
         if len(self.replicas) == 0:
             return False
@@ -239,6 +243,36 @@ class CameraAlert( Alert ):
 
         ## TODO: call Zhe's system API.
 
+    def loadReplicas(self):
+        """
+        Load replicas from database.
+        """
+        conn = GetDBConn()
+        cursor = conn.cursor()
+        query = "select ReplicaID from AlertReplica where AlertID={0}".format(self.ID)
+        cursor.execute(query)
+        replica_ids = cursor.fetchall()
+        self.replicas = []
+
+        for row in replica_ids:
+            replica_id = row[0]
+            query = """select * from AlertReplica where ReplicaID={0}""".format(replica_id)
+            cursor.execute( query )
+            replica_row = cursor.fetchall()[ 0 ]
+            parent_id = replica_row[ 4 ]
+            astro_id = replica_row[ 5 ]
+            replica_num = replica_row[ 1 ]
+
+            r = AlertReplica( self, astro_id=astro_id,
+                                 init_from_db=True, replica_id=replica_id,
+                                 replica_num=replica_num)
+            self.replicas.append(r)
+
+        self.replica_counter = len(replica_ids)
+
+        conn.close()
+        return self.replicas
+
     @property
     def annotation( self ):
         conn = GetDBConn()
@@ -248,35 +282,38 @@ class CameraAlert( Alert ):
         cursor.execute( sql_query )
         return cursor.fetchall()[0][0]
 
-    #def commit( self ):
-    #    conn = GetDBConn()
-    #    cur = conn.cursor()
+    def commit( self ):
+        """
+        Commit the alert data to Locus-aggregated Alerts DB.
+        """
+        conn = GetDBConn()
+        cur = conn.cursor()
 
-        # Nothing to commit for CA context now since all propibutes are pre-loaded to DB.
+        # Nothing to commit for CA context now since all properties are pre-loaded to DB.
         # self.CA.commit( cur )
 
-    #    if self.decision != 'NA':
+        if self.decision != 'NA':
             ## Update corresponding Alert table to reflect decision change.
             ## Connect to mysql database.
-    #        sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
-    #            self.decision, self.ID )
-    #        cur.execute( sql_update )
+            sql_update = """update Alert set Decision="{0}" where AlertID={1}""".format(
+                self.decision, self.ID )
+            cur.execute( sql_update )
 
         # Replicas will be written to DB when they are created.
         # for replica in self.replicas:
         #    replica.commit()
 
-    #    conn.commit()
-    #    conn.close()
+        conn.commit()
+        conn.close()
 
 class AlertReplica( CameraAlert ):
     """
-    Represents an alert replica.
+    Represents an alert replica. It is a sub-class of :py:class:`CameraAlert`.
     Beyond contexts available for CameraAlert, an alert replica is also
     associated with AO, AR, ES, LA, and PS context objects.
     Replica is initialized with its associated astro object (optional).
 
-    :param: parent(:py:class:`antares.alert.CameraAlert`): The CameraAlert which contains the alert replica.
+    :param: parent(:py:class:`antares.alert.CameraAlert`): parent of the alert replica.
     :param: astr_id(int): ID of the associated astro object (optional).
     :param: init_from_db(boolean): indicate if the replica is initialized from Database (optional).
     :param: replica_id(int): ID of the alert replica (unique among all replicas).
@@ -285,38 +322,31 @@ class AlertReplica( CameraAlert ):
 
     AR = None
     """
-    AR (Alert Replica) context object.  The Alert Replica contains the ARContext.
-    AR propibutes are only accessible during per-replica processing.
+    AR (Alert Replica) context object.
+    AR properties are only accessible during per-replica processing.
 
     :type: :py:class:`antares.context.ARContext`
     """
 
     AO = None
-    """AO (Astro Object) context object that this AlertReplica has (optional). AO propibutes are available if
+    """AO (Astro Object) context object. AO properties are available if
     ``AR.HasAstroObject`` = :py:data:`True`.
 
     :type: :py:class:`antares.context.AOContext`
     """
 
     ES = None
-    """ES (Extended Source) context object that this AlertReplica has (optional). ES propibutes are available only
+    """ES (Extended Source) context object. ES properties are available only
     if ``AO.kind = "extended source"``.
 
     :type: :py:class:`antares.context.ESContext`
     """
 
     PS = None
-    """PS (Point Source) context object that this AlertReplica has (optional). PS propibutes are available only
+    """PS (Point Source) context object. PS properties are available only
     if ``AO.kind = "point source"``.
 
     :type: :py:class:`antares.context.PSContext`
-    """
-
-    camera_alert = None
-    """
-    This is the CameraAlert which contains this AlertReplica.
-
-    :type: :py:class:`CameraAlert`
     """
 
     def __init__( self, parent, astro_id=None, init_from_db=False,
@@ -358,6 +388,12 @@ class AlertReplica( CameraAlert ):
         return 'Alert replica {0} belonged to camera alert {1}\n{2}\n{3}'.format(
             self.ID, self.parent.ID, self.AR, self.AO )
 
+    def createReplica( self ):
+        """
+        Create a replica of the current alert replica.
+        """
+        return self.parent.createReplica( astro_id=self.astro_id )
+
     def divert( self, annotation ):
         """
         Divert the alert replica.
@@ -376,9 +412,9 @@ class AlertReplica( CameraAlert ):
         self.parent.mark_as_rare( annotation )
 
     def commit( self ):
-        #"""
-        #Commit the alert replica to Locus-aggregated Alerts DB.
-        #"""
+        """
+        Commit the alert replica to Locus-aggregated Alerts DB.
+        """
         conn = GetDBConn()
         cur = conn.cursor()
         query = """select * from AlertReplica where ReplicaID={0}""".format(self.ID)
@@ -417,35 +453,19 @@ class AlertReplica( CameraAlert ):
 class AlertCombo( CameraAlert ):
     """
     Represents an alert combo which consists of a set of alert replicas
-    together with associated astro objects.
+    together with associated astro objects. It is a sub-class of CameraAlert.
     Beyond contexts available for CameraAlert,
     an alert combo is also associated with CB context objects.
     Combo is initialized with a set of alert replicas.
 
-    :param: combo_id (:py:class:`int`): The unique ID of the Combo.
-    :param: parent (:py:class:`antares.alert.CameraAlert`): The CameraAlert which contains this Combo.
     :param: alert_replicas (:py:class:`list`): a list of :py:class:`AlertReplica`
     """
 
     CB = None
-    """CB (Combo) context object. The Alert Combo contains the CBContext. CB propibutes are only visible during
+    """CB (Combo) context object. CB properties are only visible during
     per-combo processing.
 
     :type: :py:class:`antares.context.CBContext`
-    """
-
-    replicas = None
-    """
-    A list of the alert replicas which comprise the Combo.  The AlertCombo has these AlertReplicas; the parent CameraAlert contains them.
-
-    :type: list
-    """
-
-    camera_alert = None
-    """
-    This is the CameraAlert which contains this AlertReplica.
-
-    :type: :py:class:`CameraAlert`
     """
 
     def __init__( self, combo_id, parent, replicas ):
@@ -458,30 +478,16 @@ class AlertCombo( CameraAlert ):
         return 'Alert Combo {0} belongs to camera alert {1} with {2} replicas.'.format(
             self.combo_id, self.parent.ID, len(self.replicas))
 
+    def divert(self, annotation):
+        self.parent.divert(annotation)
+
+    def mark_as_rare(self, annotation):
+        self.parent.mark_as_rare(annotation)
+
 
 class AstroObject:
     """
-    Represents an astro object.  AstroObjects have an AO context and may have a PS or ES context(s).
-    """
-
-    AO = None
-    """AO (AstroObject) context object that the AstroObject contains.
-
-    :type: :py:class:`antares.context.AOContext`
-    """
-
-    ES = None
-    """ES (Extended Source) context object that the AstroObject contains. ES propibutes are available only
-    if ``AO.kind = "extended source"``.
-
-    :type: :py:class:`antares.context.ESContext`
-    """
-
-    PS = None
-    """PS (Point Source) context object that the AstroObject contains. PS propibutes are available only
-    if ``AO.kind = "point source"``.
-
-    :type: :py:class:`antares.context.PSContext`
+    Represents an astro object.
     """
 
     def __init__( self ):

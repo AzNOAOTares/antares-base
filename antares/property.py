@@ -1,18 +1,17 @@
-from antares.config import *
+from antares.model.config import *
 import numpy as np
 import pymysql
 from datetime import datetime
 
 class Property:
     """
-    This is the Property class. A property is initialized with its name,
-    the context it belongs to, the datatype of its value, a scale, and the description of its value.
+    Represents a property object. A property is initialized with its name,
+    the context it belongs to, the datatype of its value, a description and the scale of its value.
 
     :param: name(string): name of the property
     :param: context(:py:class:`antares.context.Context`): context the property belongs to
     :param: datatype(string): data type of the property value
-    :param: scale(:py:class:`IntPair` or :py:class:`FloatPair`): the range to which the property value scales
-    :param: scale(:py:class:`FloatPair`): the range to which the property value scales
+    :param: scale(:py:class:`IntPair`): the range to which the property value scales
     :param: description(string): description of the property
     """
 
@@ -22,6 +21,14 @@ class Property:
     It is a Numpy array.
 
     :type: numpy array
+    """
+
+    time_series = None
+    """
+    The time series of all the past values computed for the property.
+    It is a Pandas Time Series.
+
+    :type: pandas series
     """
 
     description = ""
@@ -47,12 +54,9 @@ class Property:
 
     datatype = ""
     """
-    The data type of the property. The valid data type could be one of the following:
-    (1) a Python's built-in primitive type ("boolean", "int", "float", "string"), (2) a Python package
-    ("timestamp"), or (3) a proprietary, composite object provided by ANTARES
-    (:py:class:`antares.context.UncertainFloat`, :py:class:`antares.context.ProbabilityCurve`,
-    :py:class:`antares.context.IntPair`, :py:class:`antares.context.FloatPair`, :py:class:`antares.context.TimePeriod`)
-    as are documented within the API.
+    The data type of the property. The valid data type could be either
+    a Python's built-in type (boolean, int, float, string, timestamp) or a composite
+    object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod).
 
     :type: string
     """
@@ -87,6 +91,15 @@ class Property:
     :type: list of ints
     """
 
+    enum_strs = None
+    """
+    A finite list of possible string values for the property. It is
+    available only when datatype = "enumerated string". In that case the
+    property value can be only picked from this list.
+
+    :type: list of strings
+    """
+
     def __init__( self, name, atype, context, datatype, scale, description="" ):
         self.name = name
         self.atype = atype
@@ -113,7 +126,7 @@ class Property:
                                                                    self.name )
             cursor.execute( query )
             rows = cursor.fetchall()
-            if len(rows) == 1:
+            if len(rows) >= 1:
                 self.loaded = True
                 if rows[0][0] == None:
                     return None
@@ -121,14 +134,17 @@ class Property:
                 #print( 'Value for {0} of alert {1} has been computed as {2}!'.
                 #       format( self.name, self.context.container_id, self._value ) )
 
-        if hasprop( self, '_value' ):
+        if hasattr( self, '_value' ):
             return self._value
         else:
             return None
-            #raise PropertyError( 'Value for {0} has not been set!'.format(self.name) )
+            #raise AttributeError( 'Value for {0} has not been set!'.format(self.name) )
 
     def set_value( self, val ):
         ## Check if 'val' is of the desired type.
+        if val is None:
+            return
+
         if not isinstance( val, self.datatype ):
             try:
                 val = self.datatype( val )
@@ -146,7 +162,7 @@ class Property:
             self.flushed2DB = False
 
     def get_confidence( self ):
-        if hasprop( self, '_confidence' ):
+        if hasattr( self, '_confidence' ):
             return self._confidence
         else:
             return None
@@ -159,7 +175,7 @@ class Property:
             raise TypeError( '{0} should be a {1}!'.format(confid, float) )
 
     def get_annotation( self ):
-        if hasprop( self, '_annotation' ):
+        if hasattr( self, '_annotation' ):
             return self._annotation
         else:
             return ''
@@ -171,14 +187,27 @@ class Property:
 
         self._annotation = annotation
 
+    def timeDelimitedSeries( self, start_time, end_time ):
+        """
+        A time-delimited series of all the past values of the property.
+
+        :param timestamp start_time: the start of time series
+        :param timestamp end_time: the end of time series
+
+        :return: time series of the property values from `start_time` to
+                  `end_time`.
+        :rtype: Pandas Time Series
+        """
+        pass
+
     ## Attach getters & setters
     value = property( get_value, set_value )
     confidence = property( get_confidence, set_confidence )
     annotation = property( get_annotation, set_annotation )
 
 class UncertainFloat:
-    """Represents a triple floats which is one of the data types available to
-    :py:class:`antares.property.Property`. It consists of three float values, one being the expected
+    """Represents a triple floats which is one of the data type of
+    :py:class:`antares.attribute.Property`. It consists of three float values, one being the expected
     value, a second being the lower std dev (one std dev below) and the
     third being the upper std dev (one std dev above)."""
     expected_value = None
@@ -203,22 +232,18 @@ class UncertainFloat:
     """
 
 class ProbabilityCurve:
-    """Represents a probability curve which is one of the data types available to
-    :py:class:`Property`. It is used to encapsulate numerical values which have statistical certainty."""
+    """Represents a probability curve which is one of the data type of
+    :py:class:`Property`. It is used for variability."""
     probabilities = None
     """
-    A set of variables which include the estimated value (any of the types available to Property) and
-    statistical measures (floats) describing the certainty of that value.  The exact nature of the statistical
-    measures depends on data type and desired statistical model, but generally include (for a numerical value)
-    mean, median, Q1, Q3, and standard deviation.  This type will be developed as it is used and more
-    statistical models are needed.
+    A list of probability values.
 
     :type: numpy array
     """
 
 class IntPair:
     """Represents a pair of int (providing lower and upper bounds)
-    which is one of the data types available to :py:class:`Property`."""
+    which is one of the data type of :py:class:`Property`."""
     lower_bound = None
     """
     The value of lower bound.
@@ -235,7 +260,7 @@ class IntPair:
 
 class FloatPair:
     """Represents a pair of float (providing lower and upper bounds)
-    which is one of the data types available to :py:class:`Property`."""
+    which is one of the data type of :py:class:`Property`."""
     lower_bound = None
     """
     The value of lower bound.
@@ -252,7 +277,7 @@ class FloatPair:
 
 class TimePeriod:
     """A derived property of the existence time for the
-    locus-aggregated alert. It is a data type available to :py:class:`Property`."""
+    locus-aggregated alert. It is a data type of :py:class:`Property`."""
     start = None
     """
     The start of the time period.
@@ -266,5 +291,3 @@ class TimePeriod:
 
     :type: timestamp
     """
-
-
