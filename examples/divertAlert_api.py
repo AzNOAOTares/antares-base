@@ -16,8 +16,8 @@ def filterVPDF( alert, rarityThreshold=1E7 ):
 
 if __name__ == '__main__':
     sys.path.append( '../' )
-    from antares.helper import GenerateCameraAlertStream
-    from antares.helper import ConstructAlertFromID
+    from antares.model.helper import GenerateCameraAlertStream
+    from antares.model.helper import ConstructAlertFromID
 
     alert_ids = GenerateCameraAlertStream( alert_num=2 )
     for alert_id in alert_ids:

@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ***************************************************
-PS Context ( :py:class:`antares.context.PSContext`)
+PS Context ( :py:class:`antares.model.context.PSContext`)
 ***************************************************
 
-.. automodule:: antares.context
+.. automodule:: antares.model.context
 
 .. autoclass:: PSContext
    :show-inheritance:

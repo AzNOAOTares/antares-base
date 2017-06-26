@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 *********************************************************************
-Probability Curve ( :py:class:`antares.property.ProbabilityCurve` )
+Probability Curve ( :py:class:`antares.model.property.ProbabilityCurve` )
 *********************************************************************
 
-.. automodule:: antares.property
+.. automodule:: antares.model.property
 
 .. autoclass:: ProbabilityCurve
    :show-inheritance:

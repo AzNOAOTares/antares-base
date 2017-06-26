@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ****************************************************************
-Uncertain Float ( :py:class:`antares.property.UncertainFloat` )
+Uncertain Float ( :py:class:`antares.model.property.UncertainFloat` )
 ****************************************************************
 
-.. automodule:: antares.property
+.. automodule:: antares.model.property
 
 .. autoclass:: UncertainFloat
    :show-inheritance:

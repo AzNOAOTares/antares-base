@@ -192,7 +192,7 @@ def ConstructAlertFromID( target_id, target_type ):
     :param string target_type: type of the alert to be constructed.
             'E': camera alert, 'R': alert replica.
 
-    :return: :py:class:`antares.alert.Alert` constructed alert object.
+    :return: :py:class:`antares.model.alert.Alert` constructed alert object.
     """
     if target_type == 'E':
         return ConstructCameraAlertFromID( target_id )

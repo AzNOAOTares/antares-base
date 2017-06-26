@@ -9,7 +9,7 @@ class Property:
     the context it belongs to, the datatype of its value, a description and the scale of its value.
 
     :param: name(string): name of the property
-    :param: context(:py:class:`antares.context.Context`): context the property belongs to
+    :param: context(:py:class:`antares.model.context.Context`): context the property belongs to
     :param: datatype(string): data type of the property value
     :param: scale(:py:class:`IntPair`): the range to which the property value scales
     :param: description(string): description of the property

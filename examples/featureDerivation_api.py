@@ -82,8 +82,8 @@ def deriveStdev( alert ):
 
 if __name__ == '__main__':
     sys.path.append( '../' )
-    from antares.helper import GenerateFakeAlerts
-    from antares.helper import ConstructAlertFromID
+    from antares.model.helper import GenerateFakeAlerts
+    from antares.model.helper import ConstructAlertFromID
 
     ## Construct a camera alert.
     alert_ids = GenerateFakeAlerts()

@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ******************************************************
-Helper Functions( ``antares.helper`` )
+Helper Functions( ``antares.model.helper`` )
 ******************************************************
 
-.. automodule:: antares.helper
+.. automodule:: antares.model.helper
 
 .. rubric:: Methods Summary
 
@@ -18,6 +18,6 @@ Helper Functions( ``antares.helper`` )
 
 .. rubric:: Methods Documentation
 
-.. automethod:: antares.helper.GenerateCameraAlertStream
-.. automethod:: antares.helper.ConstructAlertFromID
+.. automethod:: antares.model.helper.GenerateCameraAlertStream
+.. automethod:: antares.model.helper.ConstructAlertFromID
 

@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ********************************************************
-Time Period ( :py:class:`antares.property.TimePeriod` )
+Time Period ( :py:class:`antares.model.property.TimePeriod` )
 ********************************************************
 
-.. automodule:: antares.property
+.. automodule:: antares.model.property
 
 .. autoclass:: TimePeriod
    :show-inheritance:

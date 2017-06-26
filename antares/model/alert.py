@@ -55,42 +55,42 @@ class CameraAlert( Alert ):
     A camera alert is associated with CA, IM, IR, IS and LA context objects.
     and is initialized with these 5 available contexts.
 
-    :param: :py:class:`antares.context.CAContext` CA: CA context object
-    :param: :py:class:`antares.context.IMContext` IM: IM context object
-    :param: :py:class:`antares.context.IRContext` IR: IR context object
-    :param: :py:class:`antares.context.ISContext` IS: IS context object
-    :param: :py:class:`antares.context.LAContext` LA: LA context object
+    :param: :py:class:`antares.model.context.CAContext` CA: CA context object
+    :param: :py:class:`antares.model.context.IMContext` IM: IM context object
+    :param: :py:class:`antares.model.context.IRContext` IR: IR context object
+    :param: :py:class:`antares.model.context.ISContext` IS: IS context object
+    :param: :py:class:`antares.model.context.LAContext` LA: LA context object
     """
 
     CA = None
     """
     CA (Camera Alert) context object. CA properties are always available.
 
-    :type: :py:class:`antares.context.CAContext`
+    :type: :py:class:`antares.model.context.CAContext`
     """
 
     IM = None
     """IM (Image) context object.
 
-    :type: :py:class:`antares.context.IMContext`
+    :type: :py:class:`antares.model.context.IMContext`
     """
 
     IR = None
     """IR (Image RAFT) context object.
 
-    :type: :py:class:`antares.context.IRContext`
+    :type: :py:class:`antares.model.context.IRContext`
     """
 
     IS = None
     """IS (Image Section) context object.
 
-    :type: :py:class:`antares.context.ISContext`
+    :type: :py:class:`antares.model.context.ISContext`
     """
 
     LA = None
     """LA (Locus-aggregated Alert) context object. LA properties are always available.
 
-    :type: :py:class:`antares.context.LAContext`
+    :type: :py:class:`antares.model.context.LAContext`
     """
 
     replicas = None
@@ -313,7 +313,7 @@ class AlertReplica( CameraAlert ):
     associated with AO, AR, ES, LA, and PS context objects.
     Replica is initialized with its associated astro object (optional).
 
-    :param: parent(:py:class:`antares.alert.CameraAlert`): parent of the alert replica.
+    :param: parent(:py:class:`antares.model.alert.CameraAlert`): parent of the alert replica.
     :param: astr_id(int): ID of the associated astro object (optional).
     :param: init_from_db(boolean): indicate if the replica is initialized from Database (optional).
     :param: replica_id(int): ID of the alert replica (unique among all replicas).
@@ -325,28 +325,28 @@ class AlertReplica( CameraAlert ):
     AR (Alert Replica) context object.
     AR properties are only accessible during per-replica processing.
 
-    :type: :py:class:`antares.context.ARContext`
+    :type: :py:class:`antares.model.context.ARContext`
     """
 
     AO = None
     """AO (Astro Object) context object. AO properties are available if
     ``AR.HasAstroObject`` = :py:data:`True`.
 
-    :type: :py:class:`antares.context.AOContext`
+    :type: :py:class:`antares.model.context.AOContext`
     """
 
     ES = None
     """ES (Extended Source) context object. ES properties are available only
     if ``AO.kind = "extended source"``.
 
-    :type: :py:class:`antares.context.ESContext`
+    :type: :py:class:`antares.model.context.ESContext`
     """
 
     PS = None
     """PS (Point Source) context object. PS properties are available only
     if ``AO.kind = "point source"``.
 
-    :type: :py:class:`antares.context.PSContext`
+    :type: :py:class:`antares.model.context.PSContext`
     """
 
     def __init__( self, parent, astro_id=None, init_from_db=False,
@@ -465,7 +465,7 @@ class AlertCombo( CameraAlert ):
     """CB (Combo) context object. CB properties are only visible during
     per-combo processing.
 
-    :type: :py:class:`antares.context.CBContext`
+    :type: :py:class:`antares.model.context.CBContext`
     """
 
     def __init__( self, combo_id, parent, replicas ):
