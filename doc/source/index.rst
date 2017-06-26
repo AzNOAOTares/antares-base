@@ -120,7 +120,7 @@ Rules & Constraints
    >>> value = alert.CA.GMinusR
 
    This will assign most-recently computed value for the property GMinusR
-   to ``value``. It will raise an :py:exc:`PropertyError` exception if CA context
+   to ``value``. It will raise an :py:exc:`AttributeError` exception if CA context
    has no property called ``GMinusR``.
 
 3. Properties are changed when we assign values to them.
@@ -129,18 +129,18 @@ Rules & Constraints
    >>> alert.CA.GMinusR = value
 
    This will assign ``value`` to the property ``GMinusR`` that is defined under
-   CA context. It will raise an :py:exc:`PropertyError` exception if CA context
+   CA context. It will raise an :py:exc:`AttributeError` exception if CA context
    has no property called ``GMinusR``.
 
 4. Timestamp for a newly computed property value is assigned implicitly
    when the value is assigned to the property.
 
 5. Exceptions are handled by callers. The only exception in the API is Python's
-   built-in :py:exc:`PropertyError` exception.
+   built-in :py:exc:`AttributeError` exception.
 
 6. There will be a max size for strings. The max size is to be determined.
 
-7. The value of an property may be NA (not applicable), but NK (not known)
+7. The value of property may be NA (not applicable), but NK (not known)
    is not allowed as a value.
 
 8. The value for a Base Property is provided by the Camera in a
@@ -151,38 +151,38 @@ Rules & Constraints
    function for a given context if its arguments are present and if
    the algorithm for that derivation function completes.
 
-10. CA and LA propertys are always available.
+10. CA and LA Properties are always available.
 
-11. AR propertys are only accessible during per-replica processing;
-    AO propertys are available if ``AR-HasAstroObject`` is
+11. AR Properties are only accessible during per-replica processing;
+    AO Properties are available if ``AR-HasAstroObject`` is
     :py:data:`True`; ES only if ``AO-kind = "extended source"``; PS only if
     ``AR-HasAstroObject`` is :py:data:`True` and ``AO-kind = "point
     source"``. 
 
-12. CB propertys are only visible during per-combo processing.
+12. CB Properties are only visible during per-combo processing.
 
 13. CA processing can iterate through the alerts of its
-    locus-aggregated alert to access AR, PS, and ES propertys. For
+    locus-aggregated alert to access AR, PS, and ES Properties. For
     example: 
 
     >>> alert.LA.assembleTimeSeries_replics( 'AR', 'Redshift' )
 
     Here, ``alert`` is a camera alert and the above call returns a
-    time series of all the values of the property ``Redshift`` under
+    time series of all the values of the Property ``Redshift`` under
     ``AR`` context of the alert replicas associated with a locus
     aggregated alert.
 
 14. CB processing can iterate through its replicas to access AR, AO,
-    PS, and ES propertys.
+    PS, and ES Properties.
 
     >>> combo.CB.assembleVector( 'AR', 'Redshift' )
 
     Here, ``combo`` is an alert combo and the above call returns a
-    numpy array of all the values of the property ``Redshift`` under
+    numpy array of all the values of the Property ``Redshift`` under
     ``AR`` context of the alert replicas associated with the alert
     combo.
 
-15. A derived property cannot have a circular definition (and so
+15. A Derived Property cannot have a circular definition (and so
     definitions form a directed acyclic graph).
 
 16. Alert Replicas will not be processed until Camera Alerts have finished processing.
@@ -209,13 +209,13 @@ NOTE: we decided to leave for later discussion the identification of structures 
 
 * Each Alert within a stage will have access only to Properties within that Alert.
 
-* Values of an property in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  Larger contexts' propertys will derive from the aggregate of the smaller contexts.
+* Values of Property in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  Larger contexts' properties will derive from the aggregate of the smaller contexts.
 
-* Each alert within a stage will write a new value for one or more propertys within multiple contexts.
+* Each alert within a stage will write a new value for one or more properties within multiple contexts.
 
 * ANTARES assumes that, once written at the end of a stage, a given property becomes final and immutable.  Subsequent stages do not change the value of the property.  This assumption may need to be reexamined as the stage code base grows beyond management.
 
-* Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to propertys in the CA context but not to the Image or AstroObject contexts.  For more details on which contexts are writable, see Rules & Constraints above.
+* Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to properties in the CA context but not to the Image or AstroObject contexts.  For more details on which contexts are writable, see Rules & Constraints above.
 
 Note: the Antares Data Model document (https://docs.google.com/document/d/1xjYmhd8W9pyiwCBLA6o8mJeAz99Qbz9NvYFpICvYfSA/) had an example of
 
@@ -235,13 +235,13 @@ which reads IM-CountAlerts, adds one, and writes it. That is explicitly forbidde
 
 * Written values are stored in the database only when a stage completes. A stage that is aborted loses those values, because the stage was incomplete.
 
-* An property can be written to multiple times in a stage or in separate stages, but only the last value will be visible in subsequent stages or in output for a particular camera alert. (We allow this because different astronomers might have independently written different stages.)
+* A property can be written to multiple times in a stage or in separate stages, but only the last value will be visible in subsequent stages or in output for a particular camera alert. (We allow this because different astronomers might have independently written different stages.)
 
 * The values form a time series, one value computed for each alert at that time. Hence, old values are retained and the new value extends the time series. No value is ever changed in the database (except for multiple writes, discussed above, which we can finesse.).  In other words, each stage generates a new database entry.  The entire history of alert processing will be present in the database, with one new write per stage and no modification of old (and perhaps stale) stage values.
 
 * There will be a separate conversion process that will translate the highly-optimized storage structure used in the ANTARES pipeline to and from the traditional relational structure as described in the ER diagram.  The latter representation will be best for cross-alert analyses. The conversion(s) and cross-alert analyses will happen outside the time-critical portion of ANTARES and may be challenging in their own way in terms of performance.
   
-* User-contributed stages write to propertys associated with a context of the current alert. So a single stage or multiple stages could successively write to the same property, changing its value as the processing pipeline progresses. We retain the value as of the end of each stage, but a future alert at the same locus will only see the final value of that property: there is no facility for seeing an intermediate value within a stage or between stages of a single past alert at that locus.
+* User-contributed stages write to properties associated with a context of the current alert. So a single stage or multiple stages could successively write to the same property, changing its value as the processing pipeline progresses. We retain the value as of the end of each stage, but a future alert at the same locus will only see the final value of that property: there is no facility for seeing an intermediate value within a stage or between stages of a single past alert at that locus.
 
 * User-contributed stages can also write to local variables during their processing, but such variables will not be persisted between stages. The only values that are persisted are those associated with the contexts of the alert.
 
