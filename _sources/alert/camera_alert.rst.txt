@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ******************************************************
-Camera Alert ( :py:class:`antares.alert.CameraAlert` )
+Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
 ******************************************************
 
-.. automodule:: antares.alert
+.. automodule:: antares.model.alert
 
 .. autoclass:: CameraAlert
    :show-inheritance:
