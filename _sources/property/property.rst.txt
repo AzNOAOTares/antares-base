@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 *****************************************************
-Property ( :py:class:`antares.property.Property` )
+Property ( :py:class:`antares.model.property.Property` )
 *****************************************************
 
-.. automodule:: antares.property
+.. automodule:: antares.model.property
 
 .. autoclass:: Property
    :show-inheritance:

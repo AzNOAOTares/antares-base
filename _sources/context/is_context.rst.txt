@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ***************************************************
-IS Context ( :py:class:`antares.context.ISContext`)
+IS Context ( :py:class:`antares.model.context.ISContext`)
 ***************************************************
 
-.. automodule:: antares.context
+.. automodule:: antares.model.context
 
 .. autoclass:: ISContext
    :show-inheritance:

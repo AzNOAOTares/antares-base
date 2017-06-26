@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 *******************************************************
-Float Pair ( :py:class:`antares.property.FloatPair` )
+Float Pair ( :py:class:`antares.model.property.FloatPair` )
 *******************************************************
 
-.. automodule:: antares.property
+.. automodule:: antares.model.property
 
 .. autoclass:: FloatPair
    :show-inheritance:

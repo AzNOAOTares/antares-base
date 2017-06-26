@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>AR Context ( antares.context.ARContext) &#8212; Antares API 1.0 documentation</title>
+    <title>AR Context ( antares.model.context.ARContext) &#8212; Antares API 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AO Context ( antares.context.AOContext )" href="ao_context.html" />
-    <link rel="prev" title="CA Context ( antares.context.CAContext )" href="ca_context.html" /> 
+    <link rel="next" title="AO Context ( antares.model.context.AOContext )" href="ao_context.html" />
+    <link rel="prev" title="CA Context ( antares.model.context.CAContext )" href="ca_context.html" /> 
   </head>
   <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -40,10 +40,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="ao_context.html" title="AO Context ( antares.context.AOContext )"
+          <a href="ao_context.html" title="AO Context ( antares.model.context.AOContext )"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="ca_context.html" title="CA Context ( antares.context.CAContext )"
+          <a href="ca_context.html" title="CA Context ( antares.model.context.CAContext )"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>
@@ -54,8 +54,56 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="ar-context-antares-context-arcontext">
-<h1>AR Context ( <code class="xref py py-class docutils literal"><span class="pre">antares.context.ARContext</span></code>)<a class="headerlink" href="#ar-context-antares-context-arcontext" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ar-context-antares-model-context-arcontext">
+<h1>AR Context ( <a class="reference internal" href="#antares.model.context.ARContext" title="antares.model.context.ARContext"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.ARContext</span></code></a>)<a class="headerlink" href="#ar-context-antares-model-context-arcontext" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-antares.model.context"></span><p>Antares context module.</p>
+<dl class="class">
+<dt id="antares.model.context.ARContext">
+<em class="property">class </em><code class="descclassname">antares.model.context.</code><code class="descname">ARContext</code><span class="sig-paren">(</span><em>container_id</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.ARContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="context.html#antares.model.context.Context" title="antares.model.context.Context"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.Context</span></code></a></p>
+<p>Represents a AR (Alert Replica) context object which is a sub-class of <a class="reference internal" href="context.html#antares.model.context.Context" title="antares.model.context.Context"><code class="xref py py-class docutils literal"><span class="pre">Context</span></code></a>.
+It contains all the attributes defined under AR context.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">container_id(int): ID of the object that owns the context.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.ARContext.name" title="antares.model.context.ARContext.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">ARContext.alert_replica</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="antares.model.context.ARContext.name">
+<code class="descname">name</code><em class="property"> = ‘AR’</em><a class="headerlink" href="#antares.model.context.ARContext.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+</dd></dl>
+
 </div>
 
 
@@ -66,10 +114,10 @@
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="ca_context.html"
-                        title="previous chapter">CA Context ( <code class="docutils literal"><span class="pre">antares.context.CAContext</span></code> )</a></p>
+                        title="previous chapter">CA Context ( <code class="docutils literal"><span class="pre">antares.model.context.CAContext</span></code> )</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="ao_context.html"
-                        title="next chapter">AO Context ( <code class="docutils literal"><span class="pre">antares.context.AOContext</span></code> )</a></p>
+                        title="next chapter">AO Context ( <code class="docutils literal"><span class="pre">antares.model.context.AOContext</span></code> )</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -101,10 +149,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="ao_context.html" title="AO Context ( antares.context.AOContext )"
+          <a href="ao_context.html" title="AO Context ( antares.model.context.AOContext )"
              >next</a> |</li>
         <li class="right" >
-          <a href="ca_context.html" title="CA Context ( antares.context.CAContext )"
+          <a href="ca_context.html" title="CA Context ( antares.model.context.CAContext )"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>

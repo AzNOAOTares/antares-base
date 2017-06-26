@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ***************************************************
-EA Context ( :py:class:`antares.context.EAContext`)
+EA Context ( :py:class:`antares.model.context.EAContext`)
 ***************************************************
 
-.. automodule:: antares.context
+.. automodule:: antares.model.context
 
 .. autoclass:: EAContext
    :show-inheritance:

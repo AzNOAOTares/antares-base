@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Helper Functions( antares.helper ) &#8212; Antares API 1.0 documentation</title>
+    <title>Helper Functions( antares.model.helper ) &#8212; Antares API 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Predefined Properties" href="../property/predefined.html" />
-    <link rel="prev" title="Time Period ( antares.property.TimePeriod )" href="../property/time_period.html" /> 
+    <link rel="prev" title="Time Period ( antares.model.property.TimePeriod )" href="../property/time_period.html" /> 
   </head>
   <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -43,7 +43,7 @@
           <a href="../property/predefined.html" title="Predefined Properties"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../property/time_period.html" title="Time Period ( antares.property.TimePeriod )"
+          <a href="../property/time_period.html" title="Time Period ( antares.model.property.TimePeriod )"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>
@@ -54,8 +54,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="helper-functions-antares-helper">
-<h1>Helper Functions( <code class="docutils literal"><span class="pre">antares.helper</span></code> )<a class="headerlink" href="#helper-functions-antares-helper" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-antares.model.helper">
+<span id="helper-functions-antares-model-helper"></span><h1>Helper Functions( <code class="docutils literal"><span class="pre">antares.model.helper</span></code> )<a class="headerlink" href="#module-antares.model.helper" title="Permalink to this headline">¶</a></h1>
+<p>Global helper functions.</p>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -63,15 +64,55 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">GenerateCameraAlertStream</span></code></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.helper.GenerateCameraAlertStream" title="antares.model.helper.GenerateCameraAlertStream"><code class="xref py py-obj docutils literal"><span class="pre">GenerateCameraAlertStream</span></code></a>([alert_num])</td>
+<td>Generate a stream of camera alert IDs from the demo database.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">ConstructAlertFromID</span></code></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.helper.ConstructAlertFromID" title="antares.model.helper.ConstructAlertFromID"><code class="xref py py-obj docutils literal"><span class="pre">ConstructAlertFromID</span></code></a>(target_id,&nbsp;target_type)</td>
+<td>Generate an alert from the demo database given its ID and type.</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="antares.model.helper.GenerateCameraAlertStream">
+<code class="descclassname">helper.</code><code class="descname">GenerateCameraAlertStream</code><span class="sig-paren">(</span><em>alert_num=10</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.helper.GenerateCameraAlertStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a stream of camera alert IDs from the demo database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alert_num</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) – the number of camera alerts to be generated.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of camera alert IDs.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)">list</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="antares.model.helper.ConstructAlertFromID">
+<code class="descclassname">helper.</code><code class="descname">ConstructAlertFromID</code><span class="sig-paren">(</span><em>target_id</em>, <em>target_type</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.helper.ConstructAlertFromID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an alert from the demo database given its ID and type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>target_id</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) – ID of the alert to be constructed.</li>
+<li><strong>target_type</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – type of the alert to be constructed.
+‘E’: camera alert, ‘R’: alert replica.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">antares.alert.Alert</span></code> constructed alert object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -82,7 +123,7 @@
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="../property/time_period.html"
-                        title="previous chapter">Time Period ( <code class="docutils literal"><span class="pre">antares.property.TimePeriod</span></code> )</a></p>
+                        title="previous chapter">Time Period ( <code class="docutils literal"><span class="pre">antares.model.property.TimePeriod</span></code> )</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../property/predefined.html"
                         title="next chapter">Predefined Properties</a></p>
@@ -120,7 +161,7 @@
           <a href="../property/predefined.html" title="Predefined Properties"
              >next</a> |</li>
         <li class="right" >
-          <a href="../property/time_period.html" title="Time Period ( antares.property.TimePeriod )"
+          <a href="../property/time_period.html" title="Time Period ( antares.model.property.TimePeriod )"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>

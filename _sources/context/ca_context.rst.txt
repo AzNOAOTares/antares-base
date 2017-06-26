@@ -4,12 +4,12 @@
    contain the root `toctree` directive.
 
 ****************************************************
-CA Context ( :py:class:`antares.context.CAContext` )
+CA Context ( :py:class:`antares.model.context.CAContext` )
 ****************************************************
 
 For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properties_ref_label>`.
 
-.. automodule:: antares.context
+.. automodule:: antares.model.context
 
 .. autoclass:: CAContext
    :show-inheritance:

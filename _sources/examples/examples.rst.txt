@@ -9,7 +9,7 @@ Suppose we have a camera alert ``alert`` with some base properties, for example,
 its ``G`` value and ``R`` value, if want to compute the derived
 property ``GMinusR`` which belongs to ``CA`` context, we can do::
 
-  from antares.alert import CameraAlert
+  from antares.model.alert import CameraAlert
 
   def computeGMinusR( alert ):
       """'alert' is a camera alert """
