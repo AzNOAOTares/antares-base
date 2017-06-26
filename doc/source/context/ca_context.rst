@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-****************************************************
+***********************************************************
 CA Context ( :py:class:`antares.model.context.CAContext` )
-****************************************************
+***********************************************************
 
 For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properties_ref_label>`.
 

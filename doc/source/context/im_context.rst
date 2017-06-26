@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-***************************************************
+**********************************************************
 IM Context ( :py:class:`antares.model.context.IMContext`)
-***************************************************
+**********************************************************
 
 .. automodule:: antares.model.context
 
