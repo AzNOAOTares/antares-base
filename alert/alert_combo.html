@@ -37,6 +37,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="astroobj.html" title="Astro Object ( antares.model.alert.AstroObject )"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -52,7 +55,65 @@
           <div class="body" role="main">
             
   <div class="section" id="alert-combo-antares-model-alert-alertcombo">
-<h1>Alert Combo ( <code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.AlertCombo</span></code> )<a class="headerlink" href="#alert-combo-antares-model-alert-alertcombo" title="Permalink to this headline">¶</a></h1>
+<h1>Alert Combo ( <a class="reference internal" href="#antares.model.alert.AlertCombo" title="antares.model.alert.AlertCombo"><code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.AlertCombo</span></code></a> )<a class="headerlink" href="#alert-combo-antares-model-alert-alertcombo" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-antares.model.alert"></span><dl class="class">
+<dt id="antares.model.alert.AlertCombo">
+<em class="property">class </em><code class="descclassname">antares.model.alert.</code><code class="descname">AlertCombo</code><span class="sig-paren">(</span><em>combo_id</em>, <em>parent</em>, <em>replicas</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertCombo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="camera_alert.html#antares.model.alert.CameraAlert" title="antares.model.alert.CameraAlert"><code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.CameraAlert</span></code></a></p>
+<p>Represents an alert combo which consists of a set of alert replicas
+together with associated astro objects. It is a sub-class of CameraAlert.
+Beyond contexts available for CameraAlert,
+an alert combo is also associated with CB context objects.
+Combo is initialized with a set of alert replicas.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">alert_replicas (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>): a list of <a class="reference internal" href="alert_replica.html#antares.model.alert.AlertReplica" title="antares.model.alert.AlertReplica"><code class="xref py py-class docutils literal"><span class="pre">AlertReplica</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertCombo.CB" title="antares.model.alert.AlertCombo.CB"><code class="xref py py-obj docutils literal"><span class="pre">CB</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertCombo.replicas" title="antares.model.alert.AlertCombo.replicas"><code class="xref py py-obj docutils literal"><span class="pre">replicas</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">AlertCombo.camera_alert</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="antares.model.alert.AlertCombo.CB">
+<code class="descname">CB</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertCombo.CB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="antares.model.alert.AlertCombo.replicas">
+<code class="descname">replicas</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertCombo.replicas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+</dd></dl>
+
 </div>
 
 
@@ -94,6 +155,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="astroobj.html" title="Astro Object ( antares.model.alert.AstroObject )"
              >next</a> |</li>

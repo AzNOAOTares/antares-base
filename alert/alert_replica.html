@@ -37,6 +37,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="alert_combo.html" title="Alert Combo ( antares.model.alert.AlertCombo )"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -52,7 +55,122 @@
           <div class="body" role="main">
             
   <div class="section" id="alert-replica-antares-model-alert-alertreplica">
-<h1>Alert Replica ( <code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.AlertReplica</span></code> )<a class="headerlink" href="#alert-replica-antares-model-alert-alertreplica" title="Permalink to this headline">¶</a></h1>
+<h1>Alert Replica ( <a class="reference internal" href="#antares.model.alert.AlertReplica" title="antares.model.alert.AlertReplica"><code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.AlertReplica</span></code></a> )<a class="headerlink" href="#alert-replica-antares-model-alert-alertreplica" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-antares.model.alert"></span><dl class="class">
+<dt id="antares.model.alert.AlertReplica">
+<em class="property">class </em><code class="descclassname">antares.model.alert.</code><code class="descname">AlertReplica</code><span class="sig-paren">(</span><em>parent</em>, <em>astro_id=None</em>, <em>init_from_db=False</em>, <em>replica_id=None</em>, <em>replica_num=None</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="camera_alert.html#antares.model.alert.CameraAlert" title="antares.model.alert.CameraAlert"><code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.CameraAlert</span></code></a></p>
+<p>Represents an alert replica. It is a sub-class of <a class="reference internal" href="camera_alert.html#antares.model.alert.CameraAlert" title="antares.model.alert.CameraAlert"><code class="xref py py-class docutils literal"><span class="pre">CameraAlert</span></code></a>.
+Beyond contexts available for CameraAlert, an alert replica is also
+associated with AO, AR, ES, LA, and PS context objects.
+Replica is initialized with its associated astro object (optional).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">parent(<code class="xref py py-class docutils literal"><span class="pre">antares.alert.CameraAlert</span></code>): parent of the alert replica.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">astr_id(int): ID of the associated astro object (optional).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">init_from_db(boolean): indicate if the replica is initialized from Database (optional).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">replica_id(int): ID of the alert replica (unique among all replicas).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">replica_num(int): Number of the alert replica (unique among all replicas that share the same parent).</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.AR" title="antares.model.alert.AlertReplica.AR"><code class="xref py py-obj docutils literal"><span class="pre">AR</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.AO" title="antares.model.alert.AlertReplica.AO"><code class="xref py py-obj docutils literal"><span class="pre">AO</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.ES" title="antares.model.alert.AlertReplica.ES"><code class="xref py py-obj docutils literal"><span class="pre">ES</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.PS" title="antares.model.alert.AlertReplica.PS"><code class="xref py py-obj docutils literal"><span class="pre">PS</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">AlertReplica.camera_alert</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.divert" title="antares.model.alert.AlertReplica.divert"><code class="xref py py-obj docutils literal"><span class="pre">divert</span></code></a>(annotation)</td>
+<td>Divert the alert replica.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.mark_as_rare" title="antares.model.alert.AlertReplica.mark_as_rare"><code class="xref py py-obj docutils literal"><span class="pre">mark_as_rare</span></code></a>(annotation)</td>
+<td>Mark the alert as a rare alert.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="attribute">
+<dt id="antares.model.alert.AlertReplica.AR">
+<code class="descname">AR</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.AR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="antares.model.alert.AlertReplica.AO">
+<code class="descname">AO</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.AO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="antares.model.alert.AlertReplica.ES">
+<code class="descname">ES</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="antares.model.alert.AlertReplica.PS">
+<code class="descname">PS</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.PS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="antares.model.alert.AlertReplica.divert">
+<code class="descname">divert</code><span class="sig-paren">(</span><em>annotation</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica.divert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert the alert replica.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>annotation</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – a short description of why the alert replica  is diverted.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="antares.model.alert.AlertReplica.mark_as_rare">
+<code class="descname">mark_as_rare</code><span class="sig-paren">(</span><em>annotation</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica.mark_as_rare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark the alert as a rare alert.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>annotation</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – a short description of why the alert is rare.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -94,6 +212,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="alert_combo.html" title="Alert Combo ( antares.model.alert.AlertCombo )"
              >next</a> |</li>
