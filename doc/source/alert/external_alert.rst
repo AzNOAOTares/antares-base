@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 **********************************************************
-External Alert ( :py:class:`antares.alert.ExternalAlert` )
+External Alert ( :py:class:`antares.model.alert.ExternalAlert` )
 **********************************************************
 
-.. automodule:: antares.alert
+.. automodule:: antares.model.alert
 
 .. autoclass:: ExternalAlert
    :show-inheritance:	       

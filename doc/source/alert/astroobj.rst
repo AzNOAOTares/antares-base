@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 **********************************************************
-Astro Object ( :py:class:`antares.alert.AstroObject` )
+Astro Object ( :py:class:`antares.model.alert.AstroObject` )
 **********************************************************
 
-.. automodule:: antares.alert
+.. automodule:: antares.model.alert
 
 .. autoclass:: AstroObject
    :show-inheritance:	       

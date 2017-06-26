@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ****************************************************
-Alert Combo ( :py:class:`antares.alert.AlertCombo` )
+Alert Combo ( :py:class:`antares.model.alert.AlertCombo` )
 ****************************************************
 
-.. automodule:: antares.alert
+.. automodule:: antares.model.alert
 
 .. autoclass:: AlertCombo
    :show-inheritance:	       
