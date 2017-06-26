@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-****************************************************
+***********************************************************
 Alert Combo ( :py:class:`antares.model.alert.AlertCombo` )
-****************************************************
+***********************************************************
 
 .. automodule:: antares.model.alert
 

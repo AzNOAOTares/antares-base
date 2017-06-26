@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-***************************************************
+**********************************************************
 PS Context ( :py:class:`antares.model.context.PSContext`)
-***************************************************
+**********************************************************
 
 .. automodule:: antares.model.context
 
