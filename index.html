@@ -152,7 +152,7 @@ For example:</p>
 </pre></div>
 </div>
 <p>This will assign most-recently computed value for the property GMinusR
-to <code class="docutils literal"><span class="pre">value</span></code>. It will raise an <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception if CA context
+to <code class="docutils literal"><span class="pre">value</span></code>. It will raise an <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception if CA context
 has no property called <code class="docutils literal"><span class="pre">GMinusR</span></code>.</p>
 </li>
 <li><p class="first">Properties are changed when we assign values to them.
@@ -161,18 +161,18 @@ For example:</p>
 </pre></div>
 </div>
 <p>This will assign <code class="docutils literal"><span class="pre">value</span></code> to the property <code class="docutils literal"><span class="pre">GMinusR</span></code> that is defined under
-CA context. It will raise an <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception if CA context
+CA context. It will raise an <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception if CA context
 has no property called <code class="docutils literal"><span class="pre">GMinusR</span></code>.</p>
 </li>
 <li><p class="first">Timestamp for a newly computed property value is assigned implicitly
 when the value is assigned to the property.</p>
 </li>
 <li><p class="first">Exceptions are handled by callers. The only exception in the API is Python’s
-built-in <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception.</p>
+built-in <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception.</p>
 </li>
 <li><p class="first">There will be a max size for strings. The max size is to be determined.</p>
 </li>
-<li><p class="first">The value of an property may be NA (not applicable), but NK (not known)
+<li><p class="first">The value of property may be NA (not applicable), but NK (not known)
 is not allowed as a value.</p>
 </li>
 <li><p class="first">The value for a Base Property is provided by the Camera in a
@@ -183,38 +183,38 @@ relevant alert replica, and is always present when appropriate.</p>
 function for a given context if its arguments are present and if
 the algorithm for that derivation function completes.</p>
 </li>
-<li><p class="first">CA and LA propertys are always available.</p>
+<li><p class="first">CA and LA Properties are always available.</p>
 </li>
-<li><p class="first">AR propertys are only accessible during per-replica processing;
-AO propertys are available if <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is
+<li><p class="first">AR Properties are only accessible during per-replica processing;
+AO Properties are available if <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is
 <a class="reference external" href="https://docs.python.org/3.4/library/constants.html#True" title="(in Python v3.4)"><code class="xref py py-data docutils literal"><span class="pre">True</span></code></a>; ES only if <code class="docutils literal"><span class="pre">AO-kind</span> <span class="pre">=</span> <span class="pre">&quot;extended</span> <span class="pre">source&quot;</span></code>; PS only if
 <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is <a class="reference external" href="https://docs.python.org/3.4/library/constants.html#True" title="(in Python v3.4)"><code class="xref py py-data docutils literal"><span class="pre">True</span></code></a> and <code class="docutils literal"><span class="pre">AO-kind</span> <span class="pre">=</span> <span class="pre">&quot;point</span>
 <span class="pre">source&quot;</span></code>.</p>
 </li>
-<li><p class="first">CB propertys are only visible during per-combo processing.</p>
+<li><p class="first">CB Properties are only visible during per-combo processing.</p>
 </li>
 <li><p class="first">CA processing can iterate through the alerts of its
-locus-aggregated alert to access AR, PS, and ES propertys. For
+locus-aggregated alert to access AR, PS, and ES Properties. For
 example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alert</span><span class="o">.</span><span class="n">LA</span><span class="o">.</span><span class="n">assembleTimeSeries_replics</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal"><span class="pre">alert</span></code> is a camera alert and the above call returns a
-time series of all the values of the property <code class="docutils literal"><span class="pre">Redshift</span></code> under
+time series of all the values of the Property <code class="docutils literal"><span class="pre">Redshift</span></code> under
 <code class="docutils literal"><span class="pre">AR</span></code> context of the alert replicas associated with a locus
 aggregated alert.</p>
 </li>
 <li><p class="first">CB processing can iterate through its replicas to access AR, AO,
-PS, and ES propertys.</p>
+PS, and ES Properties.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combo</span><span class="o">.</span><span class="n">CB</span><span class="o">.</span><span class="n">assembleVector</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal"><span class="pre">combo</span></code> is an alert combo and the above call returns a
-numpy array of all the values of the property <code class="docutils literal"><span class="pre">Redshift</span></code> under
+numpy array of all the values of the Property <code class="docutils literal"><span class="pre">Redshift</span></code> under
 <code class="docutils literal"><span class="pre">AR</span></code> context of the alert replicas associated with the alert
 combo.</p>
 </li>
-<li><p class="first">A derived property cannot have a circular definition (and so
+<li><p class="first">A Derived Property cannot have a circular definition (and so
 definitions form a directed acyclic graph).</p>
 </li>
 <li><p class="first">Alert Replicas will not be processed until Camera Alerts have finished processing.</p>
@@ -248,10 +248,10 @@ definitions form a directed acyclic graph).</p>
 <p>NOTE: we decided to leave for later discussion the identification of structures of camera alerts within an image (e.g., a cluster of say 100 alerts within a small area). We can incorporate such identification as a separate analysis, outside that of the stages.  This may be done through the creation of Combo Alerts in stage processing, but algorithms independant of the stages may prove more effective.</p>
 <ul class="simple">
 <li>Each Alert within a stage will have access only to Properties within that Alert.</li>
-<li>Values of an property in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  Larger contexts’ propertys will derive from the aggregate of the smaller contexts.</li>
-<li>Each alert within a stage will write a new value for one or more propertys within multiple contexts.</li>
+<li>Values of Property in a larger context (e.g., Image) will be the same across the relevant alerts (e.g., for every alert in that Image, for every alert in that RAFT).  Larger contexts’ properties will derive from the aggregate of the smaller contexts.</li>
+<li>Each alert within a stage will write a new value for one or more properties within multiple contexts.</li>
 <li>ANTARES assumes that, once written at the end of a stage, a given property becomes final and immutable.  Subsequent stages do not change the value of the property.  This assumption may need to be reexamined as the stage code base grows beyond management.</li>
-<li>Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to propertys in the CA context but not to the Image or AstroObject contexts.  For more details on which contexts are writable, see Rules &amp; Constraints above.</li>
+<li>Values cannot be written for a larger context (e.g., Image) within an alert stage. So a camera alert can write to properties in the CA context but not to the Image or AstroObject contexts.  For more details on which contexts are writable, see Rules &amp; Constraints above.</li>
 </ul>
 <p>Note: the Antares Data Model document (<a class="reference external" href="https://docs.google.com/document/d/1xjYmhd8W9pyiwCBLA6o8mJeAz99Qbz9NvYFpICvYfSA/">https://docs.google.com/document/d/1xjYmhd8W9pyiwCBLA6o8mJeAz99Qbz9NvYFpICvYfSA/</a>) had an example of</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">LA</span><span class="o">-</span><span class="n">LightCurve</span> <span class="o">=</span> <span class="n">F2</span><span class="p">(</span> <span class="n">LA</span><span class="o">-</span><span class="n">CameraAlerts</span><span class="o">.</span><span class="n">TimeSeries</span><span class="p">(</span><span class="n">CA</span><span class="o">-</span><span class="n">Brightness</span><span class="p">),</span> <span class="n">CA</span><span class="o">-</span><span class="n">Brightness</span><span class="p">,</span> <span class="n">CA</span><span class="o">-</span><span class="n">Time</span> <span class="p">)</span>
@@ -265,10 +265,10 @@ definitions form a directed acyclic graph).</p>
 <p>which reads IM-CountAlerts, adds one, and writes it. That is explicitly forbidden above. However, for such <em>accumulative</em> calculations, there may be ways to incorporate them by having a separate process that accepts such accumulations and coalesces them into a single assignment, rather than a complex sequence of parallel reads and write, which we want to avoid allowing.</p>
 <ul class="simple">
 <li>Written values are stored in the database only when a stage completes. A stage that is aborted loses those values, because the stage was incomplete.</li>
-<li>An property can be written to multiple times in a stage or in separate stages, but only the last value will be visible in subsequent stages or in output for a particular camera alert. (We allow this because different astronomers might have independently written different stages.)</li>
+<li>A property can be written to multiple times in a stage or in separate stages, but only the last value will be visible in subsequent stages or in output for a particular camera alert. (We allow this because different astronomers might have independently written different stages.)</li>
 <li>The values form a time series, one value computed for each alert at that time. Hence, old values are retained and the new value extends the time series. No value is ever changed in the database (except for multiple writes, discussed above, which we can finesse.).  In other words, each stage generates a new database entry.  The entire history of alert processing will be present in the database, with one new write per stage and no modification of old (and perhaps stale) stage values.</li>
 <li>There will be a separate conversion process that will translate the highly-optimized storage structure used in the ANTARES pipeline to and from the traditional relational structure as described in the ER diagram.  The latter representation will be best for cross-alert analyses. The conversion(s) and cross-alert analyses will happen outside the time-critical portion of ANTARES and may be challenging in their own way in terms of performance.</li>
-<li>User-contributed stages write to propertys associated with a context of the current alert. So a single stage or multiple stages could successively write to the same property, changing its value as the processing pipeline progresses. We retain the value as of the end of each stage, but a future alert at the same locus will only see the final value of that property: there is no facility for seeing an intermediate value within a stage or between stages of a single past alert at that locus.</li>
+<li>User-contributed stages write to properties associated with a context of the current alert. So a single stage or multiple stages could successively write to the same property, changing its value as the processing pipeline progresses. We retain the value as of the end of each stage, but a future alert at the same locus will only see the final value of that property: there is no facility for seeing an intermediate value within a stage or between stages of a single past alert at that locus.</li>
 <li>User-contributed stages can also write to local variables during their processing, but such variables will not be persisted between stages. The only values that are persisted are those associated with the contexts of the alert.</li>
 </ul>
 </div>
