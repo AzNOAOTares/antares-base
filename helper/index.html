@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Helper Functions( antares.helper ) &mdash; Antares API 1.0 documentation</title>
+    <title>Helper Functions( antares.helper ) &#8212; Antares API 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -17,17 +17,19 @@
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Antares API 1.0 documentation" href="../index.html" />
-    <link rel="next" title="Predefined Attributes" href="../attribute/predefined.html" />
-    <link rel="prev" title="Time Period ( antares.attribute.TimePeriod )" href="../attribute/time_period.html" /> 
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Predefined Properties" href="../property/predefined.html" />
+    <link rel="prev" title="Time Period ( antares.property.TimePeriod )" href="../property/time_period.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,15 +37,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../attribute/predefined.html" title="Predefined Attributes"
+          <a href="../property/predefined.html" title="Predefined Properties"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../attribute/time_period.html" title="Time Period ( antares.attribute.TimePeriod )"
+          <a href="../property/time_period.html" title="Time Period ( antares.property.TimePeriod )"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -52,9 +51,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-antares.helper">
-<span id="helper-functions-antares-helper"></span><h1>Helper Functions( <code class="docutils literal"><span class="pre">antares.helper</span></code> )<a class="headerlink" href="#module-antares.helper" title="Permalink to this headline">¶</a></h1>
-<p>Global helper functions.</p>
+  <div class="section" id="helper-functions-antares-helper">
+<h1>Helper Functions( <code class="docutils literal"><span class="pre">antares.helper</span></code> )<a class="headerlink" href="#helper-functions-antares-helper" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -62,55 +60,15 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#antares.helper.GenerateCameraAlertStream" title="antares.helper.GenerateCameraAlertStream"><code class="xref py py-obj docutils literal"><span class="pre">GenerateCameraAlertStream</span></code></a>([alert_num])</td>
-<td>Generate a stream of camera alert IDs from the demo database.</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">GenerateCameraAlertStream</span></code></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#antares.helper.ConstructAlertFromID" title="antares.helper.ConstructAlertFromID"><code class="xref py py-obj docutils literal"><span class="pre">ConstructAlertFromID</span></code></a>(target_id,&nbsp;target_type)</td>
-<td>Generate an alert from the demo database given its ID and type.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">ConstructAlertFromID</span></code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
-<dl class="method">
-<dt id="antares.helper.GenerateCameraAlertStream">
-<code class="descclassname">helper.</code><code class="descname">GenerateCameraAlertStream</code><span class="sig-paren">(</span><em>alert_num=10</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.helper.GenerateCameraAlertStream" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a stream of camera alert IDs from the demo database.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alert_num</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; the number of camera alerts to be generated.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of camera alert IDs.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)">list</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="antares.helper.ConstructAlertFromID">
-<code class="descclassname">helper.</code><code class="descname">ConstructAlertFromID</code><span class="sig-paren">(</span><em>target_id</em>, <em>target_type</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.helper.ConstructAlertFromID" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate an alert from the demo database given its ID and type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>target_id</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; ID of the alert to be constructed.</li>
-<li><strong>target_type</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; type of the alert to be constructed.
-&#8216;E&#8217;: camera alert, &#8216;R&#8217;: alert replica.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../alert/general_alert.html#antares.alert.Alert" title="antares.alert.Alert"><code class="xref py py-class docutils literal"><span class="pre">antares.alert.Alert</span></code></a> constructed alert object.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 
 
@@ -120,29 +78,26 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../attribute/time_period.html"
-                        title="previous chapter">Time Period ( <code class="docutils literal"><span class="pre">antares.attribute.TimePeriod</span></code> )</a></p>
+  <p class="topless"><a href="../property/time_period.html"
+                        title="previous chapter">Time Period ( <code class="docutils literal"><span class="pre">antares.property.TimePeriod</span></code> )</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../attribute/predefined.html"
-                        title="next chapter">Predefined Attributes</a></p>
+  <p class="topless"><a href="../property/predefined.html"
+                        title="next chapter">Predefined Properties</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/helper/index.txt"
+      <li><a href="../_sources/helper/index.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -156,20 +111,17 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../attribute/predefined.html" title="Predefined Attributes"
+          <a href="../property/predefined.html" title="Predefined Properties"
              >next</a> |</li>
         <li class="right" >
-          <a href="../attribute/time_period.html" title="Time Period ( antares.attribute.TimePeriod )"
+          <a href="../property/time_period.html" title="Time Period ( antares.property.TimePeriod )"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Antares API 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, Antares Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.4.
+        &#169; Copyright 2015, Antares Team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
     </div>
   </body>
 </html>
