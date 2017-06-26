@@ -11,7 +11,7 @@ Antares Documentation
    :width: 150px
    :height: 150px
 .. image:: ./_static/ANTARES-A.png
-   :width: 150px
+   :width: 200px
    :height: 150px
 
 Welcome to Antares documentation.
