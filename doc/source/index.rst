@@ -8,8 +8,11 @@ Antares Documentation
 #################################
 
 .. image:: ./_static/antares.png
-   :width: 100px
-   :height: 100px
+   :width: 150px
+   :height: 150px
+.. image:: ./_static/ANTARES-A.png
+   :width: 150px
+   :height: 150px
 
 Welcome to Antares documentation.
 
