@@ -1,0 +1,6 @@
+setup.py
+Antares.egg-info/PKG-INFO
+Antares.egg-info/SOURCES.txt
+Antares.egg-info/dependency_links.txt
+Antares.egg-info/requires.txt
+Antares.egg-info/top_level.txt

@@ -57,7 +57,7 @@ For example:</p>
 </pre></div>
 </div>
 <p>This will assign most-recently computed value for the property GMinusR
-to <code class="docutils literal"><span class="pre">value</span></code>. It will raise an <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception if CA context
+to <code class="docutils literal"><span class="pre">value</span></code>. It will raise an <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception if CA context
 has no property called <code class="docutils literal"><span class="pre">GMinusR</span></code>.</p>
 </li>
 <li><p class="first">Properties are changed when we assign values to them.
@@ -66,14 +66,14 @@ For example:</p>
 </pre></div>
 </div>
 <p>This will assign <code class="docutils literal"><span class="pre">value</span></code> to the property <code class="docutils literal"><span class="pre">GMinusR</span></code> that is defined under
-CA context. It will raise an <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception if CA context
+CA context. It will raise an <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception if CA context
 has no property called <code class="docutils literal"><span class="pre">GMinusR</span></code>.</p>
 </li>
 <li><p class="first">Timestamp for a newly computed property value is assigned implicitly
 when the value is assigned to the property.</p>
 </li>
 <li><p class="first">Exceptions are handled by callers. The only exception in the API is Python’s
-built-in <code class="xref py py-exc docutils literal"><span class="pre">PropertyError</span></code> exception.</p>
+built-in <a class="reference external" href="https://docs.python.org/3.4/library/exceptions.html#AttributeError" title="(in Python v3.4)"><code class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></code></a> exception.</p>
 </li>
 <li><p class="first">There will be a max size for strings. The max size is to be determined.</p>
 </li>
@@ -88,18 +88,18 @@ relevant alert replica, and is always present when appropriate.</p>
 function for a given context if its arguments are present and if
 the algorithm for that derivation function completes.</p>
 </li>
-<li><p class="first">CA and LA propertys are always available.</p>
+<li><p class="first">CA and LA properties are always available.</p>
 </li>
-<li><p class="first">AR propertys are only accessible during per-replica processing;
-AO propertys are available if <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is
+<li><p class="first">AR properties are only accessible during per-replica processing;
+AO properties are available if <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is
 <a class="reference external" href="https://docs.python.org/3.4/library/constants.html#True" title="(in Python v3.4)"><code class="xref py py-data docutils literal"><span class="pre">True</span></code></a>; ES only if <code class="docutils literal"><span class="pre">AO-kind</span> <span class="pre">=</span> <span class="pre">&quot;extended</span> <span class="pre">source&quot;</span></code>; PS only if
 <code class="docutils literal"><span class="pre">AR-HasAstroObject</span></code> is <a class="reference external" href="https://docs.python.org/3.4/library/constants.html#True" title="(in Python v3.4)"><code class="xref py py-data docutils literal"><span class="pre">True</span></code></a> and <code class="docutils literal"><span class="pre">AO-kind</span> <span class="pre">=</span> <span class="pre">&quot;point</span>
 <span class="pre">source&quot;</span></code>.</p>
 </li>
-<li><p class="first">CB propertys are only visible during per-combo processing.</p>
+<li><p class="first">CB properties are only visible during per-combo processing.</p>
 </li>
 <li><p class="first">CA processing can iterate through the alerts of its
-locus-aggregated alert to access AR, PS, and ES propertys. For
+locus-aggregated alert to access AR, PS, and ES properties. For
 example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alert</span><span class="o">.</span><span class="n">LA</span><span class="o">.</span><span class="n">assembleTimeSeries_replics</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
 </pre></div>
@@ -110,7 +110,7 @@ time series of all the values of the property <code class="docutils literal"><sp
 aggregated alert.</p>
 </li>
 <li><p class="first">CB processing can iterate through its replicas to access AR, AO,
-PS, and ES propertys.</p>
+PS, and ES properties.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combo</span><span class="o">.</span><span class="n">CB</span><span class="o">.</span><span class="n">assembleVector</span><span class="p">(</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;Redshift&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>

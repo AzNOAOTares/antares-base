@@ -63,7 +63,7 @@
 <em class="property">class </em><code class="descclassname">antares.model.context.</code><code class="descname">CAContext</code><span class="sig-paren">(</span><em>container_id</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.CAContext" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="context.html#antares.model.context.Context" title="antares.model.context.Context"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.Context</span></code></a></p>
 <p>Represents a CA (Camera Alert) context object which is a sub-class of <a class="reference internal" href="context.html#antares.model.context.Context" title="antares.model.context.Context"><code class="xref py py-class docutils literal"><span class="pre">Context</span></code></a>.
-It contains all the attributes defined under CA context.</p>
+It contains all the properties defined under CA context.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -80,7 +80,7 @@ It contains all the attributes defined under CA context.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.CAContext.name" title="antares.model.context.CAContext.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
-<td></td>
+<td>Name of CA context.</td>
 </tr>
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">CAContext.camera_alert</span></code></td>
 <td></td>
@@ -94,8 +94,8 @@ It contains all the attributes defined under CA context.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.CAContext.assembleVector" title="antares.model.context.CAContext.assembleVector"><code class="xref py py-obj docutils literal"><span class="pre">assembleVector</span></code></a>(context,&nbsp;attrname)</td>
-<td>The function assembles a vector of all the values of an attribute inside a context of the alert replicas of the camera alert.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.CAContext.assembleVector" title="antares.model.context.CAContext.assembleVector"><code class="xref py py-obj docutils literal"><span class="pre">assembleVector</span></code></a>(context,&nbsp;propname)</td>
+<td>The function assembles a vector of all the values of an Property inside a context of the alert replicas of the camera alert.</td>
 </tr>
 </tbody>
 </table>
@@ -103,13 +103,22 @@ It contains all the attributes defined under CA context.</p>
 <dl class="attribute">
 <dt id="antares.model.context.CAContext.name">
 <code class="descname">name</code><em class="property"> = ‘CA’</em><a class="headerlink" href="#antares.model.context.CAContext.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Name of CA context.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
 <dt id="antares.model.context.CAContext.assembleVector">
-<code class="descname">assembleVector</code><span class="sig-paren">(</span><em>context</em>, <em>attrname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.CAContext.assembleVector" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function assembles a vector of all the values of an attribute inside
+<code class="descname">assembleVector</code><span class="sig-paren">(</span><em>context</em>, <em>propname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.CAContext.assembleVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function assembles a vector of all the values of an Property inside
 a context of the alert replicas of the camera alert.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -117,7 +126,7 @@ a context of the alert replicas of the camera alert.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the context</li>
-<li><strong>attrname</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the attribute</li>
+<li><strong>propname</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the Property</li>
 </ul>
 </td>
 </tr>
