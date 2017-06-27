@@ -40,3 +40,8 @@ __pycache__
 
 # ignore data for demo, it is too big
 demo-data
+
+# ignore setup files
+setup.py
+Antares.egg-info/
+dist/
