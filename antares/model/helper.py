@@ -10,7 +10,7 @@ import pandas as pd
 import pymysql
 from datetime import datetime
 
-import antares.stage_algorithms.ANTARES_object as ANTARES_object
+#import antares.stage_algorithms.ANTARES_object as ANTARES_object
 
 def GenerateFakeAlerts():
     return [ 777001, 777002, 777003 ]
