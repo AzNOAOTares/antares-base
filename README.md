@@ -4,8 +4,8 @@ This is the repo for making documentation for Antares API.
 
 ## Directory structure
 
-- `antares`: where source code for API goes.
-- `doc`: where source for documentation goes
+- `antares`: where python source code for API goes.
+- `doc`: where source for documentation goes (.rst files)
 - `Makefile`: used to generate online documentation at
   [here](http://aznoaotares.github.io/antares-base/index.html).
 
@@ -13,21 +13,21 @@ This is the repo for making documentation for Antares API.
 
 doc/source
 
-    |--- _static (resources, like png, js files, etc.)
+	|--- _static (resources, like png, js files, etc.)
 	
-	|--- alert (where docs for alert goes)
+	|--- alert (where .rst docs for alert go)
 	
-	|--- attribute (where docs for attribute goes)
+	|--- property (where .rst docs for property go)
 	
-	|--- context (where docs for context goes)
+	|--- context (where .rst docs for context go)
 	
-	|--- examples (where docs for examples goes)
+	|--- examples (where .rst docs for examples go)
 	
-	|--- helper (where docs for helper functions goes)
+	|--- helper (where .rst docs for helper functions go)
 	
-	|--- index.rst (where docs for the index page goes)
+	|--- index.rst (.rst doc for the index page)
 	
-	|--- rules_constraints.rst (where docs for rules&constraints goes)
+	|--- rules_constraints.rst (.rst doc for rules&constraints goes)
 	
 
 ## How to generate online documentations
@@ -39,6 +39,7 @@ need to explicitly switch to `gh-pages` branch. Always work with the
 
 ### Steps to follow
 
+0. update python files in antares/*
 1. make changes to the source code under `doc/source`.
 2. commit and push your changes to the `master` branch.
 3. render the webpages to reflect most-recent changes by executing:
