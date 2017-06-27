@@ -15,7 +15,7 @@ Rules & Constraints
    >>> value = alert.CA.GMinusR
 
    This will assign most-recently computed value for the property GMinusR
-   to ``value``. It will raise an :py:exc:`PropertyError` exception if CA context
+   to ``value``. It will raise an :py:exc:`AttributeError` exception if CA context
    has no property called ``GMinusR``.
 
 3. Properties are changed when we assign values to them.
@@ -24,14 +24,14 @@ Rules & Constraints
    >>> alert.CA.GMinusR = value
 
    This will assign ``value`` to the property ``GMinusR`` that is defined under
-   CA context. It will raise an :py:exc:`PropertyError` exception if CA context
+   CA context. It will raise an :py:exc:`AttributeError` exception if CA context
    has no property called ``GMinusR``.
 
 4. Timestamp for a newly computed property value is assigned implicitly
    when the value is assigned to the property.
 
 5. Exceptions are handled by callers. The only exception in the API is Python's
-   built-in :py:exc:`PropertyError` exception.
+   built-in :py:exc:`AttributeError` exception.
 
 6. There will be a max size for strings. The max size is to be determined.
 
@@ -46,18 +46,18 @@ Rules & Constraints
    function for a given context if its arguments are present and if
    the algorithm for that derivation function completes.
 
-10. CA and LA propertys are always available.
+10. CA and LA properties are always available.
 
-11. AR propertys are only accessible during per-replica processing;
-    AO propertys are available if ``AR-HasAstroObject`` is
+11. AR properties are only accessible during per-replica processing;
+    AO properties are available if ``AR-HasAstroObject`` is
     :py:data:`True`; ES only if ``AO-kind = "extended source"``; PS only if
     ``AR-HasAstroObject`` is :py:data:`True` and ``AO-kind = "point
     source"``. 
 
-12. CB propertys are only visible during per-combo processing.
+12. CB properties are only visible during per-combo processing.
 
 13. CA processing can iterate through the alerts of its
-    locus-aggregated alert to access AR, PS, and ES propertys. For
+    locus-aggregated alert to access AR, PS, and ES properties. For
     example: 
 
     >>> alert.LA.assembleTimeSeries_replics( 'AR', 'Redshift' )
@@ -68,7 +68,7 @@ Rules & Constraints
     aggregated alert.
 
 14. CB processing can iterate through its replicas to access AR, AO,
-    PS, and ES propertys.
+    PS, and ES properties.
 
     >>> combo.CB.assembleVector( 'AR', 'Redshift' )
 
