@@ -68,7 +68,7 @@ the context it belongs to, the datatype of its value, a description and the scal
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">name(string): name of the property</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">context(<code class="xref py py-class docutils literal"><span class="pre">antares.context.Context</span></code>): context the property belongs to</td>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">context(<a class="reference internal" href="../context/context.html#antares.model.context.Context" title="antares.model.context.Context"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.Context</span></code></a>): context the property belongs to</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">datatype(string): data type of the property value</td>
 </tr>
@@ -86,25 +86,25 @@ the context it belongs to, the datatype of its value, a description and the scal
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.property.Property.vector" title="antares.model.property.Property.vector"><code class="xref py py-obj docutils literal"><span class="pre">vector</span></code></a></td>
-<td></td>
+<td>The vector of all the past values computed for the property.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.property.Property.description" title="antares.model.property.Property.description"><code class="xref py py-obj docutils literal"><span class="pre">description</span></code></a></td>
-<td></td>
+<td>A short description of the property.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.property.Property.name" title="antares.model.property.Property.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
-<td></td>
+<td>The name of the property.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.property.Property.context" title="antares.model.property.Property.context"><code class="xref py py-obj docutils literal"><span class="pre">context</span></code></a></td>
-<td></td>
+<td>The context that the property belongs to.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.property.Property.datatype" title="antares.model.property.Property.datatype"><code class="xref py py-obj docutils literal"><span class="pre">datatype</span></code></a></td>
-<td></td>
+<td>The data type of the property.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.property.Property.annotation" title="antares.model.property.Property.annotation"><code class="xref py py-obj docutils literal"><span class="pre">annotation</span></code></a></td>
-<td></td>
+<td>Annotation for the most-recently computed value.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.property.Property.confidence" title="antares.model.property.Property.confidence"><code class="xref py py-obj docutils literal"><span class="pre">confidence</span></code></a></td>
-<td></td>
+<td>Confidence for the most-recently computed value.</td>
 </tr>
 </tbody>
 </table>
@@ -121,37 +121,103 @@ the context it belongs to, the datatype of its value, a description and the scal
 <dl class="attribute">
 <dt id="antares.model.property.Property.vector">
 <code class="descname">vector</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.property.Property.vector" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The vector of all the past values computed for the property.
+It is a Numpy array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.description">
 <code class="descname">description</code><em class="property"> = ”</em><a class="headerlink" href="#antares.model.property.Property.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A short description of the property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.name">
 <code class="descname">name</code><em class="property"> = ”</em><a class="headerlink" href="#antares.model.property.Property.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The name of the property.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.context">
 <code class="descname">context</code><em class="property"> = ”</em><a class="headerlink" href="#antares.model.property.Property.context" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The context that the property belongs to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.datatype">
 <code class="descname">datatype</code><em class="property"> = ”</em><a class="headerlink" href="#antares.model.property.Property.datatype" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The data type of the property. The valid data type could be either
+a Python’s built-in type (boolean, int, float, string, timestamp) or a composite
+object (UncertainFloat, ProbabilityCurve, IntPair, FloatPair, TimePeriod).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.annotation">
 <code class="descname">annotation</code><a class="headerlink" href="#antares.model.property.Property.annotation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Annotation for the most-recently computed value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.property.Property.confidence">
 <code class="descname">confidence</code><a class="headerlink" href="#antares.model.property.Property.confidence" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Confidence for the most-recently computed value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 </dd></dl>
