@@ -35,6 +35,7 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
       ~CameraAlert.throttle
       ~CameraAlert.divert
       ~CameraAlert.mark_as_rare
+      ~CameraAlert.hasReplicas
 
    .. rubric:: Attributes Documentation
 
