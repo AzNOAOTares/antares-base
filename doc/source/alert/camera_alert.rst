@@ -29,13 +29,7 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
 
    .. autosummary::
 
-      ~CameraAlert.createReplica
-      ~CameraAlert.createCombo
-      ~CameraAlert.numReplicas
-      ~CameraAlert.throttle
-      ~CameraAlert.divert
-      ~CameraAlert.mark_as_rare
-      ~CameraAlert.hasReplicas
+      ~CameraAlert.*
 
    .. rubric:: Attributes Documentation
 
