@@ -1,0 +1,11 @@
+flask
+numpy
+pandas
+paramiko
+pymysql
+pyyaml
+requests
+scipy
+gatspy
+george
+astropy
