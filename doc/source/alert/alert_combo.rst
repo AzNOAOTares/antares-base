@@ -24,12 +24,18 @@ Alert Combo ( :py:class:`antares.model.alert.AlertCombo` )
 
    .. autosummary::
 
+      ~AlertCombo.divert
+      ~AlertCombo.mark_as_rare
+      ~AlertCombo.__str__
+
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: CB
-
    .. autoattribute:: replicas
    .. autoattribute:: camera_alert
 
    .. rubric:: Methods Documentation
 
+   .. automethod:: divert
+   .. automethod:: mark_as_rare
+   .. automethod:: __str__

@@ -4,6 +4,7 @@ Antares context module.
 
 from antares.model.config import *
 from antares.model.property import *
+from antares import connectdb
 from io import StringIO
 import pymysql
 import pandas as pd
@@ -93,7 +94,7 @@ class CAContext( Context ):
         :return: an array of values
         :rtype: numpy array
         """
-        conn = GetDBConn()
+        conn = connectdb.GetDBConn()
         cursor = conn.cursor()
 
         v = []
@@ -227,7 +228,7 @@ class AOContext( Context ):
             setattr( self, propname, prop )
 
         ## Connect to mysql database.
-        conn = GetDBConn()
+        conn = connectdb.GetDBConn()
         cur = conn.cursor()
         # FIXME: not always SDSS
         row = None
@@ -302,7 +303,7 @@ class LAContext( Context ):
     def __init__( self, container_id ):
         """'continer_id' is the ID of the object that owns the context."""
         self.container_id = container_id
-        self.conn = GetDBConn()
+        self.conn = connectdb.GetDBConn()
 
     def __del__(self):
         self.conn.commit()

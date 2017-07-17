@@ -17,17 +17,22 @@ AR Context ( :py:class:`antares.model.context.ARContext`)
    .. autosummary::
 
       ~ARContext.name
-
       ~ARContext.alert_replica
 
    .. rubric:: Methods Summary
 
    .. autosummary::
+      ~ARContext.commit
+      ~ARContext.__str__
 
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
    .. autoattribute:: alert_replica
 
    .. rubric:: Methods Documentation
+	       
+   .. automethod:: assembleVector
+   .. automethod:: commit
+   .. automethod:: __str__
+							

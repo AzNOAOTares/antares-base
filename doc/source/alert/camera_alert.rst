@@ -22,7 +22,6 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
       ~CameraAlert.IR
       ~CameraAlert.IS
       ~CameraAlert.replicas
-      ~CameraAlert.combos
       ~CameraAlert.annotation
 
    .. rubric:: Methods Summary
@@ -30,12 +29,15 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
    .. autosummary::
 
       ~CameraAlert.createReplica
-      ~CameraAlert.createCombo 
-      ~CameraAlert.numReplicas 
+      ~CameraAlert.createCombo
       ~CameraAlert.throttle
       ~CameraAlert.divert
       ~CameraAlert.mark_as_rare
       ~CameraAlert.hasReplicas
+      ~CameraAlert.associatedAstroObjs
+      ~CameraAlert.loadReplicas
+      ~CameraAlert.commit
+      ~CameraAlert.__str__
 
    .. rubric:: Attributes Documentation
 
@@ -50,9 +52,13 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: throttle
-   .. automethod:: divert
    .. automethod:: createReplica
    .. automethod:: createCombo
-   .. automethod:: numReplicas
+   .. automethod:: throttle
+   .. automethod:: divert
    .. automethod:: mark_as_rare
+   .. automethod:: hasReplicas
+   .. automethod:: associatedAstroObjs
+   .. automethod:: loadReplicas
+   .. automethod:: commit
+   .. automethod:: __str__

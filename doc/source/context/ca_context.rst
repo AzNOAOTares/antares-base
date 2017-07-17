@@ -27,6 +27,8 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properti
    .. autosummary::
 
       ~CAContext.assembleVector
+      ~CAContext.commit
+      ~CAContext.__str__
 
    .. rubric:: Attributes Documentation
 
@@ -37,3 +39,5 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properti
    .. rubric:: Methods Documentation
 
    .. automethod:: assembleVector
+   .. automethod:: commit
+   .. automethod:: __str__

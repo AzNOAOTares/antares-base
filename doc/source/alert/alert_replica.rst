@@ -28,6 +28,9 @@ Alert Replica ( :py:class:`antares.model.alert.AlertReplica` )
 
       ~AlertReplica.divert
       ~AlertReplica.mark_as_rare
+      ~AlertReplica.createReplica
+      ~AlertReplica.commit
+      ~AlertReplica.__str__
 
    .. rubric:: Attributes Documentation
 
@@ -41,3 +44,6 @@ Alert Replica ( :py:class:`antares.model.alert.AlertReplica` )
 
    .. automethod:: divert
    .. automethod:: mark_as_rare
+   .. automethod:: createReplica
+   .. automethod:: commit
+   .. automethod:: __str__
