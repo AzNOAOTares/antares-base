@@ -47,7 +47,6 @@ Camera Alert ( :py:class:`antares.model.alert.CameraAlert` )
    .. autoattribute:: IR
    .. autoattribute:: IS
    .. autoattribute:: replicas
-   .. autoattribute:: combos
    .. autoattribute:: annotation
 
    .. rubric:: Methods Documentation

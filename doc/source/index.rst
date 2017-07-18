@@ -73,8 +73,8 @@ Property related
 
    property/property
    property/uncertain_float
-   property/int_pair
    property/float_pair
+   property/int_pair
    property/prob_curve
    property/time_period
 

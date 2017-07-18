@@ -20,8 +20,6 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properti
 
       ~CAContext.name
 
-      ~CAContext.camera_alert
-
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -33,8 +31,6 @@ For predefined attributes for CA context, see :ref:`here <Predefined_CA_Properti
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
-   .. autoattribute:: camera_alert
 
    .. rubric:: Methods Documentation
 

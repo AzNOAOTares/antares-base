@@ -17,8 +17,7 @@ AO Context ( :py:class:`antares.model.context.AOContext` )
    .. autosummary::
 
       ~AOContext.name
-      ~AOContext.astro_object
-
+      
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -29,8 +28,7 @@ AO Context ( :py:class:`antares.model.context.AOContext` )
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-   .. autoattribute:: astro_object
-
+		      
    .. rubric:: Methods Documentation
 
    .. automethod:: commit

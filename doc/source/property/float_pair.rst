@@ -16,8 +16,8 @@ Float Pair ( :py:class:`antares.model.property.FloatPair` )
 
    .. autosummary::
 
-      ~IntPair.lower_bound
-      ~IntPair.upper_bound
+      ~FloatPair.lower_bound
+      ~FloatPair.upper_bound
 
    .. rubric:: Methods Summary
 

@@ -18,8 +18,6 @@ ES Context ( :py:class:`antares.model.context.ESContext`)
 
       ~ESContext.name
 
-      ~ESContext.astro_object
-
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -27,7 +25,5 @@ ES Context ( :py:class:`antares.model.context.ESContext`)
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
-   .. autoattribute:: astro_object
 
    .. rubric:: Methods Documentation

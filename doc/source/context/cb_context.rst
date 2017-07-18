@@ -18,8 +18,6 @@ CB Context ( :py:class:`antares.model.context.CBContext` )
 
       ~CBContext.name
 
-      ~CBContext.alert_combo
-
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -29,8 +27,6 @@ CB Context ( :py:class:`antares.model.context.CBContext` )
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
-   .. autoattribute:: alert_combo
 
    .. rubric:: Methods Documentation
 
