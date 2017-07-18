@@ -18,8 +18,6 @@ EA Context ( :py:class:`antares.model.context.EAContext`)
 
       ~EAContext.name
 
-      ~EAContext.external_alert
-
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -27,7 +25,5 @@ EA Context ( :py:class:`antares.model.context.EAContext`)
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
-   .. autoattribute:: external_alert
 
    .. rubric:: Methods Documentation

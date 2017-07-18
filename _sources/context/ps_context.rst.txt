@@ -18,8 +18,6 @@ PS Context ( :py:class:`antares.model.context.PSContext`)
 
       ~PSContext.name
 
-      ~PSContext.astro_object
-
    .. rubric:: Methods Summary
 
    .. autosummary::
@@ -27,8 +25,6 @@ PS Context ( :py:class:`antares.model.context.PSContext`)
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
-
-   .. autoattribute:: astro_object
 
    .. rubric:: Methods Documentation
 

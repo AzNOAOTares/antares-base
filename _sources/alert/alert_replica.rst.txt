@@ -20,7 +20,6 @@ Alert Replica ( :py:class:`antares.model.alert.AlertReplica` )
       ~AlertReplica.AO
       ~AlertReplica.ES
       ~AlertReplica.PS
-      ~AlertReplica.camera_alert
 
    .. rubric:: Methods Summary
 
@@ -38,8 +37,7 @@ Alert Replica ( :py:class:`antares.model.alert.AlertReplica` )
    .. autoattribute:: AO
    .. autoattribute:: ES
    .. autoattribute:: PS
-   .. autoattribute:: camera_alert
-
+		      
    .. rubric:: Methods Documentation
 
    .. automethod:: divert
