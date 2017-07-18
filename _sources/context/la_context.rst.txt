@@ -21,14 +21,23 @@ LA Context ( :py:class:`antares.model.context.LAContext` )
    .. rubric:: Methods Summary
 
    .. autosummary::
-
-      ~LAContext.assembleTimeSeriesProperty
-
+      
+      ~LAContext.assembleTimeSeries_replicas
+      ~LAContext.assembleTimeSeries_cameraAlerts
+      ~LAContext.addProperty
+      ~LAContext.assembleProperties
+      ~LAContext.setScalar
+      ~LAContext.getScalar
+      
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: name
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: assembleTimeSeriesProperty
-
+   .. automethod:: assembleTimeSeries_replicas
+   .. automethod:: assembleTimeSeries_cameraAlerts
+   .. automethod:: addProperty
+   .. automethod:: assembleProperties
+   .. automethod:: setScalar
+   .. automethod:: getScalar

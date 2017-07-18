@@ -5,12 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>LA Context ( antares.model.context.LAContext ) &#8212; Antares API 2.0 documentation</title>
-    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -79,7 +76,7 @@ It contains all the properties defined under LA context.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.name" title="antares.model.context.LAContext.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
-<td>Name of LA context.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -90,7 +87,22 @@ It contains all the properties defined under LA context.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">LAContext.assembleTimeSeriesProperty</span></code></td>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.assembleTimeSeries_replicas" title="antares.model.context.LAContext.assembleTimeSeries_replicas"><code class="xref py py-obj docutils literal"><span class="pre">assembleTimeSeries_replicas</span></code></a>(context,&nbsp;propname)</td>
+<td>The function assembles a time series of all the past values of an Property inside a context of the alert replicas associated with a locus aggregated alert.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.context.LAContext.assembleTimeSeries_cameraAlerts" title="antares.model.context.LAContext.assembleTimeSeries_cameraAlerts"><code class="xref py py-obj docutils literal"><span class="pre">assembleTimeSeries_cameraAlerts</span></code></a>(context,&nbsp;…)</td>
+<td>The function assembles a time series of all the past values of an Property inside a context of the camera alerts associated with a locus aggregated alert.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.addProperty" title="antares.model.context.LAContext.addProperty"><code class="xref py py-obj docutils literal"><span class="pre">addProperty</span></code></a>(propname,&nbsp;value[,&nbsp;computed_time])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.context.LAContext.assembleProperties" title="antares.model.context.LAContext.assembleProperties"><code class="xref py py-obj docutils literal"><span class="pre">assembleProperties</span></code></a>(propname)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.setScalar" title="antares.model.context.LAContext.setScalar"><code class="xref py py-obj docutils literal"><span class="pre">setScalar</span></code></a>(propname,&nbsp;value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.context.LAContext.getScalar" title="antares.model.context.LAContext.getScalar"><code class="xref py py-obj docutils literal"><span class="pre">getScalar</span></code></a>(propname)</td>
 <td></td>
 </tr>
 </tbody>
@@ -98,19 +110,83 @@ It contains all the properties defined under LA context.</p>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="antares.model.context.LAContext.name">
-<code class="descname">name</code><em class="property"> = ‘LA’</em><a class="headerlink" href="#antares.model.context.LAContext.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of LA context.</p>
+<code class="descname">name</code><em class="property"> = 'LA'</em><a class="headerlink" href="#antares.model.context.LAContext.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="antares.model.context.LAContext.assembleTimeSeries_replicas">
+<code class="descname">assembleTimeSeries_replicas</code><span class="sig-paren">(</span><em>context</em>, <em>propname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.assembleTimeSeries_replicas" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function assembles a time series of all the past values
+of an Property inside a context of the alert replicas associated
+with a locus aggregated alert.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the context</li>
+<li><strong>propname</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the Property</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a time series of values. Here the value is a dict that maps
+replica ID to the real value of <code class="docutils literal"><span class="pre">propname</span></code>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">pandas.Series</span></code></p>
+</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="antares.model.context.LAContext.assembleTimeSeries_cameraAlerts">
+<code class="descname">assembleTimeSeries_cameraAlerts</code><span class="sig-paren">(</span><em>context</em>, <em>propname</em>, <em>passband=None</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.assembleTimeSeries_cameraAlerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function assembles a time series of all the past values
+of an Property inside a context of the camera alerts associated
+with a locus aggregated alert.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the context</li>
+<li><strong>propname</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) – the name of the Property</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a time series of values</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">an array of three element tuple: (<a class="reference external" href="https://docs.python.org/3.4/library/time.html#module-time" title="(in Python v3.4)">time</a>, value, <a class="reference internal" href="../alert/camera_alert.html#antares.model.alert.CameraAlert.annotation" title="antares.model.alert.CameraAlert.annotation">annotation</a>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="antares.model.context.LAContext.addProperty">
+<code class="descname">addProperty</code><span class="sig-paren">(</span><em>propname</em>, <em>value</em>, <em>computed_time=1500418744.907305</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.addProperty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="antares.model.context.LAContext.assembleProperties">
+<code class="descname">assembleProperties</code><span class="sig-paren">(</span><em>propname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.assembleProperties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="antares.model.context.LAContext.setScalar">
+<code class="descname">setScalar</code><span class="sig-paren">(</span><em>propname</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.setScalar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="antares.model.context.LAContext.getScalar">
+<code class="descname">getScalar</code><span class="sig-paren">(</span><em>propname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.getScalar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -168,7 +244,7 @@ It contains all the properties defined under LA context.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, Antares Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>

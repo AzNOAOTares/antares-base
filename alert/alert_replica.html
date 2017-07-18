@@ -5,12 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Alert Replica ( antares.model.alert.AlertReplica ) &#8212; Antares API 2.0 documentation</title>
-    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -68,7 +65,7 @@ Replica is initialized with its associated astro object (optional).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">parent(<a class="reference internal" href="camera_alert.html#antares.model.alert.CameraAlert" title="antares.model.alert.CameraAlert"><code class="xref py py-class docutils literal"><span class="pre">antares.model.alert.CameraAlert</span></code></a>): parent of the alert replica.</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">parent(<code class="xref py py-class docutils literal"><span class="pre">antares.alert.CameraAlert</span></code>): parent of the alert replica.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">astr_id(int): ID of the associated astro object (optional).</td>
 </tr>
@@ -88,16 +85,16 @@ Replica is initialized with its associated astro object (optional).</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.AR" title="antares.model.alert.AlertReplica.AR"><code class="xref py py-obj docutils literal"><span class="pre">AR</span></code></a></td>
-<td>AR (Alert Replica) context object.</td>
+<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.AO" title="antares.model.alert.AlertReplica.AO"><code class="xref py py-obj docutils literal"><span class="pre">AO</span></code></a></td>
-<td>AO (Astro Object) context object.</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.ES" title="antares.model.alert.AlertReplica.ES"><code class="xref py py-obj docutils literal"><span class="pre">ES</span></code></a></td>
-<td>ES (Extended Source) context object.</td>
+<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.PS" title="antares.model.alert.AlertReplica.PS"><code class="xref py py-obj docutils literal"><span class="pre">PS</span></code></a></td>
-<td>PS (Point Source) context object.</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">AlertReplica.camera_alert</span></code></td>
 <td></td>
@@ -117,68 +114,37 @@ Replica is initialized with its associated astro object (optional).</p>
 <tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.mark_as_rare" title="antares.model.alert.AlertReplica.mark_as_rare"><code class="xref py py-obj docutils literal"><span class="pre">mark_as_rare</span></code></a>(annotation)</td>
 <td>Mark the alert as a rare alert.</td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.createReplica" title="antares.model.alert.AlertReplica.createReplica"><code class="xref py py-obj docutils literal"><span class="pre">createReplica</span></code></a>()</td>
+<td>Create a replica of the current alert replica.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.commit" title="antares.model.alert.AlertReplica.commit"><code class="xref py py-obj docutils literal"><span class="pre">commit</span></code></a>()</td>
+<td>Commit the alert replica to Locus-aggregated Alerts DB.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#antares.model.alert.AlertReplica.__str__" title="antares.model.alert.AlertReplica.__str__"><code class="xref py py-obj docutils literal"><span class="pre">__str__</span></code></a>()</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="antares.model.alert.AlertReplica.AR">
 <code class="descname">AR</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.AR" title="Permalink to this definition">¶</a></dt>
-<dd><p>AR (Alert Replica) context object.
-AR properties are only accessible during per-replica processing.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="../context/ar_context.html#antares.model.context.ARContext" title="antares.model.context.ARContext"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.ARContext</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.alert.AlertReplica.AO">
 <code class="descname">AO</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.AO" title="Permalink to this definition">¶</a></dt>
-<dd><p>AO (Astro Object) context object. AO properties are available if
-<code class="docutils literal"><span class="pre">AR.HasAstroObject</span></code> = <a class="reference external" href="https://docs.python.org/3.4/library/constants.html#True" title="(in Python v3.4)"><code class="xref py py-data docutils literal"><span class="pre">True</span></code></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="../context/ao_context.html#antares.model.context.AOContext" title="antares.model.context.AOContext"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.AOContext</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.alert.AlertReplica.ES">
 <code class="descname">ES</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.ES" title="Permalink to this definition">¶</a></dt>
-<dd><p>ES (Extended Source) context object. ES properties are available only
-if <code class="docutils literal"><span class="pre">AO.kind</span> <span class="pre">=</span> <span class="pre">&quot;extended</span> <span class="pre">source&quot;</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="../context/es_context.html#antares.model.context.ESContext" title="antares.model.context.ESContext"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.ESContext</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="antares.model.alert.AlertReplica.PS">
 <code class="descname">PS</code><em class="property"> = None</em><a class="headerlink" href="#antares.model.alert.AlertReplica.PS" title="Permalink to this definition">¶</a></dt>
-<dd><p>PS (Point Source) context object. PS properties are available only
-if <code class="docutils literal"><span class="pre">AO.kind</span> <span class="pre">=</span> <span class="pre">&quot;point</span> <span class="pre">source&quot;</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="../context/ps_context.html#antares.model.context.PSContext" title="antares.model.context.PSContext"><code class="xref py py-class docutils literal"><span class="pre">antares.model.context.PSContext</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
@@ -208,6 +174,23 @@ if <code class="docutils literal"><span class="pre">AO.kind</span> <span class="
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="method">
+<dt id="antares.model.alert.AlertReplica.createReplica">
+<code class="descname">createReplica</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica.createReplica" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a replica of the current alert replica.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="antares.model.alert.AlertReplica.commit">
+<code class="descname">commit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica.commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commit the alert replica to Locus-aggregated Alerts DB.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="antares.model.alert.AlertReplica.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.alert.AlertReplica.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -266,7 +249,7 @@ if <code class="docutils literal"><span class="pre">AO.kind</span> <span class="
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, Antares Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
     </div>
   </body>
 </html>
