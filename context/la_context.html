@@ -76,7 +76,7 @@ It contains all the properties defined under LA context.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.name" title="antares.model.context.LAContext.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
-<td></td>
+<td>Name of LA context.</td>
 </tr>
 </tbody>
 </table>
@@ -96,7 +96,7 @@ It contains all the properties defined under LA context.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.addProperty" title="antares.model.context.LAContext.addProperty"><code class="xref py py-obj docutils literal"><span class="pre">addProperty</span></code></a>(propname,&nbsp;value[,&nbsp;computed_time])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#antares.model.context.LAContext.assembleProperties" title="antares.model.context.LAContext.assembleProperties"><code class="xref py py-obj docutils literal"><span class="pre">assembleProperties</span></code></a>(propname)</td>
+<tr class="row-even"><td><a class="reference internal" href="#antares.model.context.LAContext.assembleProperties" title="antares.model.context.LAContext.assembleProperties"><code class="xref py py-obj docutils literal"><span class="pre">assembleProperties</span></code></a>(propname,&nbsp;alert)</td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#antares.model.context.LAContext.setScalar" title="antares.model.context.LAContext.setScalar"><code class="xref py py-obj docutils literal"><span class="pre">setScalar</span></code></a>(propname,&nbsp;value)</td>
@@ -111,7 +111,16 @@ It contains all the properties defined under LA context.</p>
 <dl class="attribute">
 <dt id="antares.model.context.LAContext.name">
 <code class="descname">name</code><em class="property"> = 'LA'</em><a class="headerlink" href="#antares.model.context.LAContext.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Name of LA context.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
@@ -169,12 +178,12 @@ with a locus aggregated alert.</p>
 
 <dl class="method">
 <dt id="antares.model.context.LAContext.addProperty">
-<code class="descname">addProperty</code><span class="sig-paren">(</span><em>propname</em>, <em>value</em>, <em>computed_time=1500420231.5939636</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.addProperty" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addProperty</code><span class="sig-paren">(</span><em>propname</em>, <em>value</em>, <em>computed_time=1509504150.0754118</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.addProperty" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="antares.model.context.LAContext.assembleProperties">
-<code class="descname">assembleProperties</code><span class="sig-paren">(</span><em>propname</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.assembleProperties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">assembleProperties</code><span class="sig-paren">(</span><em>propname</em>, <em>alert</em><span class="sig-paren">)</span><a class="headerlink" href="#antares.model.context.LAContext.assembleProperties" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -244,7 +253,7 @@ with a locus aggregated alert.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2015-2017, Antares Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
