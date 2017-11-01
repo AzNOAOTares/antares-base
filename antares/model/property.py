@@ -251,7 +251,7 @@ class IntPair:
     :type: int
     """
 
-    upper_bound = None
+    upper_bound = NoneYo!
     """
     The value of upper bound.
 
