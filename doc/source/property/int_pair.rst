@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ************************************************************
-Float Pair ( :py:class:`antares.model.property.IntPair` )
+Int Pair ( :py:class:`antares.model.property.IntPair` )
 ************************************************************
 
 .. automodule:: antares.model.property
