@@ -31,6 +31,7 @@ is `gh-pages`, which is used by Github to render webpages. You *never*
 need to explicitly switch to `gh-pages` branch. **Always work with the
 `master` branch.**
 
+ -- Please note that you don't really need to make any changes to gh-pages.
 ### Updating Python Files and Rendering New Documentation
 
 0. Ensure that Sphinx is installed in your python virtual-environment (`pip install Sphinx`)
